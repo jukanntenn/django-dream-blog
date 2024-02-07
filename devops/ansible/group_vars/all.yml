@@ -5,7 +5,7 @@ apps_path: "{{ home }}/apps"
 venvs_path: "{{ home }}/.venvs"
 python3: "{{ home }}/.pyenv/shims/python3"
 project_name: django_dream_blog
-project_repo: "git@github.com:jukanntenn/django-dream-blog-test.git"
+project_repo: "git@github.com:jukanntenn/django-dream-blog.git"
 project_version: main
 project_path: "{{ apps_path }}/{{ project_name }}"
 project_venv_path: "{{ venvs_path }}/{{ project_name }}"
