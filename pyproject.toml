@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "django-dream-blog"
+version = "0.1.0"
+description = ""
+authors = ["jukanntenn <jukanntenn@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10, <4"
+django = "^5.0.1"
+django-environ = "^0.11.2"
+django-model-utils = "^4.3.1"
+django-vite = "^3.0.3"
+django-extensions = "^3.2.3"
+markdown = "^3.5.2"
+pymdown-extensions = "^10.7"
+pygments = "^2.17.2"
+django-constance = "^3.1.0"
+django-hitcount = "^1.3.5"
+setuptools = "^69.0.3"
+
+
+[tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "^4.2.0"
+factory-boy = "^3.3.0"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.4"
+pytest-django = "^4.7.0"
+pytest-cov = "^4.1.0"
+django-test-plus = "^2.2.3"
+pytest-sugar = "^1.0.0"
+coverage = {extras = ["toml"], version = "^7.4.1"}
+freezegun = "^1.4.0"
+
+
+[tool.poetry.group.production.dependencies]
+gunicorn = "^21.2.0"
+
+
+[[tool.poetry.source]]
+name = "tuna"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+priority = "default"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+python_files = "tests.py test_*.py"
+norecursedirs = "frontend"
+addopts = "--reuse-db --cov=dream_blog/ --cov-report html"
+
+[tool.coverage.run]
+omit = ["*/migrations/*", "*/tests/*", "dream_blog/scripts/*"]

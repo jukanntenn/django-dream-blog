@@ -1,0 +1,17 @@
+---
+- name: Site deployment
+  hosts: all
+  remote_user: alice
+  roles:
+    - role: caddy
+      become: true
+      become_method: sudo
+      tags: caddy
+
+    - role: supervisor
+      become: true
+      become_method: sudo
+      tags: supervisor
+
+    - role: project
+      tags: project

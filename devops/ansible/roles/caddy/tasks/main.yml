@@ -1,0 +1,32 @@
+- name: Ensure dependencies are installed
+  ansible.builtin.apt:
+    name:
+      - debian-keyring
+      - debian-archive-keyring
+      - apt-transport-https
+      - gnupg2
+      - curl
+    state: present
+
+- name: Add Caddy apt key
+  ansible.builtin.apt_key:
+    url: https://dl.cloudsmith.io/public/caddy/stable/gpg.key
+    # curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --show-keys
+    id: 65760C51EDEA2017CEA2CA15155B6D79CA56EA34
+    state: present
+
+- name: Add Caddy repository
+  ansible.builtin.apt_repository:
+    repo: deb https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main
+    state: present
+    update_cache: true
+
+- name: Install Caddy
+  ansible.builtin.package:
+    name: caddy
+    state: present
+
+- name: Ensure Caddy started
+  service:
+    name: caddy
+    state: started

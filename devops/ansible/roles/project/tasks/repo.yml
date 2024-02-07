@@ -1,0 +1,13 @@
+---
+- name: Ensupre project directory
+  ansible.builtin.file:
+    path: "{{ project_path }}"
+    state: directory
+
+- name: Checkout repository
+  ansible.builtin.git:
+    repo: "{{ project_repo }}"
+    dest: "{{ project_path }}"
+    version: "{{ project_version }}"
+    accept_hostkey: yes
+  notify: restart program

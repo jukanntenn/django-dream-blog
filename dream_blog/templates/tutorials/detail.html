@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load tutorials_extra %}
+{% block left %}
+  {% show_tutorial_toc tutorial %}
+{% endblock left %}
+{% block main %}
+  <h1 class="text-3xl">{{ tutorial.title }}</h1>
+  {% include "inclusions/_entry_content.html" with entry=tutorial %}
+{% endblock main %}

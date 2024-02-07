@@ -1,0 +1,31 @@
+{% load static %}
+<div class="mt-10 flex justify-center">
+  <span class="mr-5 text-xl">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">
+        <img height="24" width="24" src="{% static 'arrow-left-line.svg' %}" />
+      </a>
+    {% else %}
+      <span>
+        <img class="text-gray-400"
+             height="24"
+             width="24"
+             src="{% static 'arrow-left-line.svg' %}" />
+      </span>
+    {% endif %}
+  </span>
+  <span class="ml-5 text-xl">
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">
+        <img height="24" width="24" src="{% static 'arrow-right-line.svg' %}" />
+      </a>
+    {% else %}
+      <span>
+        <img class="text-gray-400"
+             height="24"
+             width="24"
+             src="{% static 'arrow-right-line.svg' %}" />
+      </span>
+    {% endif %}
+  </span>
+</div>

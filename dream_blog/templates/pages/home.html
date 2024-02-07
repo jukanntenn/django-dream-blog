@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block main %}
+  {% for post in page_obj %}
+    <div class="mt-10 first:mt-0">
+      <h2 class="text-2xl">
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </h2>
+      <div class="text-gray-700 mt-3">{{ post.excerpt }}</div>
+      {% include "inclusions/_entry_meta.html" with entry=post %}
+    </div>
+  {% empty %}
+    <p>暂无文章</p>
+  {% endfor %}
+  {% if is_paginated %}
+    {% include "inclusions/_pagination.html" %}
+  {% endif %}
+{% endblock main %}

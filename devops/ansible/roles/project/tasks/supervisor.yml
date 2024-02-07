@@ -1,0 +1,12 @@
+---
+- name: Copy config file
+  ansible.builtin.template:
+    src: "django_dream_blog.conf.j2"
+    dest: "/etc/supervisor/conf.d/django_dream_blog.conf"
+  notify: restart program
+
+- name: Add program
+  community.general.supervisorctl:
+    config: /etc/supervisor/supervisord.conf
+    name: django-dream-blog
+    state: present

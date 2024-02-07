@@ -1,0 +1,17 @@
+{% load static %}
+<div>
+  <div class="text-xl flex items-center">
+    <span class="mr-1">{{ profile.blogger }}</span>
+    <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2 py-0.5 rounded">博主</span>
+  </div>
+  <div class="mt-2 text-gray-500">{{ profile.slogan }}</div>
+  <div class="mt-5 flex">
+    {% for slink in profile.social_links %}
+      {% if slink.url %}
+        <a class="mr-2" href="{{ slink.url }}" target="_blank">
+          <img height="20" width="20" src="{% static slink.icon %}" />
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

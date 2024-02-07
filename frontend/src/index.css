@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .toc li {
+    @apply mt-2;
+  }
+
+  .toc a {
+    @apply block text-gray-500 hover:text-gray-800;
+  }
+
+  .toc a.active {
+    @apply text-gray-800 font-semibold;
+  }
+
+  .toc ul ul li {
+    @apply ml-4;
+  }
+
+  .toc ul ul a {
+    @apply text-sm;
+  }
+}
+
+.highlight .filename {
+  @apply block bg-slate-200 px-3 py-1;
+}
+
+.task-list {
+  @apply pl-0;
+}
+
+.task-list .task-list {
+  @apply pl-3;
+}
+
+.task-list .task-list-item {
+  @apply list-none;
+}
+
+.task-list .task-list-item input[type="checkbox"] {
+  @apply m-0;
+}
+
+.admonition {
+  @apply px-2 py-2 mb-3;
+}
+
+.admonition p {
+  @apply my-0;
+}
+
+.admonition .admonition-title {
+  @apply flex items-center font-semibold before:inline-block before:w-4 before:h-4 before:align-top my-0;
+}
+
+.admonition.danger .admonition-title,
+.admonition.error .admonition-title,
+.admonition.warning .admonition-title,
+.admonition.caution .admonition-title,
+.admonition.attention .admonition-title,
+.admonition.important .admonition-title,
+.admonition.note .admonition-title,
+.admonition.hint .admonition-title,
+.admonition.tip .admonition-title {
+  @apply before:bg-no-repeat before:bg-contain before:mr-1;
+}
+
+.admonition.danger,
+.admonition.error {
+  @apply text-red-500 bg-red-100;
+}
+
+.admonition.danger .admonition-title,
+.admonition.error .admonition-title {
+  @apply before:bg-[url('/static/error-warning-fill.svg')];
+}
+
+.admonition.warning,
+.admonition.caution,
+.admonition.attention {
+  @apply text-orange-400 bg-orange-100;
+}
+
+.admonition.warning .admonition-title,
+.admonition.caution .admonition-title,
+.admonition.attention .admonition-title {
+  @apply before:bg-[url('/static/alert-fill.svg')];
+}
+
+.admonition.important,
+.admonition.note {
+  @apply text-green-400 bg-green-100;
+}
+
+.admonition.important .admonition-title,
+.admonition.note .admonition-title {
+  @apply before:bg-[url('/static/information-fill.svg')];
+}
+
+.admonition.hint,
+.admonition.tip {
+  @apply text-cyan-600 bg-cyan-100;
+}
+
+.admonition.hint .admonition-title,
+.admonition.tip .admonition-title {
+  @apply before:bg-[url('/static/lightbulb-line.svg')];
+}
+
+.tabbed-set {
+  @apply flex relative flex-wrap;
+}
+
+.tabbed-set .tabbed-content {
+  @apply hidden w-full order-12 text-left;
+}
+
+.tabbed-set > input {
+  @apply hidden;
+}
+
+.tabbed-set > input:checked + label {
+  @apply text-zinc-800;
+}
+
+.tabbed-set > label {
+  @apply inline-block py-1 px-2 font-normal text-sm text-center text-neutral-500;
+}
+
+.tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
+  @apply block;
+}
+
+.backdrop {
+  @apply fixed inset-0 z-40;
+}

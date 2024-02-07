@@ -1,0 +1,10 @@
+{% if toc %}
+  <div>
+    <h3 class="text-xl">目录</h3>
+    <div class="toc" id="toc">
+      <ul>
+        {{ toc | safe }}
+      </ul>
+    </div>
+  </div>
+{% endif %}

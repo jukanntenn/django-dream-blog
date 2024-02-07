@@ -1,0 +1,7 @@
+- name: Copy Caddyfile
+  ansible.builtin.template:
+    src: Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+  become: yes
+  become_method: sudo
+  notify: reload caddy

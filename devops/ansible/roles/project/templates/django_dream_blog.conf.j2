@@ -1,0 +1,11 @@
+[program:django-dream-blog]
+directory={{ project_path }}
+command={{ project_venv_path }}/bin/gunicorn config.wsgi:application -w 2 -b 127.0.0.1:{{ port }}
+autostart=true
+startsecs=1
+startretries=3
+autorestart=unexpected
+stopasgroup=true
+killasgroup=true
+user={{ user }}
+environment=DJANGO_READ_DOT_ENV_FILE="yes"

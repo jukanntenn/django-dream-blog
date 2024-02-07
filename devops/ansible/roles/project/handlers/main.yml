@@ -1,0 +1,15 @@
+---
+- name: reload caddy
+  ansible.builtin.service:
+    name: caddy
+    state: reloaded
+  become: yes
+  become_method: sudo
+
+- name: restart program
+  community.general.supervisorctl:
+    config: /etc/supervisor/supervisord.conf
+    name: django-dream-blog
+    state: restarted
+  become: yes
+  become_method: sudo

@@ -1,0 +1,15 @@
+{{ domain }} {
+    redir https://www.{{ domain }}{uri}
+}
+
+www.{{ domain }} {
+    handle_path /static/* {
+            root * {{ project_www_path }}/staticfiles/
+            file_server
+    }
+    handle_path /media/* {
+            root * {{ project_www_path }}/media/
+            file_server
+    }
+    reverse_proxy 127.0.0.1:{{ port }}
+}

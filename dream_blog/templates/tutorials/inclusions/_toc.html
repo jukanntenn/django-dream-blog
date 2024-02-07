@@ -1,0 +1,13 @@
+<div class="toc">
+  <h3 class="text-xl">
+    <a href="{{ tutorial.get_absolute_url }}">{{ tutorial.title }}</a>
+  </h3>
+  <ul>
+    {% for material in materials %}
+      <li>
+        <a href="{% url 'tutorials:material_detail' tutorial.slug material.id %}"
+           class="{% if material.id == current.id %}active{% endif %}">{{ material.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

@@ -1,0 +1,51 @@
+{% load django_vite tutorials_extra static core_extra %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.css"
+          rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,
+      <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
+        <text y=%22.9em%22 font-size=%2290%22>🦋</text>
+      </svg>
+      " />
+      <title>
+        {% block title %}
+          {{ headline }}
+        {% endblock title %}
+      </title>
+      {% vite_hmr_client %}
+      {% vite_asset 'src/main.ts' %}
+    </head>
+    <body class="antialiased bg-white">
+      {% include "inclusions/_nav.html" %}
+      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="flex flex-col lg:flex-row">
+          <!-- left -->
+          <div class="fixed -translate-x-full pl-4 pr-6 lg:pl-0 bg-white opacity-100 right-auto overflow-y-auto inset-0 duration-300 z-50 shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(2rem,calc(50%-38rem))] top-[4.25rem] lg:w-64"
+               id="left">
+            {% block left %}
+              {% show_profile %}
+            {% endblock left %}
+          </div>
+          <!-- main -->
+          <div class="w-full lg:px-64">
+            {% block main %}
+            {% endblock main %}
+          </div>
+          <!-- right -->
+          <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(0px,calc(50%-38rem))] lg:top-[4.25rem] lg:overflow-y-auto lg:bottom-0">
+            {% block right %}
+              {% show_tutorials 999 %}
+            {% endblock right %}
+          </div>
+        </div>
+      </div>
+      {% include "inclusions/_footer.html" %}
+      <script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+    </body>
+  </html>
