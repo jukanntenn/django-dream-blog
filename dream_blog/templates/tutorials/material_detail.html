@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load tutorials_extra %}
+{% load tutorials_extra tree_comments_extra %}
 {% block left %}
     {% show_tutorial_toc material.tutorial material %}
 {% endblock left %}
@@ -7,6 +7,7 @@
     <h1 class="text-3xl">{{ material.title }}</h1>
     {% include "inclusions/_entry_meta.html" with entry=material %}
     {% include "inclusions/_entry_content.html" with entry=material %}
+    {% show_comments material %}
 {% endblock main %}
 {% block right %}
     {% include 'inclusions/_toc.html' with toc=material.toc %}

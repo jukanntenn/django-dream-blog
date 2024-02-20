@@ -8,3 +8,16 @@ class User(AbstractUser):
 
     first_name = None  # type: ignore
     last_name = None  # type: ignore
+
+    def social_avatar_url(self):
+        try:
+            socialaccount = self.socialaccounts[0]
+        except AttributeError:
+            socialaccount = self.socialaccount_set.first()
+        except IndexError:
+            return ""
+
+        if socialaccount is None:
+            return ""
+
+        return socialaccount.get_avatar_url()

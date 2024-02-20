@@ -1,11 +1,15 @@
-from core.models import EntryQuerySet, RichContentModel, TimeStampedModel
+from core.models import (
+    CommentsModel,
+    EntryQuerySet,
+    HitCountModel,
+    RichContentModel,
+    TimeStampedModel,
+)
 from django.conf import settings
-from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-from django.db.models import F, Manager, QuerySet
+from django.db.models import Manager, QuerySet
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from hitcount.models import HitCount, HitCountMixin
 from model_utils.choices import Choices
 
 
@@ -29,7 +33,7 @@ class TutoriallManager(Manager.from_queryset(TutorialQuerySet)):
     pass
 
 
-class Tutorial(HitCountMixin, RichContentModel, TimeStampedModel):
+class Tutorial(HitCountModel, RichContentModel, TimeStampedModel):
     STATUS = Choices(
         (1, "writing", _("Writing")),
         (2, "completed", _("Completed")),
@@ -55,11 +59,6 @@ class Tutorial(HitCountMixin, RichContentModel, TimeStampedModel):
         blank=True,
         null=True,
     )
-    hit_count_generic = GenericRelation(
-        HitCount,
-        object_id_field="object_pk",
-        related_query_name="hit_count_generic_relation",
-    )
 
     objects = TutoriallManager()
 
@@ -79,10 +78,11 @@ class MaterialQuerySet(EntryQuerySet):
         return super().visible().filter(tutorial__hidden=False)
 
 
-class MaterialManager(Manager.from_queryset(MaterialQuerySet)): ...
+class MaterialManager(Manager.from_queryset(MaterialQuerySet)):
+    ...
 
 
-class Material(HitCountMixin, RichContentModel, TimeStampedModel):
+class Material(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel):
     title = models.CharField(_("Title"), max_length=200)
     publish_date = models.DateTimeField(
         _("Publish Date"),
@@ -90,18 +90,11 @@ class Material(HitCountMixin, RichContentModel, TimeStampedModel):
         null=True,
     )
     hidden = models.BooleanField(_("Hidden"), default=False)
-    comments_enabled = models.BooleanField(_("Comments Enabled"), default=True)
 
     tutorial = models.ForeignKey(
         Tutorial,
         verbose_name=_("Tutorial"),
         on_delete=models.CASCADE,
-    )
-
-    hit_count_generic = GenericRelation(
-        HitCount,
-        object_id_field="object_pk",
-        related_query_name="hit_count_generic_relation",
     )
 
     objects = MaterialManager()
@@ -118,7 +111,3 @@ class Material(HitCountMixin, RichContentModel, TimeStampedModel):
             "tutorials:material_detail",
             kwargs={"slug": self.tutorial.slug, "pk": self.pk},
         )
-
-    @property
-    def hits(self):
-        return self.hit_count.hits

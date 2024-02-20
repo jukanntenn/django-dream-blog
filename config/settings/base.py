@@ -79,13 +79,20 @@ DJANGO_APPS = [
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.weibo",
+    "allauth.socialaccount.providers.github",
     "constance",
     "django_vite",
     "django_extensions",
     "hitcount",
+    "django_comments",
 ]
 LOCAL_APPS = [
     "dream_blog.core",
+    "dream_blog.tree_comments",
     "dream_blog.posts",
     "dream_blog.tutorials",
     "dream_blog.users",
@@ -99,6 +106,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
@@ -125,6 +133,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 # STATIC
@@ -252,3 +261,8 @@ CONSTANCE_CONFIG_FIELDSETS = {
 HITCOUNT_KEEP_HIT_ACTIVE = {"minutes": 1}
 
 DJANGO_VITE = {"default": {"dev_mode": True}}
+
+# django-contrib-comments
+# -----------------------------------------------------------------------
+# https://django-contrib-comments.readthedocs.io/en/latest/settings.html
+COMMENTS_APP = "tree_comments"

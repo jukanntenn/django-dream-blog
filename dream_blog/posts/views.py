@@ -1,5 +1,4 @@
 from core.views import SetHeadlineMixin
-from django.utils import timezone
 from hitcount.views import HitCountDetailView
 from posts.models import Post
 
@@ -18,7 +17,7 @@ class PostDetailView(SetHeadlineMixin, HitCountDetailView):
         return context
 
     def get_queryset(self):
-        return Post.objects.visible()
+        return Post.objects.visible().with_comment_count()
 
     def get_headline(self):
         return f"{self.object.title} - 追梦人物的博客"

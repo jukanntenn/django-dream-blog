@@ -1,5 +1,4 @@
 from core.views import SetHeadlineMixin
-from django.utils import timezone
 from hitcount.views import HitCountDetailView
 from tutorials.models import Material, Tutorial
 
@@ -46,6 +45,7 @@ class MaterialDetailView(SetHeadlineMixin, HitCountDetailView):
             Material.objects.visible()
             .select_related("tutorial")
             .order_by("publish_date")
+            .with_comment_count()
         )
 
     def get_headline(self):

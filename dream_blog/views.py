@@ -10,4 +10,4 @@ class HomeView(SetHeadlineMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Post.objects.visible().order_by("-publish_date")
+        return Post.objects.visible().with_comment_count().order_by("-publish_date")
