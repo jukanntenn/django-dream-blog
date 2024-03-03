@@ -1,0 +1,19 @@
+<div class="flex items-center border-b">
+    <span class="font-semibold text-lg pb-3">{{ comment_count }} 评论</span>
+    {% if user.is_authenticated %}
+        <a class="ml-auto"
+           href="{% url 'account_logout' %}?next={{ request.get_full_path }}">登出</a>
+    {% endif %}
+</div>
+<div class="mt-5">
+    {% if user.is_anonymous %}
+        {% include "accounts/inclusions/_login.html" %}
+    {% else %}
+        {% include "tree_comments/inclusions/_form.html" %}
+    {% endif %}
+</div>
+<div id="comment-list">
+    {% for comment in tree_comments %}
+        {% include "tree_comments/inclusions/_comment.html" %}
+    {% endfor %}
+</div>

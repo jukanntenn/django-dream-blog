@@ -24,6 +24,8 @@ urlpatterns = [
     path("", include("dream_blog.urls")),
     path("posts/", include("posts.urls")),
     path("tutorials/", include("tutorials.urls")),
+    path("comments/", include("tree_comments.urls")),
+    path("accounts/", include("allauth.urls")),
     path(settings.ADMIN_URL, admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

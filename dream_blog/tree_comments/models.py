@@ -41,3 +41,7 @@ class TreeComment(CommentAbstractModel):
     @property
     def comment_html(self):
         return markdownify(self.comment)["content"]
+
+    @property
+    def anchor(self):
+        return f"c{self.pk}"

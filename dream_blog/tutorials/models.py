@@ -78,8 +78,7 @@ class MaterialQuerySet(EntryQuerySet):
         return super().visible().filter(tutorial__hidden=False)
 
 
-class MaterialManager(Manager.from_queryset(MaterialQuerySet)):
-    ...
+class MaterialManager(Manager.from_queryset(MaterialQuerySet)): ...
 
 
 class Material(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel):
@@ -105,6 +104,10 @@ class Material(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel)
 
     def __str__(self):
         return self.title
+
+    @property
+    def author(self):
+        return self.tutorial.author
 
     def get_absolute_url(self):
         return reverse(

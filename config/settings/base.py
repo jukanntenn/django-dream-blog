@@ -84,11 +84,13 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.weibo",
     "allauth.socialaccount.providers.github",
+    "anymail",
     "constance",
     "django_vite",
     "django_extensions",
     "hitcount",
     "django_comments",
+    "notifications",
 ]
 LOCAL_APPS = [
     "dream_blog.core",
@@ -202,6 +204,16 @@ CSRF_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "DENY"
 
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+EMAIL_BACKEND = env(
+    "DJANGO_EMAIL_BACKEND",
+    default="django.core.mail.backends.smtp.EmailBackend",
+)
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
+EMAIL_TIMEOUT = 5
+
 
 # ADMIN
 # ------------------------------------------------------------------------------
@@ -245,6 +257,8 @@ CONSTANCE_CONFIG = {
     "SOCIAL_LINK_TELEGRAM": ("", "Social Link Telegram", str),
     "SOCIAL_LINK_ZHIHU": ("", "Social Link Zhihu", str),
     "SOCIAL_LINK_EMAIL": ("", "Social Link Email", str),
+    "COMMENT_EMAIL_SUBJECT": ("新的文章评论", "", str),
+    "REPLY_EMAIL_SUBJECT": ("评论有了新回复", "", str),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
@@ -256,6 +270,7 @@ CONSTANCE_CONFIG_FIELDSETS = {
         "SOCIAL_LINK_ZHIHU",
         "SOCIAL_LINK_EMAIL",
     ),
+    "Email Options": ("COMMENT_EMAIL_SUBJECT", "REPLY_EMAIL_SUBJECT"),
 }
 
 HITCOUNT_KEEP_HIT_ACTIVE = {"minutes": 1}

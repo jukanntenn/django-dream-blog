@@ -1,0 +1,32 @@
+{% load static %}
+<div class="mt-5 flex {% if not comment.is_root %}pl-14{% endif %}"
+     id="{{ comment.anchor }}">
+    <div class="flex-shrink-0">
+        <img class="rounded"
+             width="48"
+             height="48"
+             alt=""
+             src="{{ comment.user.social_avatar_url }}" />
+    </div>
+    <div class="ml-2 min-w-0 w-full">
+        <div>
+            {{ comment.user.name }}
+            {% if not comment.is_root %}
+                <img class="inline"
+                     height="15"
+                     width="15"
+                     src="{% static 'share-forward-fill.svg' %}" />
+                <span>{{ comment.parent.user.name }}</span>
+            {% endif %}
+        </div>
+        <div class="text-gray-400 text-sm">{{ comment.submit_date | date:"Y-m-d H:i:s" }}</div>
+        <div class="max-w-none prose prose-pre:bg-slate-100 prose-pre:rounded-none prose-pre:mt-0 prose-pre:text-sm prose-pre:text-black">
+            {{ comment.comment_html | safe }}
+        </div>
+        <div class="mt-1">
+            <span class="text-sm text-gray-500 reply" data-cid="{{ comment.pk }}">回复</span>
+            <span class="text-sm text-gray-500 hidden">正在加载评论框...</span>
+            <span class="text-sm text-gray-500 hidden fold">收起</span>
+        </div>
+    </div>
+</div>

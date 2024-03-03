@@ -78,3 +78,11 @@ LOGGING = {
 # Your stuff...
 # ------------------------------------------------------------------------------
 DJANGO_VITE = {"default": {"dev_mode": False}}
+
+
+# django anymail
+ANYMAIL = {
+    "RESEND_API_KEY": env.str("DJANGO_ANYMAIL_RESEND_API_KEY"),
+}
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+DEFAULT_FROM_EMAIL = "admin@zmrenwu.com"

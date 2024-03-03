@@ -2,6 +2,7 @@ from allauth.socialaccount.models import SocialAccount
 from django import template
 from django.db.models import F, Prefetch
 from django_cte import With
+from tree_comments.forms import TreeCommentForm
 from tree_comments.models import TreeComment
 
 register = template.Library()
@@ -21,8 +22,10 @@ def _sort_key(comment):
     return (primary, secondary)
 
 
-@register.inclusion_tag("tree_comments/inclusions/_comments.html")
-def show_comments(target):
+@register.inclusion_tag(
+    "tree_comments/inclusions/_comment_app.html", takes_context=True
+)
+def show_comment_app(context, target):
     def make_comments_cte(cte):
         return (
             TreeComment.objects.for_model(target)
@@ -64,4 +67,11 @@ def show_comments(target):
     )
     comments = sorted(comments, key=_sort_key)
 
-    return {"tree_comments": comments}
+    return {
+        "form": TreeCommentForm(target_object=target),
+        "tree_comments": comments,
+        "comment_count": target.comment_count,
+        # Must pass explicitly
+        "user": context["user"],
+        "request": context["request"],
+    }
