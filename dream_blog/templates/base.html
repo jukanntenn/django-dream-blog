@@ -1,4 +1,4 @@
-{% load django_vite tutorials_extra static core_extra %}
+{% load django_vite tutorials_extra static core_extra columns_extra %}
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -41,6 +41,7 @@
           <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(0px,calc(50%-38rem))] lg:top-[4.25rem] lg:overflow-y-auto lg:bottom-0">
             {% block right %}
               {% show_tutorials 999 %}
+              {% show_columns 999 %}
             {% endblock right %}
           </div>
         </div>

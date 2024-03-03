@@ -93,6 +93,7 @@ THIRD_PARTY_APPS = [
     "notifications",
 ]
 LOCAL_APPS = [
+    "dream_blog.columns",
     "dream_blog.core",
     "dream_blog.tree_comments",
     "dream_blog.posts",

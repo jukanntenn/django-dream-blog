@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load tree_comments_extra columns_extra %}
+{% block main %}
+    <h1 class="text-3xl">{{ article.title }}</h1>
+    {% include "inclusions/_entry_meta.html" with entry=article %}
+    {% include "inclusions/_entry_content.html" with entry=article %}
+    {% show_comment_app article %}
+{% endblock main %}
+{% block right %}
+    {% include "inclusions/_toc.html" with toc=article.toc %}
+    {% show_column_toc article.column article %}
+{% endblock right %}
