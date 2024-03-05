@@ -1,5 +1,8 @@
 import Offcanvas from "./offcanvas";
 import Scrollspy from "./scrollspy";
+import Backtop from "./backtop";
+
+new Backtop(document.getElementById("backtop"));
 
 const offcanvas = new Offcanvas(document.getElementById("left"), {
   backdropClassName: "backdrop",
