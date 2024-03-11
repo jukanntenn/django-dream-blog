@@ -91,6 +91,10 @@ THIRD_PARTY_APPS = [
     "hitcount",
     "django_comments",
     "notifications",
+    "health_check",
+    "health_check.db",
+    "health_check.storage",
+    "health_check.contrib.migrations",
 ]
 LOCAL_APPS = [
     "dream_blog.columns",
