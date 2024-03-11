@@ -1474,6 +1474,7 @@ files = [
 
 [package.dependencies]
 certifi = "*"
+django = {version = ">=1.8", optional = true, markers = "extra == \"django\""}
 urllib3 = {version = ">=1.26.11", markers = "python_version >= \"3.6\""}
 
 [package.extras]
@@ -1811,4 +1812,4 @@ reference = "tuna"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10, <4"
-content-hash = "00e5975e9822d3a7e33cb1761b57a5f41cd490379b9b6b03c0c0cb7db8ee1a76"
+content-hash = "885ff1ef5476c4d855092d213eabc26ec6bb573d18edbe1efbc411a235509286"
