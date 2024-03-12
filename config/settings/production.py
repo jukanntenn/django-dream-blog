@@ -83,8 +83,9 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_SSL = True
 EMAIL_HOST = env.str("DJANGO_EMAIL_HOST")
-EMAIL_PORT = 25
+EMAIL_PORT = 465
 EMAIL_HOST_USER = env.str("DJANGO_EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env.str("DJANGO_EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
