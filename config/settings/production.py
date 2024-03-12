@@ -81,15 +81,17 @@ LOGGING = {
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env.str("DJANGO_EMAIL_HOST")
+EMAIL_PORT = 25
+EMAIL_HOST_USER = env.str("DJANGO_EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("DJANGO_EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# django-vite
+# ------------------------------------------------------------------------------
 DJANGO_VITE = {"default": {"dev_mode": False}}
-
-
-# django anymail
-ANYMAIL = {
-    "RESEND_API_KEY": env.str("DJANGO_ANYMAIL_RESEND_API_KEY"),
-}
-EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
-DEFAULT_FROM_EMAIL = "admin@zmrenwu.com"
 
 # Sentry
 # ------------------------------------------------------------------------------
