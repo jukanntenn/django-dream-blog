@@ -24,6 +24,9 @@ django-notifications-hq = "^1.8.3"
 django-anymail = {extras = ["resend"], version = "^10.2"}
 sentry-sdk = {extras = ["django"], version = "^1.41.0"}
 django-health-check = "^3.18.1"
+huey = "^2.5.0"
+django-tencentcos-storage = "^0.2.1"
+django-dbbackup = "^4.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -48,7 +51,7 @@ gunicorn = "^21.2.0"
 [[tool.poetry.source]]
 name = "tuna"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-priority = "default"
+priority = "primary"
 
 [build-system]
 requires = ["poetry-core"]

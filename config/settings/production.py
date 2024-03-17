@@ -113,3 +113,14 @@ sentry_sdk.init(
     environment=env("SENTRY_ENVIRONMENT", default="production"),
     enable_tracing=True,
 )
+
+DBBACKUP_STORAGE = "tencentcos_storage.TencentCOSStorage"
+
+TENCENTCOS_STORAGE = {
+    "BUCKET": "backup-1253812787",
+    "CONFIG": {
+        "Region": "ap-beijing",
+        "SecretId": env.str("TENCENTCOS_STORAGE_SECRET_ID"),
+        "SecretKey": env.str("TENCENTCOS_STORAGE_SECRET_KEY"),
+    },
+}

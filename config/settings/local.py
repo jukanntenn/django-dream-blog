@@ -1,5 +1,5 @@
 from .base import *  # noqa
-from .base import env
+from .base import BASE_DIR, env
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -40,3 +40,6 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
+
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {"location": BASE_DIR / "backup"}

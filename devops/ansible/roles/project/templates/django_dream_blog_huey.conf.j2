@@ -1,0 +1,11 @@
+[program:django-dream-blog-huey]
+directory={{ project_path }}
+command={{ project_venv_path }}/bin/gunicorn manage.py run_huey
+autostart=true
+startsecs=1
+startretries=3
+autorestart=unexpected
+stopasgroup=true
+killasgroup=true
+user={{ user }}
+environment=DJANGO_READ_DOT_ENV_FILE="yes"

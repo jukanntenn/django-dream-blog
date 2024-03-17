@@ -95,6 +95,8 @@ THIRD_PARTY_APPS = [
     "health_check.db",
     "health_check.storage",
     "health_check.contrib.migrations",
+    "dbbackup",
+    "huey.contrib.djhuey",
 ]
 LOCAL_APPS = [
     "dream_blog.columns",
@@ -286,3 +288,24 @@ DJANGO_VITE = {"default": {"dev_mode": True}}
 # -----------------------------------------------------------------------
 # https://django-contrib-comments.readthedocs.io/en/latest/settings.html
 COMMENTS_APP = "tree_comments"
+
+# django-dbbackup
+# ------------------------------------------------------------------------------
+# https://django-dbbackup.readthedocs.io/en/master/configuration.html
+DBBACKUP_CLEANUP_KEEP = 2
+DBBACKUP_CLEANUP_KEEP_MEDIA = 2
+DBBACKUP_CONNECTORS = {
+    "default": {
+        "CONNECTOR": "dbbackup.db.sqlite.SqliteCPConnector",
+    }
+}
+
+HUEY = {
+    "huey_class": "huey.SqliteHuey",
+    "name": "dream-blog",
+    "immediate": False,
+    "consumer": {
+        "workers": 4,
+        "worker_type": "thread",
+    },
+}
