@@ -1,6 +1,6 @@
 [program:django-dream-blog-huey]
 directory={{ project_path }}
-command={{ project_venv_path }}/bin/gunicorn manage.py run_huey
+command={{ project_venv_path }}/bin/python manage.py run_huey
 autostart=true
 startsecs=1
 startretries=3
