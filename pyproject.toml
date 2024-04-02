@@ -27,6 +27,7 @@ django-health-check = "^3.18.1"
 huey = "^2.5.0"
 django-tencentcos-storage = "^0.2.1"
 django-dbbackup = "^4.1.0"
+django-huey-email = "^0.0.1"
 
 
 [tool.poetry.group.dev.dependencies]

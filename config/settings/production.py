@@ -82,7 +82,8 @@ LOGGING = {
 # Your stuff...
 # ------------------------------------------------------------------------------
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "huey_email.backends.HueyEmailBackend"
+HUEY_EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_SSL = True
 EMAIL_HOST = env.str("DJANGO_EMAIL_HOST")
 EMAIL_PORT = 465

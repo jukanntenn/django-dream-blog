@@ -758,6 +758,25 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 reference = "tuna"
 
 [[package]]
+name = "django-huey-email"
+version = "0.0.1"
+description = "Asynchronous Email Backend for Django with Huey."
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "django_huey_email-0.0.1-py3-none-any.whl", hash = "sha256:afc92318b2770b6f988ff01f0a81375c332359489dc475d78c399b3fd07e8fcf"},
+    {file = "django_huey_email-0.0.1.tar.gz", hash = "sha256:42c075115ea1b8104469f42e5e8d3003f1a590e932ecaf28fe98171cb82fb537"},
+]
+
+[package.dependencies]
+huey = ">=2.5.0,<3.0.0"
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "tuna"
+
+[[package]]
 name = "django-model-utils"
 version = "4.4.0"
 description = "Django model mixins and utilities"
@@ -1969,4 +1988,4 @@ reference = "tuna"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10, <4"
-content-hash = "8d928b306bf9fa857eda9768194786e2e3d9d710899bb5636a4833ee226b0183"
+content-hash = "0dad542c2eb141a2509926b4298311170396ba229718217404207ae9a5ea2376"
