@@ -12,6 +12,6 @@
     <p>暂无文章</p>
   {% endfor %}
   {% if is_paginated %}
-    {% include "inclusions/_pagination.html" %}
+    <div class="mt-16 flex justify-center">{% include "inclusions/_pagination.html" %}</div>
   {% endif %}
 {% endblock main %}
