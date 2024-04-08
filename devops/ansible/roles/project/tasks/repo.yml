@@ -1,5 +1,5 @@
 ---
-- name: Ensupre project directory
+- name: Ensure project directory
   ansible.builtin.file:
     path: "{{ project_path }}"
     state: directory
