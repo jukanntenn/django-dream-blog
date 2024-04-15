@@ -9,7 +9,10 @@
 - name: restart program
   community.general.supervisorctl:
     config: /etc/supervisor/supervisord.conf
-    name: django-dream-blog
+    name: "{{ item }}"
     state: restarted
+  loop:
+    - django-dream-blog
+    - django-dream-blog-huey
   become: yes
   become_method: sudo
