@@ -3,6 +3,7 @@ Base settings to build other settings files upon.
 """
 
 import sys
+from email.utils import getaddresses
 from pathlib import Path
 
 import environ
@@ -227,7 +228,7 @@ EMAIL_TIMEOUT = 5
 # Django Admin URL.
 ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = []
+ADMINS = getaddresses(env.list("DJANGO_ADMINS", default=[]))
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 

@@ -116,6 +116,8 @@ sentry_sdk.init(
 )
 
 DBBACKUP_STORAGE = "tencentcos_storage.TencentCOSStorage"
+DBBACKUP_SEND_EMAIL = True
+DBBACKUP_SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 TENCENTCOS_STORAGE = {
     "BUCKET": "backup-1253812787",
