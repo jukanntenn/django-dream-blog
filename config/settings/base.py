@@ -309,3 +309,5 @@ HUEY = {
         "worker_type": "thread",
     },
 }
+
+HC_EMAIL_SERVICE_PING_EMAIL = env.str("HC_EMAIL_SERVICE_PING_EMAIL", "")
