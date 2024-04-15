@@ -30,7 +30,7 @@ class TutorialQuerySet(QuerySet):
         return self.filter(hidden=False)
 
 
-class TutoriallManager(Manager.from_queryset(TutorialQuerySet)):
+class TutorialManager(Manager.from_queryset(TutorialQuerySet)):
     pass
 
 
@@ -61,7 +61,7 @@ class Tutorial(HitCountModel, RichContentModel, TimeStampedModel):
         null=True,
     )
 
-    objects = TutoriallManager()
+    objects = TutorialManager()
 
     class Meta:
         verbose_name = _("Tutorial")
