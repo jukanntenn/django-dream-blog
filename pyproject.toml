@@ -34,6 +34,7 @@ django-huey-email = "^0.0.1"
 django-debug-toolbar = "^4.2.0"
 factory-boy = "^3.3.0"
 django-browser-reload = "^1.12.1"
+rich = "^13.7.1"
 
 
 [tool.poetry.group.test.dependencies]

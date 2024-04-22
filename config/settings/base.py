@@ -245,12 +245,21 @@ LOGGING = {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
         },
+        "rich": {"datefmt": "[%X]"},
     },
     "handlers": {
         "console": {
             "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
+            "class": "rich.logging.RichHandler",
+            "formatter": "rich",
+            "rich_tracebacks": True,
+            "tracebacks_show_locals": True,
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": [],
+            "level": "INFO",
         }
     },
     "root": {"level": "INFO", "handlers": ["console"]},
