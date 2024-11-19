@@ -98,7 +98,6 @@ THIRD_PARTY_APPS = [
     "health_check.contrib.migrations",
     "dbbackup",
     "huey.contrib.djhuey",
-    "django_browser_reload",
 ]
 LOCAL_APPS = [
     "dream_blog.columns",
