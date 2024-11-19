@@ -1,7 +1,7 @@
 - name: Copy Caddyfile
   ansible.builtin.template:
-    src: Caddyfile.j2
-    dest: /etc/caddy/Caddyfile
+    src: django_dream_blog.caddy.j2
+    dest: /etc/caddy/conf.d/django_dream_blog.caddy
   become: yes
   become_method: sudo
   notify: reload caddy
