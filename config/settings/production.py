@@ -125,5 +125,6 @@ TENCENTCOS_STORAGE = {
         "Region": "ap-beijing",
         "SecretId": env.str("TENCENTCOS_STORAGE_SECRET_ID"),
         "SecretKey": env.str("TENCENTCOS_STORAGE_SECRET_KEY"),
+        "Timeout": 1800,  # 30 minutes
     },
 }
