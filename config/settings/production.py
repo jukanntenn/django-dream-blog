@@ -122,7 +122,7 @@ DBBACKUP_SERVER_EMAIL = DEFAULT_FROM_EMAIL
 TENCENTCOS_STORAGE = {
     "BUCKET": "backup-1253812787",
     "UPLOAD_PART_SIZE": 2,
-    "UPLOAD_MAX_THREAD": 10,
+    "UPLOAD_MAX_THREAD": 2,
     "CONFIG": {
         "Region": "ap-beijing",
         "SecretId": env.str("TENCENTCOS_STORAGE_SECRET_ID"),
