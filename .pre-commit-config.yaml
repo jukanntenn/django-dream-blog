@@ -7,6 +7,18 @@ repos:
     hooks:
       - id: uv-lock
       - id: uv-export
+        args:
+          [
+            "--format",
+            "requirements-txt",
+            "--output",
+            "requirements.txt",
+            "--frozen",
+            "--no-default-groups",
+            "--group",
+            "production",
+            "--no-emit-project",
+          ]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
