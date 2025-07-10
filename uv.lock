@@ -410,6 +410,7 @@ dependencies = [
     { name = "django-health-check" },
     { name = "django-hitcount" },
     { name = "django-huey-email" },
+    { name = "django-md-field" },
     { name = "django-model-utils" },
     { name = "django-notifications-hq" },
     { name = "django-tencentcos-storage" },
@@ -455,6 +456,7 @@ requires-dist = [
     { name = "django-health-check", specifier = ">=3.18.1,<4" },
     { name = "django-hitcount", specifier = ">=1.3.5,<2" },
     { name = "django-huey-email", specifier = ">=0.0.1,<0.0.2" },
+    { name = "django-md-field", specifier = ">=0.1.0" },
     { name = "django-model-utils", specifier = ">=4.4.0,<5" },
     { name = "django-notifications-hq", specifier = ">=1.8.3,<2" },
     { name = "django-tencentcos-storage", specifier = ">=0.2.1,<0.3" },
@@ -548,6 +550,18 @@ dependencies = [
 sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/06/90/039c0ac30b9d98c3ac377983bceea6b862f5ce63c18c59c15addf4b3134e/django_huey_email-0.0.1.tar.gz", hash = "sha256:42c075115ea1b8104469f42e5e8d3003f1a590e932ecaf28fe98171cb82fb537", size = 2530 }
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/c7/a6/ce928c45c15de9f28aed41f4158cd93d892fcf3d495c7cd031657bc6aa78/django_huey_email-0.0.1-py3-none-any.whl", hash = "sha256:afc92318b2770b6f988ff01f0a81375c332359489dc475d78c399b3fd07e8fcf", size = 3388 },
+]
+
+[[package]]
+name = "django-md-field"
+version = "0.1.0"
+source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
+dependencies = [
+    { name = "markdown" },
+]
+sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/0f/65/bf295822108b99b2cd7addaa6a4c0cea8faeec51dfd328bab2aef08012c5/django_md_field-0.1.0.tar.gz", hash = "sha256:87dff61316dfd8825b93793b91de2b9fe7e2d7f3b52478ed751565931195c2ff", size = 12472 }
+wheels = [
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/03/7c/36c5d78a382b4b1a80b6596c7020b0eafeb26b43514cece08deb904d4e2b/django_md_field-0.1.0-py3-none-any.whl", hash = "sha256:041cd2e55551ab6aa8085ffd1819a9036de7f832f29e66ef3a0eb649c6c7bfc5", size = 4287 },
 ]
 
 [[package]]
@@ -753,11 +767,11 @@ wheels = [
 
 [[package]]
 name = "markdown"
-version = "3.6"
+version = "3.8.2"
 source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/22/02/4785861427848cc11e452cc62bb541006a1087cf04a1de83aedd5530b948/Markdown-3.6.tar.gz", hash = "sha256:ed4f41f6daecbeeb96e576ce414c41d2d876daa9a16cb35fa8ed8c2ddfad0224", size = 354715 }
+sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/d7/c2/4ab49206c17f75cb08d6311171f2d65798988db4360c4d1485bd0eedd67c/markdown-3.8.2.tar.gz", hash = "sha256:247b9a70dd12e27f67431ce62523e675b866d254f900c4fe75ce3dda62237c45", size = 362071 }
 wheels = [
-    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/fc/b3/0c0c994fe49cd661084f8d5dc06562af53818cc0abefaca35bdc894577c3/Markdown-3.6-py3-none-any.whl", hash = "sha256:48f276f4d8cfb8ce6527c8f79e2ee29708508bf4d40aa410fbc3b4ee832c850f", size = 105381 },
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/96/2b/34cc11786bc00d0f04d0f5fdc3a2b1ae0b6239eef72d3d345805f9ad92a1/markdown-3.8.2-py3-none-any.whl", hash = "sha256:5c83764dbd4e00bdd94d85a19b8d55ccca20fe35b2e678a1422b380324dd5f24", size = 106827 },
 ]
 
 [[package]]

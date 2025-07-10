@@ -7,6 +7,8 @@ from email.utils import getaddresses
 from pathlib import Path
 
 import environ
+from django.utils.text import slugify
+from markdown.extensions.toc import TocExtension
 
 # django_dream_blog/
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
@@ -323,3 +325,29 @@ HUEY = {
 HC_EMAIL_SERVICE_PING_EMAIL = env.str("HC_EMAIL_SERVICE_PING_EMAIL", "")
 
 SOCIALACCOUNT_ADAPTER = "users.adapter.SocialAccountAdapter"
+
+MARKDOWN_FIELD = {
+    "extensions": [
+        "markdown.extensions.admonition",
+        "markdown.extensions.nl2br",
+        TocExtension(slugify=slugify, toc_depth=3),
+        "pymdownx.extra",
+        "pymdownx.magiclink",
+        "pymdownx.tasklist",
+        "pymdownx.tilde",
+        "pymdownx.caret",
+        "pymdownx.superfences",
+        "pymdownx.tabbed",
+        "pymdownx.highlight",
+        "pymdownx.inlinehilite",
+        "pymdownx.arithmatex",
+    ],
+    "extension_configs": {
+        "pymdownx.highlight": {
+            "linenums_style": "pymdownx-inline",
+        },
+        "pymdownx.arithmatex": {
+            "generic": True,
+        },
+    },
+}

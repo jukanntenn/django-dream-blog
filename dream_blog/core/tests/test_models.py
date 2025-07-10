@@ -12,15 +12,6 @@ def entry():
     return Entry.objects.create(content="# 标题内容")
 
 
-def test_rich_content_model_properties(entry: Entry):
-    assert isinstance(entry.markdownified, dict)
-    assert "content" in entry.markdownified
-    assert "toc" in entry.markdownified
-
-    assert entry.content_html == entry.markdownified["content"]
-    assert entry.toc == entry.markdownified["toc"]
-
-
 class TestEntryQuerySet:
     def setup_method(self):
         Entry.objects.create(

@@ -1,4 +1,3 @@
-from core.utils import markdownify
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models import Count, Q, QuerySet
@@ -6,6 +5,7 @@ from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from hitcount.models import HitCount, HitCountMixin
+from markdown_field import MarkdownField
 from model_utils.fields import AutoCreatedField, AutoLastModifiedField
 from tree_comments.models import TreeComment
 
@@ -39,19 +39,15 @@ class TimeStampedModel(models.Model):
 
 
 class RichContentModel(models.Model):
-    content = models.TextField(_("Content"))
+    content = MarkdownField(_("Content"))
 
     @property
     def toc(self):
-        return self.markdownified.get("toc", "")
+        return self.content.toc
 
     @property
     def content_html(self):
-        return self.markdownified.get("content", "")
-
-    @cached_property
-    def markdownified(self):
-        return markdownify(self.content)
+        return self.content.html
 
     class Meta:
         abstract = True

@@ -1,9 +1,12 @@
-from core.utils import markdownify
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_comments.abstracts import CommentAbstractModel
 from django_comments.managers import CommentManager as DjangoCommentManager
 from django_cte import CTEManager, CTEQuerySet
+from markdown_field import MarkdownField
+
+COMMENT_MAX_LENGTH = getattr(settings, "COMMENT_MAX_LENGTH", 3000)
 
 
 class TreeCommentQuerySet(CTEQuerySet):
@@ -19,6 +22,7 @@ class TreeCommentManager(DjangoCommentManager, CTEManager):
 
 
 class TreeComment(CommentAbstractModel):
+    comment = MarkdownField(_("comment"), max_length=COMMENT_MAX_LENGTH)
     parent = models.ForeignKey(
         "self",
         verbose_name=_("Parent"),
@@ -40,7 +44,7 @@ class TreeComment(CommentAbstractModel):
 
     @property
     def comment_html(self):
-        return markdownify(self.comment)["content"]
+        return self.comment.html
 
     @property
     def anchor(self):
