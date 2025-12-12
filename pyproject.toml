@@ -36,6 +36,7 @@ dev = [
     "factory-boy>=3.3.0,<4",
     "django-browser-reload>=1.12.1,<2",
     "rich>=13.7.1,<14",
+    "daphne>=4.0.0,<5",
 ]
 test = [
     "pytest>=7.4.4,<8",
@@ -46,7 +47,10 @@ test = [
     "coverage[toml]>=7.4.1,<8",
     "freezegun>=1.4.0,<2",
 ]
-production = ["gunicorn>=21.2.0,<22"]
+production = [
+    "gunicorn>=21.2.0,<22",
+    "uvicorn[standard]>=0.30.0,<1",
+]
 
 [tool.uv]
 default-groups = ["dev", "test", "production"]

@@ -11,7 +11,7 @@ repos:
           [
             "--format",
             "requirements-txt",
-            "--output",
+            "--output-file",
             "requirements.txt",
             "--frozen",
             "--no-default-groups",

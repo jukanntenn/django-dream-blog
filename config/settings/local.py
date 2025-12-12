@@ -30,10 +30,11 @@ EMAIL_PORT = 1025
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#prerequisites
-INSTALLED_APPS += [
+INSTALLED_APPS.insert(0, "daphne")  # noqa: F405
+INSTALLED_APPS += [  # noqa: F405
     "debug_toolbar",
     "django_browser_reload",
-]  # noqa: F405
+]
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#middleware
 MIDDLEWARE += [  # noqa: F405
     "debug_toolbar.middleware.DebugToolbarMiddleware",
