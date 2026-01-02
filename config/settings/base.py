@@ -7,6 +7,7 @@ from email.utils import getaddresses
 from pathlib import Path
 
 import environ
+import pymdownx.superfences
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 
@@ -349,6 +350,15 @@ MARKDOWN_FIELD = {
         },
         "pymdownx.arithmatex": {
             "generic": True,
+        },
+        "pymdownx.superfences": {
+            "custom_fences": [
+                {
+                    "name": "mermaid",
+                    "class": "mermaid",
+                    "format": pymdownx.superfences.fence_div_format,
+                }
+            ]
         },
     },
 }

@@ -8,11 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.css"
           rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,
-      <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
-        <text y=%22.9em%22 font-size=%2290%22>🦋</text>
-      </svg>
-      " />
+    <link rel="icon"
+          href="data:image/svg+xml, <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22> <text y=%22.9em%22 font-size=%2290%22>🦋</text> </svg> " />
       <title>
         {% block title %}
           {{ headline }}
@@ -52,5 +49,6 @@
       </span>
       {% include "inclusions/_footer.html" %}
       <script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+      <script src="https://unpkg.com/mermaid@9.4.0/dist/mermaid.min.js"></script>
     </body>
   </html>
