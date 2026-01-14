@@ -2,35 +2,9 @@ pre {
   line-height: 125%;
   margin: 0;
 }
-td.linenos pre {
-  color: #000000;
-  background-color: #f0f0f0;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-span.linenos {
-  color: #000000;
-  background-color: #f0f0f0;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-td.linenos pre.special {
-  color: #000000;
-  background-color: #ffffc0;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-span.linenos.special {
-  color: #000000;
-  background-color: #ffffc0;
-  padding-left: 5px;
-  padding-right: 5px;
-}
 .highlight .hll {
-  background-color: #ffffcc;
 }
 .highlight {
-  background: #f0f0f0;
 }
 .highlight .c {
   color: #60a0b0;
@@ -67,7 +41,6 @@ span.linenos.special {
 } /* Comment.Single */
 .highlight .cs {
   color: #60a0b0;
-  background-color: #fff0f0;
 } /* Comment.Special */
 .highlight .gd {
   color: #a00000;

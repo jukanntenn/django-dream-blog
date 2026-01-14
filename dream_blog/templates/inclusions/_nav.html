@@ -1,14 +1,41 @@
 {% load static %}
-<div class="sticky top-0 z-30 w-full flex-none bg-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="py-4 lg:px-8 mx-4 lg:mx-0">
-      <div class="relative flex items-center">
-        <span class="inline-block lg:hidden" id="offcanvas-trigger">
-          <img height="20" width="20" src="{% static 'menu-fill.svg' %}" />
-        </span>
-        <a href="{% url 'home' %}" class="mx-auto lg:mx-0">
-          <span class="text-3xl whitespace-nowrap">🦋</span>
-        </a>
+<div id="site-nav"
+     class="sticky top-0 z-[60] w-full flex-none bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <div class="py-4">
+      <div class="relative flex items-center justify-between">
+        <div class="flex items-center">
+          <span class="inline-block lg:hidden" id="offcanvas-trigger">
+            <img height="20" width="20" src="{% static 'menu-fill.svg' %}" />
+          </span>
+          <a href="{% url 'home' %}"
+             class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0">
+            <span class="text-3xl whitespace-nowrap">🦋</span>
+          </a>
+        </div>
+        <!-- 主题切换按钮 -->
+        <button id="theme-switcher"
+                class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="切换主题">
+          <img data-theme-icon="light"
+               height="20"
+               width="20"
+               src="{% static 'sun-fill.svg' %}"
+               alt="亮色模式"
+               class="hidden" />
+          <img data-theme-icon="dark"
+               height="20"
+               width="20"
+               src="{% static 'moon-line.svg' %}"
+               alt="暗色模式"
+               class="hidden" />
+          <img data-theme-icon="system"
+               height="20"
+               width="20"
+               src="{% static 'contrast-fill.svg' %}"
+               alt="跟随系统"
+               class="hidden" />
+        </button>
       </div>
     </div>
   </div>

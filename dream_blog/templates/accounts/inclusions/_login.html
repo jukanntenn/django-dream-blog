@@ -1,11 +1,16 @@
 {% load socialaccount static %}
+{% get_providers as socialaccount_providers %}
 <div class="my-10 flex content-start">
         <span class="text-small text-muted mr-3">登录后回复</span>
-        <a href="{% provider_login_url 'github' %}?next={{ request.get_full_path }}">
-                <img alt="" height="24" width="24" src="{% static 'github-fill.svg' %}" />
-        </a>
-        <a class="ml-3"
-           href="{% provider_login_url 'weibo' %}?next={{ request.get_full_path }}">
-                <img alt="" height="24" width="24" src="{% static 'weibo-fill.svg' %}" />
-        </a>
+        {% for provider in socialaccount_providers %}
+                {% if provider.id == 'github' or provider.id == 'weibo' %}
+                        <a {% if not forloop.first %}class="ml-3"{% endif %}
+                           href="{% provider_login_url provider %}?next={{ request.get_full_path }}">
+                                <img alt=""
+                                     height="24"
+                                     width="24"
+                                     src="{% static provider.id|add:'-fill.svg' %}" />
+                        </a>
+                {% endif %}
+        {% endfor %}
 </div>

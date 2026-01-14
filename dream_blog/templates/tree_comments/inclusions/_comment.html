@@ -1,8 +1,8 @@
 {% load static %}
 <div class="mt-5 flex {% if not comment.is_root %}pl-14{% endif %}"
      id="{{ comment.anchor }}">
-    <div class="flex-shrink-0">
-        <img class="rounded"
+    <div class="shrink-0">
+        <img class="rounded-sm"
              width="48"
              height="48"
              alt=""
@@ -20,7 +20,7 @@
             {% endif %}
         </div>
         <div class="text-gray-400 text-sm">{{ comment.submit_date | date:"Y-m-d H:i:s" }}</div>
-        <div class="max-w-none prose prose-pre:bg-slate-100 prose-pre:rounded-none prose-pre:mt-0 prose-pre:text-sm prose-pre:text-black">
+        <div class="max-w-none prose prose--comment">
             {{ comment.comment_html | safe }}
         </div>
         <div class="mt-1">

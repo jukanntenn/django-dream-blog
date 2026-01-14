@@ -1,31 +1,297 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@source '../../dream_blog/templates/**/*.{html,js}';
+
+/* 启用基于 class 的 dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* Dark mode 主题基础样式 */
+  .dark {
+    color-scheme: dark;
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  }
+
+  .theme-switching,
+  .theme-switching * {
+    transition: none !important;
+  }
+}
 
 @layer components {
-  .toc li {
+  .prose {
+    @apply text-[16px] leading-7 text-gray-800 dark:text-gray-100;
+    text-wrap: pretty;
+  }
+
+  .prose--comment {
+    @apply text-sm leading-6;
+  }
+
+  .prose > :first-child {
+    @apply mt-0;
+  }
+
+  .prose > :last-child {
+    @apply mb-0;
+  }
+
+  .prose :where(p) {
+    @apply my-5 text-gray-800 dark:text-gray-200;
+  }
+
+  .prose--comment :where(p) {
+    @apply my-3 text-gray-700 dark:text-gray-200;
+  }
+
+  .prose :where(h1) {
+    @apply mt-10 mb-5 scroll-mt-24 text-balance text-3xl leading-tight font-semibold tracking-tight text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(h2) {
+    @apply mt-10 mb-4 scroll-mt-24 text-balance text-2xl leading-snug font-semibold tracking-tight text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(h3) {
+    @apply mt-8 mb-3 scroll-mt-24 text-balance text-xl leading-snug font-semibold text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(h4) {
+    @apply mt-6 mb-3 scroll-mt-24 text-balance text-lg leading-snug font-semibold text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(h1 + p),
+  .prose :where(h2 + p),
+  .prose :where(h3 + p),
+  .prose :where(h4 + p) {
     @apply mt-2;
   }
 
-  .toc a {
-    @apply block text-gray-500 hover:text-gray-800;
+  .prose :where(a) {
+    @apply text-blue-700 dark:text-blue-300 underline underline-offset-4 decoration-blue-300/70 dark:decoration-blue-600/60 hover:decoration-blue-500 dark:hover:decoration-blue-400;
   }
 
-  .toc a.active {
-    @apply text-gray-800 font-semibold;
+  .prose :where(strong) {
+    @apply font-semibold text-gray-900 dark:text-gray-100;
   }
 
-  .toc ul ul li {
+  .prose :where(em) {
+    @apply text-gray-800 dark:text-gray-200;
+  }
+
+  .prose :where(ul) {
+    @apply my-5 pl-6 list-disc;
+  }
+
+  .prose :where(ol) {
+    @apply my-5 pl-6 list-decimal;
+  }
+
+  .prose :where(li) {
+    @apply my-2 text-gray-800 dark:text-gray-200;
+  }
+
+  .prose :where(li)::marker {
+    color: var(--color-gray-400);
+  }
+
+  .dark .prose :where(li)::marker {
+    color: var(--color-gray-500);
+  }
+
+  .prose :where(ul ul),
+  .prose :where(ol ol),
+  .prose :where(ul ol),
+  .prose :where(ol ul) {
+    @apply my-2;
+  }
+
+  .prose :where(blockquote) {
+    @apply my-6 border-l-2 border-gray-200 dark:border-gray-800 pl-4 text-gray-800 dark:text-gray-200;
+  }
+
+  .prose :where(blockquote > :first-child) {
+    @apply mt-0;
+  }
+
+  .prose :where(blockquote > :last-child) {
+    @apply mb-0;
+  }
+
+  .prose :where(hr) {
+    @apply my-10 border-gray-200 dark:border-gray-800;
+  }
+
+  .prose :where(code) {
+    @apply font-mono;
+  }
+
+  .prose :not(pre) > code {
+    @apply rounded-md bg-gray-100 dark:bg-gray-800/70 px-1.5 py-0.5 text-[0.875em] font-medium text-gray-900 dark:text-gray-100 ring-1 ring-black/5 dark:ring-white/10;
+  }
+
+  .prose pre {
+    @apply my-6 overflow-x-auto rounded-xl bg-slate-50 dark:bg-slate-950 px-4 py-3 text-[13px] leading-6 text-gray-900 dark:text-gray-100 ring-1 ring-black/5 dark:ring-white/10 shadow-sm;
+  }
+
+  .prose pre code {
+    @apply border-0 bg-transparent p-0 text-inherit font-normal;
+  }
+
+  .prose .highlight {
+    @apply my-6 overflow-hidden rounded-xl bg-slate-50 dark:bg-slate-950 ring-1 ring-black/5 dark:ring-white/10 shadow-sm;
+  }
+
+  .dark .prose .highlight {
+    background-color: var(--color-slate-950);
+  }
+
+  .prose .highlight pre {
+    @apply my-0 border-0 bg-transparent rounded-none;
+  }
+
+  .prose .highlight .linenos {
+    @apply inline-block select-none pr-3 text-xs font-medium tabular-nums text-gray-400 dark:text-gray-200;
+    width: 3.5ch;
+    margin-left: -0.25rem;
+    text-align: right;
+  }
+
+  .prose .highlight .linenos::before {
+    content: attr(data-linenos);
+  }
+
+  /* 高亮行背景 */
+  .prose .highlight .hll {
+    @apply bg-yellow-50 dark:bg-yellow-900/20;
+  }
+
+  /* 特殊行号背景 */
+  .prose .highlight td.linenos pre.special,
+  .prose .highlight span.linenos.special {
+    @apply bg-yellow-100 dark:bg-yellow-900/40;
+  }
+
+  /* 特殊注释背景 */
+  .prose .highlight .cs {
+    @apply bg-red-50 dark:bg-red-950/35;
+  }
+
+  .prose :where(table) {
+    @apply my-8 w-full overflow-x-auto rounded-xl border-separate border-spacing-0 text-sm ring-1 ring-black/5 dark:ring-white/10;
+    display: block;
+  }
+
+  .prose :where(thead th) {
+    @apply border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/40 px-3 py-2 text-left font-semibold text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(tbody td) {
+    @apply border-b border-gray-100 dark:border-gray-800/70 bg-white dark:bg-gray-900 px-3 py-2 align-top text-gray-800 dark:text-gray-200;
+  }
+
+  .prose :where(tbody tr:nth-child(2n)) {
+    @apply bg-gray-50/60 dark:bg-gray-950/20;
+  }
+
+  .prose :where(img) {
+    @apply my-8 rounded-xl bg-white dark:bg-gray-900 ring-1 ring-black/5 dark:ring-white/10 shadow-sm;
+  }
+
+  .prose :where(.mermaid) {
+    @apply my-8 overflow-x-auto rounded-xl bg-slate-50 dark:bg-slate-950 px-4 py-3 ring-1 ring-black/5 dark:ring-white/10 shadow-sm;
+  }
+
+  .prose :where(.mermaid svg) {
+    @apply mx-auto max-w-full h-auto;
+  }
+
+  .prose :where(.katex-display) {
+    @apply my-8 overflow-x-auto overflow-y-hidden;
+  }
+
+  .prose :where(.arithmatex) {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(.task-list) {
+    @apply my-5;
+  }
+
+  .prose :where(.tabbed-set) {
+    @apply my-6;
+  }
+
+  .prose :where(kbd) {
+    @apply rounded-md border border-black/10 dark:border-white/10 bg-gray-100 dark:bg-gray-800/60 px-1.5 py-0.5 text-[0.85em] font-medium text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(mark) {
+    @apply rounded-sm bg-yellow-100 dark:bg-yellow-900/30 px-1 text-gray-900 dark:text-gray-100;
+  }
+
+  .prose :where(details) {
+    @apply my-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-3;
+  }
+
+  .prose :where(summary) {
+    @apply cursor-pointer select-none font-medium text-gray-900 dark:text-gray-100;
+  }
+}
+
+@utility toc {
+  & li {
+    @apply mt-2;
+  }
+
+  & a {
+    @apply block text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200;
+  }
+
+  & a.active {
+    @apply text-gray-800 dark:text-gray-200 font-semibold;
+  }
+
+  & ul ul li {
     @apply ml-4;
   }
 
-  .toc ul ul a {
+  & ul ul a {
     @apply text-sm;
   }
 }
 
+@utility active {
+  .toc &a {
+    @apply text-gray-800 font-semibold;
+  }
+}
+
 .highlight .filename {
-  @apply block bg-slate-200 px-3 py-1;
+  @apply block border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-slate-950/40 px-4 py-2 text-xs font-medium text-gray-600 dark:text-gray-300;
 }
 
 .task-list {
@@ -45,7 +311,7 @@
 }
 
 .admonition {
-  @apply px-2 py-2 mb-3;
+  @apply my-8 rounded-xl px-4 py-3 ring-1 ring-black/5 dark:ring-white/10;
 }
 
 .admonition p {
@@ -53,7 +319,7 @@
 }
 
 .admonition .admonition-title {
-  @apply flex items-center font-semibold before:inline-block before:w-4 before:h-4 before:align-top my-0;
+  @apply mb-2 flex items-center text-sm font-semibold before:inline-block before:w-4 before:h-4 before:align-top;
 }
 
 .admonition.danger .admonition-title,
@@ -70,7 +336,7 @@
 
 .admonition.danger,
 .admonition.error {
-  @apply text-red-500 bg-red-100;
+  @apply text-red-900 dark:text-red-200 bg-red-50 dark:bg-red-950/40;
 }
 
 .admonition.danger .admonition-title,
@@ -81,7 +347,7 @@
 .admonition.warning,
 .admonition.caution,
 .admonition.attention {
-  @apply text-orange-400 bg-orange-100;
+  @apply text-orange-900 dark:text-orange-200 bg-orange-50 dark:bg-orange-950/35;
 }
 
 .admonition.warning .admonition-title,
@@ -92,7 +358,7 @@
 
 .admonition.important,
 .admonition.note {
-  @apply text-green-400 bg-green-100;
+  @apply text-green-900 dark:text-green-200 bg-green-50 dark:bg-green-950/35;
 }
 
 .admonition.important .admonition-title,
@@ -102,7 +368,7 @@
 
 .admonition.hint,
 .admonition.tip {
-  @apply text-cyan-600 bg-cyan-100;
+  @apply text-cyan-900 dark:text-cyan-200 bg-cyan-50 dark:bg-cyan-950/35;
 }
 
 .admonition.hint .admonition-title,
@@ -123,11 +389,11 @@
 }
 
 .tabbed-set > input:checked + label {
-  @apply text-zinc-800;
+  @apply text-zinc-800 dark:text-zinc-200;
 }
 
 .tabbed-set > label {
-  @apply inline-block py-1 px-2 font-normal text-sm text-center text-neutral-500;
+  @apply inline-block py-1 px-2 font-normal text-sm text-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300;
 }
 
 .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
@@ -135,5 +401,5 @@
 }
 
 .backdrop {
-  @apply fixed inset-0 z-40;
+  @apply fixed inset-0 z-40 bg-black/50 dark:bg-black/70;
 }

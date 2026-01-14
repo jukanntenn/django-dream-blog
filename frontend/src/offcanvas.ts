@@ -20,12 +20,15 @@ class Offcanvas {
 
   private readonly oriTransformVal;
 
+  private readonly oriTranslateVal;
+
   private isShown = false;
 
   constructor(element: HTMLElement, config?: Config) {
     this.elem = element;
     this.config = Object.assign(config || {}, defaultConfig);
     this.oriTransformVal = this.elem.style.transform;
+    this.oriTranslateVal = this.elem.style.translate;
     this.backdrop = this.initializeBackDrop();
   }
 
@@ -39,6 +42,7 @@ class Offcanvas {
 
   show() {
     this.elem.style.transform = "none";
+    this.elem.style.translate = "0 0";
     this.isShown = true;
     this.backdrop?.show();
   }
@@ -49,6 +53,7 @@ class Offcanvas {
     }
 
     this.elem.style.transform = this.oriTransformVal;
+    this.elem.style.translate = this.oriTranslateVal;
     this.isShown = false;
     this.backdrop?.hide();
   }

@@ -1,6 +1,13 @@
 import Offcanvas from "./offcanvas";
 import Scrollspy from "./scrollspy";
 import Backtop from "./backtop";
+import ThemeSwitcher from "./theme-switcher";
+
+// 初始化主题切换器
+const themeSwitcherElement = document.getElementById("theme-switcher");
+if (themeSwitcherElement) {
+  new ThemeSwitcher(themeSwitcherElement);
+}
 
 new Backtop(document.getElementById("backtop"));
 
@@ -31,11 +38,52 @@ function appendChildren(root, children) {
 
 const tocElem = document.getElementById("toc");
 const tocUlElem = tocElem && tocElem.children[0];
+
+function getScrollOffsetTop() {
+  const navElem = document.getElementById("site-nav");
+  const navHeight = navElem ? navElem.getBoundingClientRect().height : 0;
+  return navHeight + 12;
+}
+
+function scrollToHash(hash, behavior) {
+  if (!hash) return false;
+  const id = decodeURIComponent(hash.startsWith("#") ? hash.slice(1) : hash);
+  if (!id) return false;
+  const target = document.getElementById(id);
+  if (!target) return false;
+  const top =
+    target.getBoundingClientRect().top +
+    window.pageYOffset -
+    getScrollOffsetTop();
+  window.scrollTo({ top: Math.max(0, top), behavior });
+  return true;
+}
+
 if (tocUlElem) {
   const tree = [];
   appendChildren(tocUlElem, tree);
   new Scrollspy(tree, document.body, {
     activeClassName: "active",
+  });
+
+  tocElem.addEventListener("click", (e) => {
+    const aElem = e.target.closest && e.target.closest("a");
+    if (!aElem) return;
+    const href = aElem.getAttribute("href");
+    if (!href) return;
+    const id = href.includes("#")
+      ? href.split("#").pop()
+      : href.startsWith("#")
+        ? href.slice(1)
+        : null;
+    if (!id) return;
+    const hash = `#${id}`;
+    const didScroll = scrollToHash(hash, "smooth");
+    if (!didScroll) return;
+    e.preventDefault();
+    if (window.location.hash !== hash) {
+      window.history.pushState(null, "", hash);
+    }
   });
 }
 
@@ -70,6 +118,10 @@ var onReady = function onReady(fn) {
 onReady(function () {
   if (typeof katex !== "undefined") {
     katexMath();
+  }
+
+  if (window.location.hash) {
+    scrollToHash(window.location.hash, "auto");
   }
 });
 

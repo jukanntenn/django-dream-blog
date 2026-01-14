@@ -18,10 +18,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from django.views import defaults as default_views
 
+from dream_blog.feeds import RssFeed
+from dream_blog.sitemaps import SITEMAPS
+
 urlpatterns = [
+    path("sitemap.xml", sitemap, {"sitemaps": SITEMAPS}, name="sitemap"),
+    path("rss.xml", RssFeed(), name="rss"),
     path("", include("dream_blog.urls")),
     path("posts/", include("posts.urls")),
     path("tutorials/", include("tutorials.urls")),
