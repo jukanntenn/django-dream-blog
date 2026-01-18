@@ -6,12 +6,12 @@
         <li class="flex mt-3 first:mt-0">
           <div>
             <div>
-              <a href="{{ column.get_absolute_url }}">{{ column.title }}</a>
+              <a href="{{ column.get_absolute_url }}" class="text-gray-900 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300">{{ column.title }}</a>
             </div>
-            <div class="text-xs text-gray-400 mt-1">{{ column.excerpt }}</div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ column.excerpt }}</div>
             <div class="flex justify-between text-xs mt-1">
-              <span class="text-gray-400">{{ column.num_articles }} 篇文章</span>
-              <a class="text-blue-400" href="{{ column.get_absolute_url }}">进入专栏</a>
+              <span class="text-gray-600 dark:text-gray-400">{{ column.num_articles }} 篇文章</span>
+              <a class="text-blue-400 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="{{ column.get_absolute_url }}">进入专栏</a>
             </div>
           </div>
         </li>

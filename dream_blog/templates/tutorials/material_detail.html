@@ -7,7 +7,7 @@
     <h1 class="text-3xl">{{ material.title }}</h1>
     {% include "inclusions/_entry_meta.html" with entry=material %}
     {% include "inclusions/_entry_content.html" with entry=material %}
-    <div class="my-4 text-sm text-blue-400">{% include "inclusions/_prev_next.html" with entry=material %}</div>
+    <div class="my-4 text-sm text-gray-700 dark:text-gray-300">{% include "inclusions/_prev_next.html" with entry=material %}</div>
     {% show_comment_app material %}
 {% endblock main %}
 {% block right %}

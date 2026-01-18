@@ -6,9 +6,9 @@
         <li class="flex mt-3 first:mt-0">
           <div>
             <div>
-              <a href="{{ tutorial.get_absolute_url }}">{{ tutorial.title }}</a>
+              <a href="{{ tutorial.get_absolute_url }}" class="text-gray-900 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300">{{ tutorial.title }}</a>
             </div>
-            <div class="text-sm text-gray-400 mt-1">{{ tutorial.excerpt }}</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ tutorial.excerpt }}</div>
           </div>
         </li>
       {% endfor %}

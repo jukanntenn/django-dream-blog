@@ -4,7 +4,7 @@
     {% for article in articles %}
       <li>
         <a href="{% url 'columns:article_detail' column.slug article.id %}"
-           class="text-sm text-blue-400">{{ article.title }}</a>
+           class="text-sm text-blue-400 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">{{ article.title }}</a>
       </li>
     {% endfor %}
   </ul>

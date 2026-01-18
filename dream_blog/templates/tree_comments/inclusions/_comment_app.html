@@ -1,7 +1,7 @@
-<div class="flex items-center border-b" id="comment-area">
-    <span class="font-semibold text-lg pb-3">{{ comment_count }} 评论</span>
+<div class="flex items-center border-b border-gray-200 dark:border-gray-700" id="comment-area">
+    <span class="font-semibold text-lg pb-3 text-gray-900 dark:text-gray-100">{{ comment_count }} 评论</span>
     {% if user.is_authenticated %}
-        <a class="ml-auto"
+        <a class="ml-auto text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
            href="{% url 'account_logout' %}?next={{ request.get_full_path }}">登出</a>
     {% endif %}
 </div>

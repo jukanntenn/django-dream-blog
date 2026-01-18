@@ -3,9 +3,9 @@
   {% for post in page_obj %}
     <div class="mt-10 first:mt-0">
       <h2 class="text-2xl">
-        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        <a href="{{ post.get_absolute_url }}" class="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-300">{{ post.title }}</a>
       </h2>
-      <div class="text-gray-700 mt-3">{{ post.excerpt }}</div>
+      <div class="text-gray-700 dark:text-gray-300 mt-3">{{ post.excerpt }}</div>
       {% include "inclusions/_entry_meta.html" with entry=post %}
     </div>
   {% empty %}

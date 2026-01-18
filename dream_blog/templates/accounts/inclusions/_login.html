@@ -1,7 +1,7 @@
 {% load socialaccount static %}
 {% get_providers as socialaccount_providers %}
 <div class="my-10 flex content-start">
-        <span class="text-small text-muted mr-3">登录后回复</span>
+        <span class="text-small text-gray-500 dark:text-gray-400 mr-3">登录后回复</span>
         {% for provider in socialaccount_providers %}
                 {% if provider.id == 'github' or provider.id == 'weibo' %}
                         <a {% if not forloop.first %}class="ml-3"{% endif %}
