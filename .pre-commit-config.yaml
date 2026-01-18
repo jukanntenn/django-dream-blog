@@ -18,6 +18,7 @@ repos:
             "--group",
             "production",
             "--no-emit-project",
+            "--no-hashes",
           ]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
