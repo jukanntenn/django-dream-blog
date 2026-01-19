@@ -23,7 +23,7 @@ class Scrollspy {
   constructor(
     elements: HTMLElement[],
     scrollElement: HTMLElement = document.body,
-    config: Config = {}
+    config: Config = {},
   ) {
     this.scrollElement =
       scrollElement.tagName === "BODY" ? window : scrollElement;
@@ -53,7 +53,7 @@ class Scrollspy {
             selector,
             (this.scrollElement === window
               ? document.body
-              : this.scrollElement) as HTMLElement
+              : this.scrollElement) as HTMLElement,
           )
         : null;
       if (!trigger) return null;
@@ -111,7 +111,7 @@ class Scrollspy {
       (this.scrollElement as HTMLElement).scrollHeight ||
       Math.max(
         document.body.scrollHeight,
-        document.documentElement.scrollHeight
+        document.documentElement.scrollHeight,
       )
     );
   }
@@ -134,11 +134,11 @@ class Scrollspy {
 
   private process() {
     const scrollTop = this.getScrollTop();
-    const effectiveScrollTop = scrollTop + this.getSpyOffset();
+    const effectiveScrollTop = scrollTop + this.getSpyOffset() + 1;
     const scrollHeight = this.getScrollHeight();
-    const maxScroll = scrollHeight - this.getOffsetHeight();
+    const maxScroll = Math.max(0, scrollHeight - this.getOffsetHeight());
 
-    if (scrollTop >= maxScroll) {
+    if (scrollTop + 1 >= maxScroll) {
       const target = this.targets[this.targets.length - 1];
 
       if (this.activeTarget !== target) {
@@ -189,7 +189,7 @@ class Scrollspy {
     if (this.config.activeClassName) {
       const tokens = this.config.activeClassName.split(" ");
       this.targets.forEach((target) =>
-        target.element.classList.remove(...tokens)
+        target.element.classList.remove(...tokens),
       );
     }
   }
