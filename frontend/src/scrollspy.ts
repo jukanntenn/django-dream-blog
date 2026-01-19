@@ -8,6 +8,7 @@ type Target = {
 
 type Config = {
   activeClassName?: string;
+  offset?: number | (() => number);
 };
 
 class Scrollspy {
@@ -40,6 +41,7 @@ class Scrollspy {
   }
 
   refresh(elements: HTMLElement[]) {
+    this.targets = [];
     const offsetBase = this.scrollElement === window ? 0 : this.getScrollTop();
     const targetStack: (Target | null)[] = [];
     let currTarget: Target | null;
@@ -120,8 +122,19 @@ class Scrollspy {
       : (this.scrollElement as HTMLElement).getBoundingClientRect().height;
   }
 
+  private getSpyOffset() {
+    if (typeof this.config.offset === "function") {
+      return this.config.offset();
+    }
+    if (typeof this.config.offset === "number") {
+      return this.config.offset;
+    }
+    return 0;
+  }
+
   private process() {
     const scrollTop = this.getScrollTop();
+    const effectiveScrollTop = scrollTop + this.getSpyOffset();
     const scrollHeight = this.getScrollHeight();
     const maxScroll = scrollHeight - this.getOffsetHeight();
 
@@ -136,7 +149,7 @@ class Scrollspy {
 
     if (
       this.activeTarget &&
-      scrollTop < this.targets[0].offset &&
+      effectiveScrollTop < this.targets[0].offset &&
       this.targets[0].offset > 0
     ) {
       this.activeTarget = null;
@@ -147,9 +160,9 @@ class Scrollspy {
     for (let i = 0; i < this.targets.length; i += 1) {
       const isActiveTarget =
         this.activeTarget !== this.targets[i] &&
-        scrollTop >= this.targets[i].offset &&
+        effectiveScrollTop >= this.targets[i].offset &&
         (typeof this.targets[i + 1] === "undefined" ||
-          scrollTop < this.targets[i + 1].offset);
+          effectiveScrollTop < this.targets[i + 1].offset);
 
       if (isActiveTarget) {
         this.activate(this.targets[i]);
@@ -197,6 +210,10 @@ class Scrollspy {
   }
 
   private static find(selector: string, element: HTMLElement = document.body) {
+    if (selector.startsWith("#")) {
+      const id = selector.slice(1);
+      return document.getElementById(id);
+    }
     return Element.prototype.querySelector.call(element, selector);
   }
 }

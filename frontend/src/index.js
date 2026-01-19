@@ -64,6 +64,7 @@ if (tocUlElem) {
   appendChildren(tocUlElem, tree);
   new Scrollspy(tree, document.body, {
     activeClassName: "active",
+    offset: getScrollOffsetTop,
   });
 
   tocElem.addEventListener("click", (e) => {
