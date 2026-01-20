@@ -2,6 +2,7 @@ import Offcanvas from "./offcanvas";
 import Scrollspy from "./scrollspy";
 import Backtop from "./backtop";
 import ThemeSwitcher from "./theme-switcher";
+import "./scripts/katex";
 
 // 初始化主题切换器
 const themeSwitcherElement = document.getElementById("theme-switcher");
@@ -88,22 +89,11 @@ if (tocUlElem) {
   });
 }
 
-// KaTeX
-
-var katexMath = function () {
-  var maths = document.querySelectorAll(".arithmatex"),
-    tex;
-
-  for (var i = 0; i < maths.length; i++) {
-    tex = maths[i].textContent || maths[i].innerText;
-    if (tex.startsWith("\\(") && tex.endsWith("\\)")) {
-      katex.render(tex.slice(2, -2), maths[i], { displayMode: false });
-    } else if (tex.startsWith("\\[") && tex.endsWith("\\]")) {
-      katex.render(tex.slice(2, -2), maths[i], { displayMode: true });
-    }
-  }
-};
-
+/**
+ * Registers a callback to run when the DOM is ready.
+ * Handles both modern browsers and legacy IE support.
+ * Note: onReady is also defined in katex.js for KaTeX initialization.
+ */
 var onReady = function onReady(fn) {
   if (document.addEventListener) {
     document.addEventListener("DOMContentLoaded", fn);
@@ -116,11 +106,8 @@ var onReady = function onReady(fn) {
   }
 };
 
+// Handle initial hash scrolling
 onReady(function () {
-  if (typeof katex !== "undefined") {
-    katexMath();
-  }
-
   if (window.location.hash) {
     scrollToHash(window.location.hash, "auto");
   }
