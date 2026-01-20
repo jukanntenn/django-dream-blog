@@ -27,7 +27,7 @@ dependencies = [
     "django-tencentcos-storage>=0.2.1,<0.3",
     "django-dbbackup>=4.1.0,<5",
     "django-huey-email>=0.0.1,<0.0.2",
-    "django-md-field>=0.1.0",
+    "django-md-field",
 ]
 
 [dependency-groups]
@@ -59,6 +59,7 @@ default = true
 
 [tool.uv.sources]
 django-notifications-hq = { git = "https://github.com/django-notifications/django-notifications" }
+django-md-field = { git = "https://github.com/jukanntenn/django-md-field.git", branch = "main" }
 
 [build-system]
 requires = ["hatchling"]

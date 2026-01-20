@@ -102,6 +102,7 @@ THIRD_PARTY_APPS = [
     "health_check.storage",
     "health_check.contrib.migrations",
     "dbbackup",
+    "markdown_field",
     "huey.contrib.djhuey",
 ]
 LOCAL_APPS = [

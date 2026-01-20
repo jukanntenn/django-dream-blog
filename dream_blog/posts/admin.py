@@ -1,5 +1,7 @@
 from core.admin import hide, show
 from django.contrib import admin
+from markdown_field.widgets import PreviewMarkdownWidget
+from markdown_field.fields import MarkdownField
 from posts.models import Post
 
 
@@ -21,6 +23,10 @@ class PostAdmin(admin.ModelAdmin):
         "hidden",
         "comments_enabled",
     ]
+
+    formfield_overrides = {
+        MarkdownField: {"widget": PreviewMarkdownWidget}
+    }
 
     fieldsets = (
         (

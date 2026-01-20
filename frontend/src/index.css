@@ -60,7 +60,7 @@
   }
 
   .prose :where(p) {
-    @apply my-5 text-gray-800 dark:text-gray-200;
+    @apply my-5 px-0 text-gray-800 dark:text-gray-200;
   }
 
   .prose--comment :where(p) {
@@ -72,15 +72,15 @@
   }
 
   .prose :where(h2) {
-    @apply mt-10 mb-4 scroll-mt-24 text-balance text-2xl leading-snug font-semibold tracking-tight text-gray-900 dark:text-gray-100;
+    @apply mt-10 mb-4 scroll-mt-24 p-0 bg-transparent text-balance text-2xl leading-snug font-semibold tracking-tight text-gray-900 dark:text-gray-100;
   }
 
   .prose :where(h3) {
-    @apply mt-8 mb-3 scroll-mt-24 text-balance text-xl leading-snug font-semibold text-gray-900 dark:text-gray-100;
+    @apply mt-8 mb-3 scroll-mt-24 p-0 text-balance text-xl leading-snug font-semibold text-gray-900 dark:text-gray-100;
   }
 
   .prose :where(h4) {
-    @apply mt-6 mb-3 scroll-mt-24 text-balance text-lg leading-snug font-semibold text-gray-900 dark:text-gray-100;
+    @apply mt-6 mb-3 scroll-mt-24 p-0 text-balance text-lg leading-snug font-semibold text-gray-900 dark:text-gray-100;
   }
 
   .prose :where(h1 + p),
@@ -103,11 +103,11 @@
   }
 
   .prose :where(ul) {
-    @apply my-5 pl-6 list-disc;
+    @apply my-5 pl-6 pr-0 list-disc;
   }
 
   .prose :where(ol) {
-    @apply my-5 pl-6 list-decimal;
+    @apply my-5 pl-6 pr-0 list-decimal;
   }
 
   .prose :where(li) {
@@ -130,7 +130,11 @@
   }
 
   .prose :where(blockquote) {
-    @apply my-6 border-l-2 border-gray-200 dark:border-gray-800 pl-4 text-gray-800 dark:text-gray-200;
+    @apply my-6 ml-0 border-l-2 border-gray-200 dark:border-gray-800 pl-4 text-gray-800 dark:text-gray-200;
+  }
+
+  .prose :where(dl) {
+    @apply px-0;
   }
 
   .prose :where(blockquote > :first-child) {
@@ -154,7 +158,7 @@
   }
 
   .prose pre {
-    @apply my-6 overflow-x-auto rounded-xl bg-slate-50 dark:bg-slate-950 px-4 py-3 text-[13px] leading-6 text-gray-900 dark:text-gray-100 ring-1 ring-black/5 dark:ring-white/10 shadow-sm;
+    @apply my-6 mx-0 overflow-x-auto rounded-xl bg-slate-50 dark:bg-slate-950 px-4 py-3 text-[13px] leading-6 text-gray-900 dark:text-gray-100 ring-1 ring-black/5 dark:ring-white/10 shadow-sm;
   }
 
   .prose pre code {
@@ -200,9 +204,14 @@
     @apply bg-red-50 dark:bg-red-950/35;
   }
 
+  .prose .highlight .filename {
+    @apply block border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-slate-950/40 px-4 py-2 text-xs font-medium text-gray-600 dark:text-gray-300;
+  }
+
   .prose :where(table) {
     @apply my-8 w-full overflow-x-auto rounded-xl border-separate border-spacing-0 text-sm ring-1 ring-black/5 dark:ring-white/10;
     display: block;
+    border-collapse: separate;
   }
 
   .prose :where(thead th) {
@@ -241,6 +250,22 @@
     @apply my-5;
   }
 
+  .prose .task-list {
+    @apply pl-0;
+  }
+
+  .prose .task-list .task-list {
+    @apply pl-3;
+  }
+
+  .prose .task-list .task-list-item {
+    @apply list-none;
+  }
+
+  .prose .task-list .task-list-item input[type="checkbox"] {
+    @apply m-0;
+  }
+
   .prose :where(.tabbed-set) {
     @apply my-6;
   }
@@ -259,6 +284,96 @@
 
   .prose :where(summary) {
     @apply cursor-pointer select-none font-medium text-gray-900 dark:text-gray-100;
+  }
+
+  .prose .admonition {
+    @apply my-8 rounded-xl px-4 py-3 ring-1 ring-black/5 dark:ring-white/10;
+  }
+
+  .prose .admonition p {
+    @apply my-0;
+  }
+
+  .prose .admonition .admonition-title {
+    @apply mb-2 flex items-center text-sm font-semibold before:inline-block before:w-4 before:h-4 before:align-top;
+  }
+
+  .prose .admonition.danger .admonition-title,
+  .prose .admonition.error .admonition-title,
+  .prose .admonition.warning .admonition-title,
+  .prose .admonition.caution .admonition-title,
+  .prose .admonition.attention .admonition-title,
+  .prose .admonition.important .admonition-title,
+  .prose .admonition.note .admonition-title,
+  .prose .admonition.hint .admonition-title,
+  .prose .admonition.tip .admonition-title {
+    @apply before:bg-no-repeat before:bg-contain before:mr-1;
+  }
+
+  .prose .admonition.danger,
+  .prose .admonition.error {
+    @apply text-red-900 dark:text-red-200 bg-red-50 dark:bg-red-950/40;
+  }
+
+  .prose .admonition.danger .admonition-title,
+  .prose .admonition.error .admonition-title {
+    @apply before:bg-[url('/static/error-warning-fill.svg')];
+  }
+
+  .prose .admonition.warning,
+  .prose .admonition.caution,
+  .prose .admonition.attention {
+    @apply text-orange-900 dark:text-orange-200 bg-orange-50 dark:bg-orange-950/35;
+  }
+
+  .prose .admonition.warning .admonition-title,
+  .prose .admonition.caution .admonition-title,
+  .prose .admonition.attention .admonition-title {
+    @apply before:bg-[url('/static/alert-fill.svg')];
+  }
+
+  .prose .admonition.important,
+  .prose .admonition.note {
+    @apply text-green-900 dark:text-green-200 bg-green-50 dark:bg-green-950/35;
+  }
+
+  .prose .admonition.important .admonition-title,
+  .prose .admonition.note .admonition-title {
+    @apply before:bg-[url('/static/information-fill.svg')];
+  }
+
+  .prose .admonition.hint,
+  .prose .admonition.tip {
+    @apply text-cyan-900 dark:text-cyan-200 bg-cyan-50 dark:bg-cyan-950/35;
+  }
+
+  .prose .admonition.hint .admonition-title,
+  .prose .admonition.tip .admonition-title {
+    @apply before:bg-[url('/static/lightbulb-line.svg')];
+  }
+
+  .prose .tabbed-set {
+    @apply flex relative flex-wrap;
+  }
+
+  .prose .tabbed-set .tabbed-content {
+    @apply hidden w-full order-12 text-left;
+  }
+
+  .prose .tabbed-set > input {
+    @apply hidden;
+  }
+
+  .prose .tabbed-set > input:checked + label {
+    @apply text-zinc-800 dark:text-zinc-200;
+  }
+
+  .prose .tabbed-set > label {
+    @apply inline-block py-1 px-2 font-normal text-sm text-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300;
+  }
+
+  .prose .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
+    @apply block;
   }
 }
 
@@ -288,116 +403,6 @@
   .toc &a {
     @apply text-gray-800 font-semibold;
   }
-}
-
-.highlight .filename {
-  @apply block border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-slate-950/40 px-4 py-2 text-xs font-medium text-gray-600 dark:text-gray-300;
-}
-
-.task-list {
-  @apply pl-0;
-}
-
-.task-list .task-list {
-  @apply pl-3;
-}
-
-.task-list .task-list-item {
-  @apply list-none;
-}
-
-.task-list .task-list-item input[type="checkbox"] {
-  @apply m-0;
-}
-
-.admonition {
-  @apply my-8 rounded-xl px-4 py-3 ring-1 ring-black/5 dark:ring-white/10;
-}
-
-.admonition p {
-  @apply my-0;
-}
-
-.admonition .admonition-title {
-  @apply mb-2 flex items-center text-sm font-semibold before:inline-block before:w-4 before:h-4 before:align-top;
-}
-
-.admonition.danger .admonition-title,
-.admonition.error .admonition-title,
-.admonition.warning .admonition-title,
-.admonition.caution .admonition-title,
-.admonition.attention .admonition-title,
-.admonition.important .admonition-title,
-.admonition.note .admonition-title,
-.admonition.hint .admonition-title,
-.admonition.tip .admonition-title {
-  @apply before:bg-no-repeat before:bg-contain before:mr-1;
-}
-
-.admonition.danger,
-.admonition.error {
-  @apply text-red-900 dark:text-red-200 bg-red-50 dark:bg-red-950/40;
-}
-
-.admonition.danger .admonition-title,
-.admonition.error .admonition-title {
-  @apply before:bg-[url('/static/error-warning-fill.svg')];
-}
-
-.admonition.warning,
-.admonition.caution,
-.admonition.attention {
-  @apply text-orange-900 dark:text-orange-200 bg-orange-50 dark:bg-orange-950/35;
-}
-
-.admonition.warning .admonition-title,
-.admonition.caution .admonition-title,
-.admonition.attention .admonition-title {
-  @apply before:bg-[url('/static/alert-fill.svg')];
-}
-
-.admonition.important,
-.admonition.note {
-  @apply text-green-900 dark:text-green-200 bg-green-50 dark:bg-green-950/35;
-}
-
-.admonition.important .admonition-title,
-.admonition.note .admonition-title {
-  @apply before:bg-[url('/static/information-fill.svg')];
-}
-
-.admonition.hint,
-.admonition.tip {
-  @apply text-cyan-900 dark:text-cyan-200 bg-cyan-50 dark:bg-cyan-950/35;
-}
-
-.admonition.hint .admonition-title,
-.admonition.tip .admonition-title {
-  @apply before:bg-[url('/static/lightbulb-line.svg')];
-}
-
-.tabbed-set {
-  @apply flex relative flex-wrap;
-}
-
-.tabbed-set .tabbed-content {
-  @apply hidden w-full order-12 text-left;
-}
-
-.tabbed-set > input {
-  @apply hidden;
-}
-
-.tabbed-set > input:checked + label {
-  @apply text-zinc-800 dark:text-zinc-200;
-}
-
-.tabbed-set > label {
-  @apply inline-block py-1 px-2 font-normal text-sm text-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300;
-}
-
-.tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
-  @apply block;
 }
 
 .backdrop {

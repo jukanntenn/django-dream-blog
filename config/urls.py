@@ -34,6 +34,7 @@ urlpatterns = [
     path("columns/", include("columns.urls")),
     path("comments/", include("tree_comments.urls")),
     path("accounts/", include("allauth.urls")),
+    path("markdown-field/", include("markdown_field.urls")),
     path("ht/", include("health_check.urls")),
     path(settings.ADMIN_URL, admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

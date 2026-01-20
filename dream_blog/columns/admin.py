@@ -1,6 +1,8 @@
 from columns.models import Article, Column
 from core.admin import hide, show
 from django.contrib import admin
+from markdown_field.widgets import PreviewMarkdownWidget
+from markdown_field.fields import MarkdownField
 
 
 @admin.register(Column)
@@ -16,6 +18,10 @@ class ColumnAdmin(admin.ModelAdmin):
     ]
 
     search_fields = ["title", "content"]
+
+    formfield_overrides = {
+        MarkdownField: {"widget": PreviewMarkdownWidget}
+    }
 
     fieldsets = (
         (
@@ -54,3 +60,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_select_related = ["column"]
     search_fields = ["title"]
     list_filter = ["column"]
+
+    formfield_overrides = {
+        MarkdownField: {"widget": PreviewMarkdownWidget}
+    }

@@ -1,5 +1,7 @@
 from core.admin import hide, show
 from django.contrib import admin
+from markdown_field.widgets import PreviewMarkdownWidget
+from markdown_field.fields import MarkdownField
 from tutorials.models import Category, Material, Tutorial
 
 
@@ -26,6 +28,10 @@ class TutorialAdmin(admin.ModelAdmin):
 
     search_fields = ["title", "content"]
     list_filter = ["category"]
+
+    formfield_overrides = {
+        MarkdownField: {"widget": PreviewMarkdownWidget}
+    }
 
     fieldsets = (
         (
@@ -66,3 +72,7 @@ class MaterialAdmin(admin.ModelAdmin):
     list_select_related = ["tutorial"]
     search_fields = ["title"]
     list_filter = ["tutorial"]
+
+    formfield_overrides = {
+        MarkdownField: {"widget": PreviewMarkdownWidget}
+    }
