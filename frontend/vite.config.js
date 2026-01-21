@@ -7,7 +7,10 @@ export default defineConfig({
     manifest: "manifest.json",
     outDir: resolve("./dist"),
     rollupOptions: {
-      input: "src/main.ts",
+      input: {
+        main: resolve(__dirname, "src/main.ts"),
+        preview: resolve(__dirname, "src/styles/preview.css"),
+      },
     },
   },
 });

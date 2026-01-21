@@ -1,11 +1,16 @@
 {
   "src/main.ts": {
-    "file": "assets/main-9tjgPUE3.js",
+    "file": "assets/main-B8YTa7f_.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
     "css": [
-      "assets/main-HrquEdG4.css"
+      "assets/main-XVMxXXky.css"
     ]
+  },
+  "src/styles/preview.css": {
+    "file": "assets/preview-BgTpAEH8.css",
+    "src": "src/styles/preview.css",
+    "isEntry": true
   }
 }

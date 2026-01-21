@@ -1,0 +1,24 @@
+{% load i18n %}
+<script src="{% url 'markdown_field:jsi18n' %}"></script>
+<div class="md-field"
+     data-md-field="1"
+     data-md-preview-url="{{ widget.markdown_field_preview_url }}"
+     data-md-debounce-ms="{{ widget.markdown_field_debounce_ms|default:'300' }}"
+     data-md-field-cache-key="{{ widget.markdown_field_cache_key }}">
+  <div class="md-field__tabs" role="tablist">
+    <button type="button"
+            class="md-field__tab"
+            data-md-tab="write"
+            aria-selected="true">{% trans "Write" %}</button>
+    <button type="button"
+            class="md-field__tab"
+            data-md-tab="preview"
+            aria-selected="false">{% trans "Preview" %}</button>
+  </div>
+  <div class="md-field__panes">
+    <div class="md-field__pane" data-md-pane="write">{% include "django/forms/widgets/textarea.html" %}</div>
+    <div class="md-field__pane" data-md-pane="preview" hidden>
+      <div class="md-field__preview markdown-body prose" data-md-preview></div>
+    </div>
+  </div>
+</div>
