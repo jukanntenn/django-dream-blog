@@ -1,6 +1,7 @@
 user: alice
 www_path: /var/www
 home: /home/{{ user }}
+uv: "{{ home }}/.local/bin/uv"
 apps_path: "{{ home }}/apps"
 venvs_path: "{{ home }}/.venvs"
 python3: "{{ home }}/.pyenv/shims/python3"

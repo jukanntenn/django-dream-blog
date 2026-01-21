@@ -1,7 +1,7 @@
 {% extends "admin/change_form.html" %}
 {% load django_vite %}
-
-{% block extrahead %}{{ block.super }}
+{% block extrahead %}
+  {{ block.super }}
   <!-- 引入 markdown 预览样式 -->
-  {% vite_asset 'src/styles/preview.css' %}
-{% endblock %}
+  <link rel="stylesheet" href="{% vite_asset_url 'src/styles/preview.css' %}">
+{% endblock extrahead %}
