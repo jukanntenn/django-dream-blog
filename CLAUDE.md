@@ -37,8 +37,8 @@ Keep this section up to date with the project structure. Use it as a reference t
 ### Dependency Management
 
 - `uv sync --no-install-project` - Install default dependency groups (dev/test/production)
-- `uv add package --group dev` - Install development dependency (includes debug_toolbar, etc.)
-- `uv add package --group test` - Install test dependency (includes pytest, etc.)
+- `uv add package --group dev --no-install-project` - Install development dependency (includes debug_toolbar, etc.)
+- `uv add package --group test --no-install-project` - Install test dependency (includes pytest, etc.)
 
 ### Code Quality & Formatting
 
@@ -62,3 +62,4 @@ All commands must be executed in the frontend/ directory, i.e., after running `c
 ## Standards
 
 - Use English for comments, documentation, log messages and exception information in code
+- Don’t modify any files under the staticfiles directory--they’re auto-collected by Django
