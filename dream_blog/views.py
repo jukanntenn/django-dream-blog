@@ -1,17 +1,18 @@
 from core.views import SetHeadlineMixin
 from django.views.generic import ListView
-from posts.models import Post
+
+from core.entries import get_index_queryset
 
 
 class HomeView(SetHeadlineMixin, ListView):
     template_name = "pages/home.html"
-    context_object_name = "posts"
+    context_object_name = "entries"
     headline = "追梦人物的博客"
     paginate_by = 20
     paginate_orphans = 3
 
     def get_queryset(self):
-        return Post.objects.visible().with_comment_count().order_by("-publish_date")
+        return get_index_queryset()
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

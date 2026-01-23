@@ -255,10 +255,12 @@ LOGGING = {
     "handlers": {
         "console": {
             "level": "DEBUG",
-            "class": "rich.logging.RichHandler",
-            "formatter": "rich",
-            "rich_tracebacks": True,
-            "tracebacks_show_locals": True,
+            # "class": "rich.logging.RichHandler",
+            # "formatter": "rich",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+            # "rich_tracebacks": True,
+            # "tracebacks_show_locals": True,
         }
     },
     "loggers": {
