@@ -14,8 +14,14 @@
       "assets/main-TbxsTpF7.css"
     ]
   },
+  "src/scripts/admin-preview-render.ts": {
+    "file": "assets/admin-preview-render-CCxdSuG3.js",
+    "name": "admin-preview-render",
+    "src": "src/scripts/admin-preview-render.ts",
+    "isEntry": true
+  },
   "src/styles/preview.css": {
-    "file": "assets/preview-CKqbcreX.css",
+    "file": "assets/preview-CjxweiQQ.css",
     "src": "src/styles/preview.css",
     "isEntry": true
   }

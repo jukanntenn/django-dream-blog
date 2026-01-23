@@ -6,4 +6,6 @@
   <script src="{% vite_asset_url 'src/admin-theme-sync.ts' %}"></script>
   <!-- Markdown preview styles -->
   <link rel="stylesheet" href="{% vite_asset_url 'src/styles/preview.css' %}">
+  <!-- Dynamic KaTeX and Mermaid rendering for markdown preview -->
+  <script type="module" src="{% vite_asset_url 'src/scripts/admin-preview-render.ts' %}"></script>
 {% endblock extrahead %}
