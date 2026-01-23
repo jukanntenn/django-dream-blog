@@ -1,0 +1,8 @@
+/**
+ * Shared Tailwind CSS base configuration
+ * Import this file to get Tailwind with dark mode support
+ */
+@import "tailwindcss";
+
+/* 启用基于 class 的 dark mode */
+@custom-variant dark (&:where(.dark, .dark *));

@@ -1,4 +1,10 @@
 {
+  "src/admin-theme-sync.ts": {
+    "file": "assets/admin-theme-sync-Ce7dHTL8.js",
+    "name": "admin-theme-sync",
+    "src": "src/admin-theme-sync.ts",
+    "isEntry": true
+  },
   "src/main.ts": {
     "file": "assets/main-MxEDfQYw.js",
     "name": "main",
@@ -9,7 +15,7 @@
     ]
   },
   "src/styles/preview.css": {
-    "file": "assets/preview-BgTpAEH8.css",
+    "file": "assets/preview-CKqbcreX.css",
     "src": "src/styles/preview.css",
     "isEntry": true
   }

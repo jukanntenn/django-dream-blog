@@ -1,6 +1,7 @@
-/* 导入 Tailwind CSS（prose.css 需要 Tailwind utility classes） */
-@import "tailwindcss";
-
+/**
+ * Preview styles for admin markdown preview
+ * Uses shared Tailwind configuration with dark mode support
+ */
+@import "./tailwind-base.css";
 @import "../friendly.css";
-/* 导入 prose 样式 */
 @import "./prose.css";

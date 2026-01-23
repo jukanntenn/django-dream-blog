@@ -2,6 +2,8 @@
 {% load django_vite %}
 {% block extrahead %}
   {{ block.super }}
-  <!-- 引入 markdown 预览样式 -->
+  <!-- Synchronize admin theme with Tailwind dark mode -->
+  <script src="{% vite_asset_url 'src/admin-theme-sync.ts' %}"></script>
+  <!-- Markdown preview styles -->
   <link rel="stylesheet" href="{% vite_asset_url 'src/styles/preview.css' %}">
 {% endblock extrahead %}
