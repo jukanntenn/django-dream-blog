@@ -9,7 +9,7 @@
     {% for slink in profile.social_links %}
       {% if slink.url %}
         <a class="mr-2 hover:opacity-80 transition-opacity" href="{{ slink.url }}" target="_blank">
-          <img height="20" width="20" src="{% static slink.icon %}" />
+          <img class="dark:invert" height="20" width="20" src="{% static slink.icon %}" />
         </a>
       {% endif %}
     {% endfor %}

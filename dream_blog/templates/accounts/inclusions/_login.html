@@ -7,6 +7,7 @@
                         <a {% if not forloop.first %}class="ml-3"{% endif %}
                            href="{% provider_login_url provider %}?next={{ request.get_full_path }}">
                                 <img alt=""
+                                     class="dark:invert"
                                      height="24"
                                      width="24"
                                      src="{% static provider.id|add:'-fill.svg' %}" />

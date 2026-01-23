@@ -6,7 +6,7 @@
       <div class="relative flex items-center justify-between">
         <div class="flex items-center">
           <span class="inline-block lg:hidden" id="offcanvas-trigger">
-            <img height="20" width="20" src="{% static 'menu-fill.svg' %}" />
+            <img class="dark:invert" height="20" width="20" src="{% static 'menu-fill.svg' %}" />
           </span>
           <a href="{% url 'home' %}"
              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0">
@@ -22,19 +22,19 @@
                width="20"
                src="{% static 'sun-fill.svg' %}"
                alt="亮色模式"
-               class="hidden" />
+               class="dark:invert hidden" />
           <img data-theme-icon="dark"
                height="20"
                width="20"
                src="{% static 'moon-line.svg' %}"
                alt="暗色模式"
-               class="hidden" />
+               class="dark:invert hidden" />
           <img data-theme-icon="system"
                height="20"
                width="20"
                src="{% static 'contrast-fill.svg' %}"
                alt="跟随系统"
-               class="hidden" />
+               class="dark:invert hidden" />
         </button>
       </div>
     </div>

@@ -3,11 +3,11 @@
   {% if page_obj.has_previous %}
     <a href="?page={{ page_obj.previous_page_number }}"
        class="p-2 mr-4 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6" src="{% static 'arrow-left-s-line.svg' %}" />
+      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-left-s-line.svg' %}" />
     </a>
   {% else %}
     <span class="p-2 mr-4 rounded-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6" src="{% static 'arrow-left-s-line.svg' %}" />
+      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-left-s-line.svg' %}" />
     </span>
   {% endif %}
   {% for number in elided_page_range %}
@@ -22,11 +22,11 @@
   {% if page_obj.has_next %}
     <a href="?page={{ page_obj.next_page_number }}"
        class="p-2 ml-4 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6" src="{% static 'arrow-right-s-line.svg' %}" />
+      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-right-s-line.svg' %}" />
     </a>
   {% else %}
     <span class="p-2 ml-4 rounded-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6" src="{% static 'arrow-right-s-line.svg' %}" />
+      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-right-s-line.svg' %}" />
     </span>
   {% endif %}
 </nav>

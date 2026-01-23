@@ -12,7 +12,7 @@
         <div>
             <span class="text-gray-900 dark:text-gray-100 font-medium">{{ comment.user.name }}</span>
             {% if not comment.is_root %}
-                <img class="inline"
+                <img class="inline dark:invert"
                      height="15"
                      width="15"
                      src="{% static 'share-forward-fill.svg' %}" />
