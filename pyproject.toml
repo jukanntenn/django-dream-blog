@@ -60,6 +60,7 @@ default = true
 [tool.uv.sources]
 django-notifications-hq = { git = "https://github.com/django-notifications/django-notifications" }
 django-md-field = { git = "https://github.com/jukanntenn/django-md-field.git", branch = "main" }
+django-tencentcos-storage = { git = "https://github.com/jukanntenn/django-tencentcos-storage", branch = "main" }
 
 [build-system]
 requires = ["hatchling"]

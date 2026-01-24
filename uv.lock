@@ -779,7 +779,7 @@ requires-dist = [
     { name = "django-md-field", git = "https://github.com/jukanntenn/django-md-field.git?branch=main" },
     { name = "django-model-utils", specifier = ">=4.4.0,<5" },
     { name = "django-notifications-hq", git = "https://github.com/django-notifications/django-notifications" },
-    { name = "django-tencentcos-storage", specifier = ">=0.2.1,<0.3" },
+    { name = "django-tencentcos-storage", git = "https://github.com/jukanntenn/django-tencentcos-storage?branch=main" },
     { name = "django-vite", specifier = ">=3.0.3,<4" },
     { name = "huey", specifier = ">=2.5.0,<3" },
     { name = "markdown", specifier = ">=3.5.2,<4" },
@@ -911,13 +911,9 @@ dependencies = [
 [[package]]
 name = "django-tencentcos-storage"
 version = "0.2.1"
-source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
+source = { git = "https://github.com/jukanntenn/django-tencentcos-storage?branch=main#35a642e249c18a27ff5b1d5742dec5e76771d6f7" }
 dependencies = [
     { name = "cos-python-sdk-v5" },
-]
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/b9/0f/8e54008a9ca761b5733d91e0f6d6e62e52d7f78d56f9d3a005ea51df3a6a/django_tencentcos_storage-0.2.1.tar.gz", hash = "sha256:0c2a173589803a2fe242a228cea4258647b8d883755630e696ccd2c46c61eab8", size = 5050, upload-time = "2024-03-16T15:48:06.061Z" }
-wheels = [
-    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/40/10/e55fae1fa156ee2eaef149a537947ac752655d3c2a8a7761a12b9c38f56c/django_tencentcos_storage-0.2.1-py3-none-any.whl", hash = "sha256:56bef4c22bbf370cffdaeee1d43b6431e501403e972d599f6af63c4d0b2f96d4", size = 5749, upload-time = "2024-03-16T15:48:04.291Z" },
 ]
 
 [[package]]
