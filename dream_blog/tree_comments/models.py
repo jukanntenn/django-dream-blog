@@ -38,6 +38,9 @@ class TreeComment(CommentAbstractModel):
         verbose_name_plural = _("Comments")
         ordering = None
 
+    def __str__(self):
+        return "%s: %s..." % (self.name, self.comment.text[:50])
+
     @property
     def is_root(self):
         return self.parent is None
