@@ -1,14 +1,4 @@
-- name: Create venv & Upgrade pip
-  ansible.builtin.pip:
-    name: pip
-    state: latest
-    virtualenv: "{{ project_venv_path }}"
-    virtualenv_command: "{{ python3 }} -m venv"
-
-- name: Install requirements.txt
-  ansible.builtin.pip:
+- name: Install dependencies
+  ansible.builtin.command:
     chdir: "{{ project_path }}"
-    requirements: requirements.txt
-    state: present
-    virtualenv: "{{ project_venv_path }}"
-    virtualenv_command: "{{ python3 }} -m venv"
+    cmd: "{{ uv }} sync --no-install-project --group production"

@@ -1,15 +1,16 @@
 user: alice
 www_path: /var/www
 home: /home/{{ user }}
-uv: "{{ home }}/.local/bin/uv"
+local_bin: "{{ home }}/.local/bin"
+uv: "{{ local_bin }}/uv"
+python3: "{{ local_bin }}/python3"
+
 apps_path: "{{ home }}/apps"
-venvs_path: "{{ home }}/.venvs"
-python3: "{{ home }}/.pyenv/shims/python3"
-project_name: django_dream_blog
+project_name: django-dream-blog
 project_repo: "git@github.com:jukanntenn/django-dream-blog.git"
 project_version: main
 project_path: "{{ apps_path }}/{{ project_name }}"
-project_venv_path: "{{ venvs_path }}/{{ project_name }}"
+project_venv_path: "{{ project_path }}/.venv"
 project_www_path: "{{ www_path }}/{{ project_name }}"
 domain: zmrenwu.com
 port: 8000

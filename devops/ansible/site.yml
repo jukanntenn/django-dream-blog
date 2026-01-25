@@ -3,7 +3,7 @@
 #   ANSIBLE_STDOUT_CALLBACK=yaml ansible-playbook -i devops/ansible/hosts.yml devops/ansible/site.yml -K --vault-password-file ~/.ansible-vault/django-dream-blog.pwd
 
 - name: Site deployment
-  hosts: all
+  hosts: abj
   remote_user: alice
   roles:
     - role: caddy
