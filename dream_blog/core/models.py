@@ -1,3 +1,4 @@
+from comments.models import Comment
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models import Count, Q, QuerySet
@@ -7,7 +8,6 @@ from django.utils.translation import gettext_lazy as _
 from hitcount.models import HitCount, HitCountMixin
 from markdown_field import MarkdownField
 from model_utils.fields import AutoCreatedField, AutoLastModifiedField
-from tree_comments.models import TreeComment
 
 
 def _compensate(value):
@@ -56,7 +56,7 @@ class RichContentModel(models.Model):
 class CommentsModel(models.Model):
     comments_enabled = models.BooleanField(_("Comments Enabled"), default=True)
     comments = GenericRelation(
-        TreeComment,
+        Comment,
         content_type_field="content_type",
         object_id_field="object_pk",
     )

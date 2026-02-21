@@ -152,7 +152,9 @@ function getInsertBeforeElem(refElem) {
   return refElem.nextElementSibling;
 }
 
+const commentList = document.getElementById("comment-list");
 const commentFormElem = document.querySelector(".comment-form");
+
 if (commentFormElem) {
   commentFormElem.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -170,11 +172,12 @@ if (commentFormElem) {
         return response.text();
       })
       .then((data) => {
-        const commentList = document.getElementById("comment-list");
-        if (commentList.firstChild) {
-          commentList.insertAdjacentHTML("afterbegin", data);
-        } else {
-          commentList.innerHTML = data;
+        if (commentList) {
+          if (commentList.firstChild) {
+            commentList.insertAdjacentHTML("afterbegin", data);
+          } else {
+            commentList.innerHTML = data;
+          }
         }
         commentFormElem.querySelector("textarea[name='comment']").value = "";
       })
@@ -186,24 +189,41 @@ if (commentFormElem) {
         submitBtn.textContent = "提交评论";
       });
   });
+}
 
-  const replyBtns = document.querySelectorAll(".reply");
-  replyBtns.forEach((btn) => {
-    btn.addEventListener("click", function (event) {
-      event.preventDefault();
+if (commentList) {
+  commentList.addEventListener("click", (e) => {
+    const replyBtn = e.target.closest && e.target.closest(".reply");
+    if (replyBtn) {
+      e.preventDefault();
 
-      btn.classList.add("hidden");
-      btn.nextElementSibling.classList.remove("hidden");
+      if (!commentFormElem) {
+        const commentArea = document.getElementById("comment-area");
+        if (commentArea) {
+          commentArea.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        return;
+      }
+
+      replyBtn.classList.add("hidden");
+      replyBtn.nextElementSibling.classList.remove("hidden");
       const targetFields = _getTargetFields(commentFormElem);
       const params = new URLSearchParams(targetFields);
       fetchCommentForm("/comments/form/?" + params.toString()).then((html) => {
-        btn.nextElementSibling.classList.add("hidden");
-        btn.nextElementSibling.nextElementSibling.classList.remove("hidden");
+        replyBtn.nextElementSibling.classList.add("hidden");
+        if (!html) {
+          replyBtn.classList.remove("hidden");
+          return;
+        }
+
+        replyBtn.nextElementSibling.nextElementSibling.classList.remove(
+          "hidden"
+        );
         const parser = new DOMParser();
         const replyFormElem = parser.parseFromString(html, "text/html").body
           .firstChild;
         replyFormElem.querySelector("input[name='parent']").value =
-          this.dataset.cid;
+          replyBtn.dataset.cid;
 
         replyFormElem
           .querySelector('button[type="submit"]')
@@ -224,7 +244,7 @@ if (commentFormElem) {
                 const parser = new DOMParser();
                 const elem = parser.parseFromString(html, "text/html").body
                   .firstChild;
-                let ref = btn.parentNode.parentNode.parentNode;
+                let ref = replyBtn.parentNode.parentNode.parentNode;
                 let insertBeforeElem = getInsertBeforeElem(ref);
                 if (insertBeforeElem) {
                   ref.parentNode.insertBefore(elem, insertBeforeElem);
@@ -246,19 +266,18 @@ if (commentFormElem) {
               });
           });
 
-        this.parentNode.insertAdjacentElement("afterend", replyFormElem);
+        replyBtn.parentNode.insertAdjacentElement("afterend", replyFormElem);
       });
-    });
-  });
+      return;
+    }
 
-  const foldBtns = document.querySelectorAll(".fold");
-  foldBtns.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      btn.parentNode.nextElementSibling.remove();
-      btn.classList.add("hidden");
-      btn.previousElementSibling.previousElementSibling.classList.remove(
+    const foldBtn = e.target.closest && e.target.closest(".fold");
+    if (foldBtn) {
+      foldBtn.parentNode.nextElementSibling.remove();
+      foldBtn.classList.add("hidden");
+      foldBtn.previousElementSibling.previousElementSibling.classList.remove(
         "hidden"
       );
-    });
+    }
   });
 }

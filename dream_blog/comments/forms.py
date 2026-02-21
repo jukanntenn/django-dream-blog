@@ -1,6 +1,6 @@
+from comments import get_model
 from django import forms
 from django_comments.forms import CommentForm
-from tree_comments import get_model
 
 
 class TreeCommentForm(CommentForm):

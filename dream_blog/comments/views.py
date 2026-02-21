@@ -1,6 +1,6 @@
 import functools
 
-import django_comments
+from comments import get_form
 from django.apps import apps
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
@@ -10,8 +10,8 @@ from django.utils.decorators import method_decorator
 from django.utils.html import escape
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import FormView, TemplateView
-from django_comments import get_form, signals
-from django_comments.views.comments import CommentPostBadRequest
+from tree_comments import signals
+from tree_comments.views import CommentPostBadRequest
 
 
 def inject_comment_target(func):
@@ -58,7 +58,7 @@ def inject_comment_target(func):
 
 
 class CommentFormTemplateView(TemplateView):
-    template_name = "tree_comments/inclusions/_form.html"
+    template_name = "comments/inclusions/_form.html"
 
     @inject_comment_target
     def get(self, request, *args, **kwargs):
@@ -72,7 +72,7 @@ class CommentFormTemplateView(TemplateView):
 
 class CommentPostView(FormView):
     http_method_names = ["post"]
-    template_name = "tree_comments/inclusions/_comment.html"
+    template_name = "comments/inclusions/_comment.html"
 
     def get_form_kwargs(self):
         target = self.kwargs.pop("target")
@@ -85,7 +85,7 @@ class CommentPostView(FormView):
         return {"target_object": target, "data": data}
 
     def get_form_class(self):
-        return django_comments.get_form()
+        return get_form()
 
     def form_invalid(self, form):
         return CommentPostBadRequest(

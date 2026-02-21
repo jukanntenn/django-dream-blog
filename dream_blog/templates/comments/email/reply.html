@@ -1,7 +1,7 @@
-{% extends "tree_comments/email/base.html" %}
+{% extends "comments/email/base.html" %}
 {% block content %}
   <p class="comment-translatable">
-    <strong>{{ comment.user.name }}</strong> 在 {{ content_object.title }} 中发布了评论：
+    <strong>{{ comment.user.name }}</strong> 在 {{ content_object.title }} 中回复了你：
   </p>
   <p>{{ comment.comment_html | safe }}</p>
   <p>

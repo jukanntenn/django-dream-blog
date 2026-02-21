@@ -1,9 +1,9 @@
+from comments.models import Comment
 from django.contrib import admin
 from django_comments.admin import CommentsAdmin
-from tree_comments.models import TreeComment
 
 
-@admin.register(TreeComment)
+@admin.register(Comment)
 class TreeCommentsAdmin(CommentsAdmin):
     list_display = (
         "user_name",

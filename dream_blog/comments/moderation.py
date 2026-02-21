@@ -3,9 +3,9 @@ from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.template import loader
-from django_comments.moderation import CommentModerator as DjangoCommentModerator
-from django_comments.moderation import Moderator as DjangoModerator
 from notifications.signals import notify
+from tree_comments.moderation import CommentModerator as DjangoCommentModerator
+from tree_comments.moderation import Moderator as DjangoModerator
 
 
 class Moderator(DjangoModerator):
@@ -46,8 +46,8 @@ class CommentModerator(DjangoCommentModerator):
             if recipient == author or not recipient.email:
                 continue
 
-        tmpl_html = loader.get_template("tree_comments/email/reply.html")
-        tmpl_txt = loader.get_template("tree_comments/email/reply.txt")
+        tmpl_html = loader.get_template("comments/email/reply.html")
+        tmpl_txt = loader.get_template("comments/email/reply.txt")
         c = {
             "comment": comment,
             "content_object": content_object,
@@ -74,8 +74,8 @@ class CommentModerator(DjangoCommentModerator):
         if not self.email_notification:
             return
         recipient_list = [manager_tuple[1] for manager_tuple in settings.MANAGERS]
-        tmpl_txt = loader.get_template("tree_comments/email/comment.txt")
-        tmpl_html = loader.get_template("tree_comments/email/comment.html")
+        tmpl_txt = loader.get_template("comments/email/comment.txt")
+        tmpl_html = loader.get_template("comments/email/comment.html")
         c = {
             "comment": comment,
             "content_object": content_object,

@@ -95,7 +95,7 @@ THIRD_PARTY_APPS = [
     "django_vite",
     "django_extensions",
     "hitcount",
-    "django_comments",
+    # "django_comments",
     "notifications",
     "health_check",
     "health_check.db",
@@ -104,11 +104,13 @@ THIRD_PARTY_APPS = [
     "dbbackup",
     "markdown_field",
     "huey.contrib.djhuey",
+    "tree_comments",
 ]
 LOCAL_APPS = [
     "dream_blog.columns",
     "dream_blog.core",
-    "dream_blog.tree_comments",
+    # "dream_blog.tree_comments",
+    "dream_blog.comments",
     "dream_blog.posts",
     "dream_blog.tutorials",
     "dream_blog.users",
@@ -305,7 +307,7 @@ DJANGO_VITE = {"default": {"dev_mode": True}}
 # django-contrib-comments
 # -----------------------------------------------------------------------
 # https://django-contrib-comments.readthedocs.io/en/latest/settings.html
-COMMENTS_APP = "tree_comments"
+# COMMENTS_APP = "tree_comments"
 
 # django-dbbackup
 # ------------------------------------------------------------------------------
@@ -366,3 +368,9 @@ MARKDOWN_FIELD = {
         },
     },
 }
+
+# Required by tree_comments to associate comments to a Site
+SITE_ID = 1
+COMMENTS_APP = "comments"
+TREE_COMMENTS_COMMENT_MODEL = "comments.Comment"
+TREE_COMMENTS_COMMENT_FLAG_MODEL = "comments.CommentFlag"

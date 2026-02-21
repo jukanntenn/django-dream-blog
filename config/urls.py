@@ -32,7 +32,7 @@ urlpatterns = [
     path("posts/", include("posts.urls")),
     path("tutorials/", include("tutorials.urls")),
     path("columns/", include("columns.urls")),
-    path("comments/", include("tree_comments.urls")),
+    path("comments/", include("comments.urls")),
     path("accounts/", include("allauth.urls")),
     path("markdown-field/", include("markdown_field.urls")),
     path("ht/", include("health_check.urls")),
