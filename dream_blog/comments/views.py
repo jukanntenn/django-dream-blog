@@ -116,6 +116,7 @@ class CommentPostView(FormView):
         )
 
         context = self.get_context_data(comment=comment, form=form)
+        context["is_new"] = True
         return self.render_to_response(context)
 
     @method_decorator(csrf_protect)

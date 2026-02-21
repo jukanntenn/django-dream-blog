@@ -144,7 +144,7 @@ function fetchCommentForm(url) {
 function getInsertBeforeElem(refElem) {
   while (
     refElem.nextElementSibling &&
-    refElem.nextElementSibling.classList.contains("pl-14")
+    refElem.nextElementSibling.classList.contains("pl-12")
   ) {
     refElem = refElem.nextElementSibling;
   }
@@ -177,6 +177,10 @@ if (commentFormElem) {
             commentList.insertAdjacentHTML("afterbegin", data);
           } else {
             commentList.innerHTML = data;
+          }
+          const newComment = commentList.firstElementChild;
+          if (newComment && newComment.id) {
+            scrollToHash(`#${newComment.id}`, "smooth");
           }
         }
         commentFormElem.querySelector("textarea[name='comment']").value = "";
@@ -221,7 +225,7 @@ if (commentList) {
         );
         const parser = new DOMParser();
         const replyFormElem = parser.parseFromString(html, "text/html").body
-          .firstChild;
+          .firstElementChild;
         replyFormElem.querySelector("input[name='parent']").value =
           replyBtn.dataset.cid;
 
@@ -243,7 +247,7 @@ if (commentList) {
               .then((html) => {
                 const parser = new DOMParser();
                 const elem = parser.parseFromString(html, "text/html").body
-                  .firstChild;
+                  .firstElementChild;
                 let ref = replyBtn.parentNode.parentNode.parentNode;
                 let insertBeforeElem = getInsertBeforeElem(ref);
                 if (insertBeforeElem) {
@@ -253,6 +257,9 @@ if (commentList) {
                 }
                 replyFormElem.querySelector("textarea[name='comment']").value =
                   "";
+                if (elem && elem.id) {
+                  scrollToHash(`#${elem.id}`, "smooth");
+                }
               })
               .catch((error) => {
                 console.error("提交出错:", error);

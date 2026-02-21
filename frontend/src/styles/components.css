@@ -664,6 +664,24 @@
          bg-slate-100 dark:bg-slate-800;
 }
 
+@keyframes highlight-flash {
+  0% { background-color: rgb(207 250 254); }
+  100% { background-color: transparent; }
+}
+
+@keyframes highlight-flash-dark {
+  0% { background-color: rgb(22 78 99); }
+  100% { background-color: transparent; }
+}
+
+.comment-new {
+  animation: highlight-flash 1.5s ease-out forwards;
+}
+
+.dark .comment-new {
+  animation: highlight-flash-dark 1.5s ease-out forwards;
+}
+
 /* ============================================
    Article Components
    ============================================ */

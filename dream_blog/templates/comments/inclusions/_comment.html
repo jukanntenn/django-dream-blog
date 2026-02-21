@@ -1,7 +1,7 @@
 {% load static %}
 {# Single comment component with refined avatar and visual hierarchy #}
 {# Design intent: Circular avatar with subtle ring, clear nesting for replies #}
-<div class="mt-5 flex {% if not comment.is_root %}pl-12 md:pl-14{% endif %}"
+<div class="mt-5 flex{% if not comment.is_root %} pl-12 md:pl-14{% endif %}{% if is_new %} comment-new{% endif %}"
      id="{{ comment.anchor }}">
     {# Refined avatar with circular shape and subtle ring #}
     <div class="shrink-0">
