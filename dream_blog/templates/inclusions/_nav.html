@@ -1,7 +1,9 @@
 {% load static %}
+{# Navigation bar: sticky header with theme switcher #}
+{# Design intent: Transparent background to show gradient, no border for natural layout #}
 <div id="site-nav"
-     class="sticky top-0 z-[60] w-full flex-none bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+     class="sticky top-0 z-[60] w-full flex-none">
+  <div class="max-w-[90rem] mx-auto px-4 lg:px-8">
     <div class="py-4">
       <div class="relative flex items-center justify-between">
         <div class="flex items-center">
@@ -13,9 +15,9 @@
             <span class="text-3xl whitespace-nowrap">🦋</span>
           </a>
         </div>
-        <!-- 主题切换按钮 -->
+        <!-- Theme switcher button with slate hover state -->
         <button id="theme-switcher"
-                class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
                 aria-label="切换主题">
           <img data-theme-icon="light"
                height="20"

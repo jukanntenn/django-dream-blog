@@ -1,32 +1,47 @@
 {% load static %}
-<nav aria-label="Pagination" class="flex items-center">
+{# Pagination component with enhanced visual feedback #}
+{# Design intent: Clear active state, smooth hover transitions #}
+<nav aria-label="Pagination" class="flex items-center gap-1">
+  {# Previous page button #}
   {% if page_obj.has_previous %}
     <a href="?page={{ page_obj.previous_page_number }}"
-       class="p-2 mr-4 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-left-s-line.svg' %}" />
+       class="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-150">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
     </a>
   {% else %}
-    <span class="p-2 mr-4 rounded-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-left-s-line.svg' %}" />
+    <span class="p-2 rounded-lg text-slate-300 dark:text-slate-600 cursor-not-allowed">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
     </span>
   {% endif %}
+
+  {# Page numbers #}
   {% for number in elided_page_range %}
     {% if number == page_obj.number %}
-      <span class="px-4 py-2 cursor-pointer rounded-sm bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-medium hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">{{ number }}</span>
+      <span class="pagination-item--active">{{ number }}</span>
     {% elif number == paginator.ELLIPSIS %}
-      <span class="px-4 py-2 cursor-pointer rounded-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">{{ number }}</span>
+      <span class="px-3 py-2 text-slate-400 dark:text-slate-500">{{ number }}</span>
     {% else %}
-      <a href="?page={{ number }}" class="px-4 py-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors">{{ number }}</a>
+      <a href="?page={{ number }}" class="pagination-item">{{ number }}</a>
     {% endif %}
   {% endfor %}
+
+  {# Next page button #}
   {% if page_obj.has_next %}
     <a href="?page={{ page_obj.next_page_number }}"
-       class="p-2 ml-4 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-right-s-line.svg' %}" />
+       class="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-150">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
     </a>
   {% else %}
-    <span class="p-2 ml-4 rounded-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-      <img class="h-6 w-6 dark:invert" src="{% static 'arrow-right-s-line.svg' %}" />
+    <span class="p-2 rounded-lg text-slate-300 dark:text-slate-600 cursor-not-allowed">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
     </span>
   {% endif %}
 </nav>

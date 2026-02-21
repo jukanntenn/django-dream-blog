@@ -1,12 +1,14 @@
-<div class="flex items-center border-b border-gray-200 dark:border-gray-700"
+{# Comment section header with clean design #}
+{# Design intent: No border, natural content separation #}
+<div class="flex items-center mt-8 pt-6"
      id="comment-area">
-    <span class="font-semibold text-lg pb-3 text-gray-900 dark:text-gray-100">{{ comment_count }} 评论</span>
+    <span class="font-semibold text-slate-900 dark:text-slate-100">{{ comment_count }} 评论</span>
     {% if user.is_authenticated %}
-        <a class="ml-auto text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+        <a class="ml-auto text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
            href="{% url 'account_logout' %}?next={{ request.get_full_path }}">登出</a>
     {% endif %}
 </div>
-<div class="mt-5">
+<div class="mt-4">
     {% if user.is_anonymous %}
         {% include "accounts/inclusions/_login.html" %}
     {% else %}

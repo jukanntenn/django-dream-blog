@@ -1,3 +1,4 @@
-<div class="text-gray-500 dark:text-gray-400 text-sm mt-3">
-  <span class="after:content-['•'] after:mx-1 text-gray-700 dark:text-gray-400">{{ entry.publish_date | date:"Y-m-d" }}</span><span class="after:content-['•'] after:mx-1 text-gray-700 dark:text-gray-400">{{ entry.hit_count.hits }} 阅读</span><a href="{{ entry.get_absolute_url }}#comment-area" class="text-gray-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300">{{ entry.num_comments }} 评论</a>
+{# Entry meta info: date, views, comments with slate color scheme #}
+<div class="text-slate-500 dark:text-slate-400 text-sm mt-3">
+  <span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.publish_date | date:"Y-m-d" }}</span><span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.hit_count.hits }} 阅读</span><a href="{{ entry.get_absolute_url }}#comment-area" class="text-slate-700 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400">{{ entry.num_comments }} 评论</a>
 </div>

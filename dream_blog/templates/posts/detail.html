@@ -10,7 +10,8 @@
     {% include "inclusions/_toc.html" with toc=post.toc %}
     {% if request.user.is_superuser %}
         <div class="mt-4">
-            <a class="inline-flex items-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm py-0.5 px-2 border border-gray-400 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            {# Admin edit button with slate color scheme #}
+            <a class="inline-flex items-center bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm py-0.5 px-2 border border-slate-400 dark:border-slate-600 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                href="{% url 'admin:posts_post_change' post.id %}">编辑文章</a>
         </div>
     {% endif %}

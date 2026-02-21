@@ -1,0 +1,857 @@
+/**
+ * Prism Design System - Component Styles
+ *
+ * Reusable component styles using Tailwind CSS 4 @utility directive.
+ * These components follow the Prism color scheme.
+ *
+ * @author Grid - Design System Administrator
+ * @version 1.0.0
+ */
+
+/* ============================================
+   Navigation Components
+   ============================================ */
+
+/**
+ * Navigation Link
+ * Usage: <a class="nav-link">Link</a>
+ * Active state: <a class="nav-link nav-link--active">Active Link</a>
+ */
+@utility nav-link {
+  @apply inline-flex items-center gap-2 px-3 py-2 text-sm font-medium
+         text-slate-600 dark:text-slate-300
+         rounded-lg transition-colors duration-200
+         hover:text-slate-900 dark:hover:text-slate-100
+         hover:bg-slate-100 dark:hover:bg-slate-800;
+
+  &.nav-link--active {
+    @apply text-cyan-600 dark:text-cyan-400
+           bg-cyan-50 dark:bg-cyan-950/50
+           hover:text-cyan-700 dark:hover:text-cyan-300
+           hover:bg-cyan-100 dark:hover:bg-cyan-900/50;
+  }
+}
+
+/**
+ * Navigation Link (Inline variant - for headers)
+ * Usage: <a class="nav-link-inline">Link</a>
+ */
+@utility nav-link-inline {
+  @apply inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium
+         text-slate-600 dark:text-slate-300
+         transition-colors duration-200
+         hover:text-cyan-600 dark:hover:text-cyan-400;
+
+  &.nav-link-inline--active {
+    @apply text-cyan-600 dark:text-cyan-400;
+  }
+}
+
+/* ============================================
+   Button Components
+   ============================================ */
+
+/**
+ * Button Base
+ * Shared styles for all button variants
+ * Design intent: Ripple effect on click for tactile feedback
+ */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2
+         font-medium rounded-lg transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-offset-2
+         dark:focus:ring-offset-slate-900
+         disabled:opacity-50 disabled:cursor-not-allowed
+         relative overflow-hidden;
+
+  /* Ripple effect on click - using CSS for performance */
+  &::after {
+    @apply content-[''] absolute inset-0
+           bg-white/20 rounded-lg
+           opacity-0 scale-0
+           transition-all duration-300 ease-out;
+  }
+
+  &:active::after {
+    @apply opacity-100 scale-100;
+  }
+}
+
+/**
+ * Button - Primary (Cyan)
+ * Usage: <button class="btn btn--primary">Primary</button>
+ * Active state: translateY for tactile feedback
+ * Design intent: Smooth elevation and shadow transition on hover
+ */
+@utility btn--primary {
+  @apply btn px-4 py-2.5 text-sm
+         bg-cyan-600 dark:bg-cyan-500
+         text-white dark:text-slate-900
+         hover:bg-cyan-700 dark:hover:bg-cyan-400
+         focus:ring-cyan-500/50
+         shadow-[var(--shadow-sm)]
+         hover:shadow-[var(--shadow-md)]
+         active:translate-y-px active:shadow-sm;
+}
+
+/**
+ * Button - Secondary (Slate)
+ * Usage: <button class="btn btn--secondary">Secondary</button>
+ */
+@utility btn--secondary {
+  @apply btn px-4 py-2.5 text-sm
+         bg-slate-100 dark:bg-slate-800
+         text-slate-700 dark:text-slate-200
+         hover:bg-slate-200 dark:hover:bg-slate-700
+         focus:ring-slate-500/50
+         border border-slate-200 dark:border-slate-700
+         active:translate-y-px;
+}
+
+/**
+ * Button - Outline
+ * Usage: <button class="btn btn--outline">Outline</button>
+ */
+@utility btn--outline {
+  @apply btn px-4 py-2.5 text-sm
+         bg-transparent
+         text-slate-700 dark:text-slate-300
+         border border-slate-300 dark:border-slate-600
+         hover:bg-slate-50 dark:hover:bg-slate-800
+         focus:ring-slate-500/50
+         active:translate-y-px;
+}
+
+/**
+ * Button - Ghost
+ * Usage: <button class="btn btn--ghost">Ghost</button>
+ */
+@utility btn--ghost {
+  @apply btn px-4 py-2.5 text-sm
+         bg-transparent
+         text-slate-600 dark:text-slate-400
+         hover:bg-slate-100 dark:hover:bg-slate-800
+         hover:text-slate-900 dark:hover:text-slate-200;
+}
+
+/**
+ * Button - Accent (Teal)
+ * Usage: <button class="btn btn--accent">Accent</button>
+ */
+@utility btn--accent {
+  @apply btn px-4 py-2.5 text-sm
+         bg-teal-500 dark:bg-teal-400
+         text-white dark:text-slate-900
+         hover:bg-teal-600 dark:hover:bg-teal-300
+         focus:ring-teal-500/50
+         shadow-sm hover:shadow-md
+         active:translate-y-px;
+}
+
+/**
+ * Button - Danger
+ * Usage: <button class="btn btn--danger">Delete</button>
+ */
+@utility btn--danger {
+  @apply btn px-4 py-2.5 text-sm
+         bg-red-600 dark:bg-red-500
+         text-white
+         hover:bg-red-700 dark:hover:bg-red-400
+         focus:ring-red-500/50
+         shadow-sm hover:shadow-md;
+}
+
+/**
+ * Button - Small
+ * Size modifier: <button class="btn--primary btn--sm">Small</button>
+ */
+@utility btn--sm {
+  @apply px-3 py-1.5 text-xs;
+}
+
+/**
+ * Button - Large
+ * Size modifier: <button class="btn--primary btn--lg">Large</button>
+ */
+@utility btn--lg {
+  @apply px-6 py-3 text-base;
+}
+
+/* ============================================
+   Card Components
+   ============================================ */
+
+/**
+ * Card - Base
+ * Usage: <div class="card">Content</div>
+ */
+@utility card {
+  @apply bg-white dark:bg-slate-900
+         rounded-xl border border-slate-200 dark:border-slate-800
+         shadow-sm;
+}
+
+/**
+ * Card - Elevated (with stronger shadow)
+ * Usage: <div class="card card--elevated">Content</div>
+ */
+@utility card--elevated {
+  @apply bg-white dark:bg-slate-900
+         rounded-xl border border-slate-200 dark:border-slate-800
+         shadow-md hover:shadow-lg transition-shadow duration-200;
+}
+
+/**
+ * Card - Interactive (hoverable)
+ * Usage: <a class="card card--interactive">Content</a>
+ * Design intent: Smooth hover lift effect with enhanced shadow
+ * translateY(-4px) creates noticeable lift, shadow-lift adds depth
+ */
+@utility card--interactive {
+  @apply bg-white dark:bg-slate-900
+         rounded-xl border border-slate-200 dark:border-slate-800
+         shadow-[var(--shadow-sm)]
+         hover:shadow-[var(--shadow-lift)]
+         hover:border-slate-300 dark:hover:border-slate-700
+         hover:-translate-y-1
+         transition-all duration-300 ease-[var(--ease-snap)] cursor-pointer;
+}
+
+/**
+ * Card Header
+ * Usage: <div class="card__header">Header</div>
+ */
+@utility card__header {
+  @apply px-5 py-4 border-b border-slate-200 dark:border-slate-800;
+}
+
+/**
+ * Card Body
+ * Usage: <div class="card__body">Body content</div>
+ */
+@utility card__body {
+  @apply p-5;
+}
+
+/**
+ * Card Footer
+ * Usage: <div class="card__footer">Footer</div>
+ */
+@utility card__footer {
+  @apply px-5 py-4 border-t border-slate-200 dark:border-slate-800
+         bg-slate-50 dark:bg-slate-800/50 rounded-b-xl;
+}
+
+/* ============================================
+   Badge/Tag Components
+   ============================================ */
+
+/**
+ * Badge - Base
+ * Usage: <span class="badge">Badge</span>
+ */
+@utility badge {
+  @apply inline-flex items-center gap-1 px-2.5 py-0.5
+         text-xs font-medium rounded-full;
+}
+
+/**
+ * Badge - Default (Slate)
+ * Usage: <span class="badge badge--default">Badge</span>
+ */
+@utility badge--default {
+  @apply badge bg-slate-100 dark:bg-slate-800
+         text-slate-700 dark:text-slate-300;
+}
+
+/**
+ * Badge - Primary (Cyan)
+ * Usage: <span class="badge badge--primary">Badge</span>
+ */
+@utility badge--primary {
+  @apply badge bg-cyan-100 dark:bg-cyan-900/50
+         text-cyan-700 dark:text-cyan-300;
+}
+
+/**
+ * Badge - Accent (Teal)
+ * Usage: <span class="badge badge--accent">Badge</span>
+ */
+@utility badge--accent {
+  @apply badge bg-teal-100 dark:bg-teal-900/50
+         text-teal-700 dark:text-teal-300;
+}
+
+/**
+ * Badge - Success (Emerald)
+ * Usage: <span class="badge badge--success">Badge</span>
+ */
+@utility badge--success {
+  @apply badge bg-emerald-100 dark:bg-emerald-900/50
+         text-emerald-700 dark:text-emerald-300;
+}
+
+/**
+ * Badge - Warning (Amber)
+ * Usage: <span class="badge badge--warning">Badge</span>
+ */
+@utility badge--warning {
+  @apply badge bg-amber-100 dark:bg-amber-900/50
+         text-amber-700 dark:text-amber-300;
+}
+
+/**
+ * Badge - Error (Red)
+ * Usage: <span class="badge badge--error">Badge</span>
+ */
+@utility badge--error {
+  @apply badge bg-red-100 dark:bg-red-900/50
+         text-red-700 dark:text-red-300;
+}
+
+/**
+ * Badge - Info (Sky)
+ * Usage: <span class="badge badge--info">Badge</span>
+ */
+@utility badge--info {
+  @apply badge bg-sky-100 dark:bg-sky-900/50
+         text-sky-700 dark:text-sky-300;
+}
+
+/* ============================================
+   Link Components
+   ============================================ */
+
+/**
+ * Link - Default
+ * Usage: <a class="link">Link text</a>
+ */
+@utility link {
+  @apply text-teal-600 dark:text-teal-400
+         underline underline-offset-4
+         decoration-teal-300/70 dark:decoration-teal-600/60
+         hover:decoration-teal-500 dark:hover:decoration-teal-400
+         transition-colors duration-200;
+}
+
+/**
+ * Link - Subtle (less prominent)
+ * Usage: <a class="link link--subtle">Link text</a>
+ */
+@utility link--subtle {
+  @apply text-slate-600 dark:text-slate-400
+         no-underline hover:text-cyan-600 dark:hover:text-cyan-400
+         hover:underline hover:underline-offset-4
+         transition-colors duration-200;
+}
+
+/**
+ * Link - Primary (Cyan accent)
+ * Usage: <a class="link link--primary">Link text</a>
+ */
+@utility link--primary {
+  @apply text-cyan-600 dark:text-cyan-400
+         no-underline hover:text-cyan-700 dark:hover:text-cyan-300
+         hover:underline hover:underline-offset-4
+         transition-colors duration-200;
+}
+
+/* ============================================
+   Form Components
+   ============================================ */
+
+/**
+ * Input - Base
+ * Usage: <input class="input" type="text" />
+ */
+@utility input {
+  @apply w-full px-4 py-2.5 text-sm
+         bg-white dark:bg-slate-900
+         text-slate-900 dark:text-slate-100
+         border border-slate-300 dark:border-slate-700
+         rounded-lg shadow-sm
+         placeholder:text-slate-400 dark:placeholder:text-slate-500
+         focus:outline-none focus:ring-2 focus:ring-cyan-500/50
+         focus:border-cyan-500 dark:focus:border-cyan-400
+         disabled:bg-slate-50 dark:disabled:bg-slate-800
+         disabled:cursor-not-allowed
+         transition-colors duration-200;
+}
+
+/**
+ * Input - Error state
+ * Usage: <input class="input input--error" type="text" />
+ */
+@utility input--error {
+  @apply border-red-500 dark:border-red-500
+         focus:ring-red-500/50 focus:border-red-500;
+}
+
+/**
+ * Label
+ * Usage: <label class="label">Label text</label>
+ */
+@utility label {
+  @apply block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5;
+}
+
+/**
+ * Form Helper Text
+ * Usage: <p class="form-helper">Helper text</p>
+ */
+@utility form-helper {
+  @apply mt-1.5 text-xs text-slate-500 dark:text-slate-400;
+}
+
+/**
+ * Form Error Message
+ * Usage: <p class="form-error">Error message</p>
+ */
+@utility form-error {
+  @apply mt-1.5 text-xs text-red-600 dark:text-red-400;
+}
+
+/* ============================================
+   Alert Components
+   ============================================ */
+
+/**
+ * Alert - Base
+ * Usage: <div class="alert">Message</div>
+ */
+@utility alert {
+  @apply px-4 py-3 rounded-lg text-sm flex items-start gap-3;
+}
+
+/**
+ * Alert - Info
+ * Usage: <div class="alert alert--info">Info message</div>
+ */
+@utility alert--info {
+  @apply alert bg-sky-50 dark:bg-sky-950/50
+         text-sky-800 dark:text-sky-200
+         border border-sky-200 dark:border-sky-900;
+}
+
+/**
+ * Alert - Success
+ * Usage: <div class="alert alert--success">Success message</div>
+ */
+@utility alert--success {
+  @apply alert bg-emerald-50 dark:bg-emerald-950/50
+         text-emerald-800 dark:text-emerald-200
+         border border-emerald-200 dark:border-emerald-900;
+}
+
+/**
+ * Alert - Warning
+ * Usage: <div class="alert alert--warning">Warning message</div>
+ */
+@utility alert--warning {
+  @apply alert bg-amber-50 dark:bg-amber-950/50
+         text-amber-800 dark:text-amber-200
+         border border-amber-200 dark:border-amber-900;
+}
+
+/**
+ * Alert - Error
+ * Usage: <div class="alert alert--error">Error message</div>
+ */
+@utility alert--error {
+  @apply alert bg-red-50 dark:bg-red-950/50
+         text-red-800 dark:text-red-200
+         border border-red-200 dark:border-red-900;
+}
+
+/* ============================================
+   Avatar Component
+   ============================================ */
+
+/**
+ * Avatar
+ * Usage: <img class="avatar" src="..." alt="..." />
+ */
+@utility avatar {
+  @apply inline-block rounded-full bg-slate-100 dark:bg-slate-800
+         object-cover ring-2 ring-white dark:ring-slate-900;
+}
+
+/**
+ * Avatar sizes
+ */
+@utility avatar--sm {
+  @apply avatar w-8 h-8;
+}
+
+@utility avatar--md {
+  @apply avatar w-10 h-10;
+}
+
+@utility avatar--lg {
+  @apply avatar w-12 h-12;
+}
+
+@utility avatar--xl {
+  @apply avatar w-16 h-16;
+}
+
+/* ============================================
+   Divider Component
+   ============================================ */
+
+/**
+ * Divider
+ * Usage: <hr class="divider" />
+ */
+@utility divider {
+  @apply border-0 h-px bg-slate-200 dark:bg-slate-800 my-4;
+}
+
+/**
+ * Divider with text
+ * Usage: <div class="divider-text">or</div>
+ */
+@utility divider-text {
+  @apply flex items-center gap-4 my-4 text-sm text-slate-500 dark:text-slate-400;
+
+  &::before,
+  &::after {
+    @apply flex-1 h-px bg-slate-200 dark:bg-slate-800;
+    content: '';
+  }
+}
+
+/* ============================================
+   Skeleton Loading
+   ============================================ */
+
+/**
+ * Skeleton
+ * Usage: <div class="skeleton h-4 w-32"></div>
+ */
+@utility skeleton {
+  @apply bg-slate-200 dark:bg-slate-800 rounded animate-pulse;
+}
+
+/**
+ * Skeleton - Circular (for avatars)
+ * Usage: <div class="skeleton--circle w-10 h-10"></div>
+ */
+@utility skeleton--circle {
+  @apply skeleton rounded-full;
+}
+
+/* ============================================
+   Pagination Components
+   ============================================ */
+
+/**
+ * Pagination Item
+ * Usage: <a class="pagination-item">1</a>
+ * Design intent: Smooth hover and focus states for page navigation
+ */
+@utility pagination-item {
+  @apply px-4 py-2 rounded-lg text-sm font-medium
+         text-slate-700 dark:text-slate-300
+         transition-all duration-150 ease-out
+         hover:bg-slate-100 dark:hover:bg-slate-800
+         focus:outline-none focus:ring-2 focus:ring-cyan-500/50;
+}
+
+/**
+ * Pagination Item - Active
+ * Usage: <span class="pagination-item--active">1</span>
+ */
+@utility pagination-item--active {
+  @apply px-4 py-2 rounded-lg text-sm font-medium
+         bg-cyan-600 dark:bg-cyan-500
+         text-white dark:text-slate-900
+         shadow-sm;
+}
+
+/* ============================================
+   Textarea Component
+   ============================================ */
+
+/**
+ * Textarea - Base
+ * Usage: <textarea class="textarea"></textarea>
+ * Design intent: Consistent styling with input, enhanced focus ring
+ */
+@utility textarea {
+  @apply w-full px-4 py-3 text-sm leading-relaxed
+         bg-white dark:bg-slate-900
+         text-slate-900 dark:text-slate-100
+         border border-slate-300 dark:border-slate-700
+         rounded-lg shadow-sm
+         placeholder:text-slate-400 dark:placeholder:text-slate-500
+         focus:outline-none focus:ring-2 focus:ring-cyan-500/50
+         focus:border-cyan-500 dark:focus:border-cyan-400
+         disabled:bg-slate-50 dark:disabled:bg-slate-800
+         disabled:cursor-not-allowed
+         transition-colors duration-200
+         resize-y min-h-[100px];
+}
+
+/**
+ * Textarea - Error state
+ * Usage: <textarea class="textarea textarea--error"></textarea>
+ */
+@utility textarea--error {
+  @apply border-red-500 dark:border-red-500
+         focus:ring-red-500/50 focus:border-red-500;
+}
+
+/* ============================================
+   Sidebar Components
+   ============================================ */
+
+/**
+ * Sidebar Card
+ * Usage: <div class="sidebar-card">Content</div>
+ * Design intent: Borderless natural layout using whitespace for separation
+ * No visible border - relies on background and spacing for visual hierarchy
+ */
+@utility sidebar-card {
+  @apply p-5 rounded-xl
+         bg-slate-50/80 dark:bg-slate-800/30
+         backdrop-blur-sm;
+  /* No border - uses soft background and backdrop-blur for depth */
+}
+
+/**
+ * Sidebar Title
+ * Usage: <h3 class="sidebar-title">Title</h3>
+ * Design intent: Clean title without border, letting content flow naturally
+ */
+@utility sidebar-title {
+  @apply text-sm font-semibold text-slate-700 dark:text-slate-300
+         mb-2 uppercase tracking-wide;
+}
+
+/**
+ * Sidebar Link
+ * Usage: <a class="sidebar-link">Link</a>
+ */
+@utility sidebar-link {
+  @apply text-slate-700 dark:text-slate-300
+         hover:text-cyan-600 dark:hover:text-cyan-400
+         transition-colors duration-150;
+}
+
+/* ============================================
+   Comment Components
+   ============================================ */
+
+/**
+ * Comment Avatar
+ * Usage: <img class="comment-avatar" src="..." />
+ * Design intent: Refined avatar with subtle ring for comments
+ */
+@utility comment-avatar {
+  @apply w-12 h-12 rounded-full object-cover
+         ring-2 ring-slate-100 dark:ring-slate-700
+         bg-slate-100 dark:bg-slate-800;
+}
+
+/**
+ * Comment Avatar - Small (for nested replies)
+ * Usage: <img class="comment-avatar--sm" src="..." />
+ */
+@utility comment-avatar--sm {
+  @apply w-10 h-10 rounded-full object-cover
+         ring-2 ring-slate-100 dark:ring-slate-700
+         bg-slate-100 dark:bg-slate-800;
+}
+
+/* ============================================
+   Article Components
+   ============================================ */
+
+/**
+ * Article Title Link
+ * Usage: <a class="article-title-link">Title</a>
+ * Design intent: Smooth hover transition for article titles
+ */
+@utility article-title-link {
+  @apply text-slate-900 dark:text-slate-100
+         hover:text-cyan-600 dark:hover:text-cyan-400
+         transition-colors duration-150;
+}
+
+/**
+ * Article Meta
+ * Usage: <div class="article-meta">meta info</div>
+ */
+@utility article-meta {
+  @apply text-sm text-slate-600 dark:text-slate-400
+         flex flex-wrap items-center gap-x-3;
+}
+
+/**
+ * Article Brief
+ * Usage: <p class="article-brief">Brief description</p>
+ */
+@utility article-brief {
+  @apply text-slate-600 dark:text-slate-400
+         mt-2 leading-relaxed;
+}
+
+/* ============================================
+   Navigation Components
+   ============================================ */
+
+/**
+ * Prev/Next Navigation Link
+ * Usage: <a class="nav-prev-next">Previous/Next</a>
+ */
+@utility nav-prev-next {
+  @apply flex items-center gap-1
+         text-slate-700 dark:text-slate-300
+         hover:text-cyan-600 dark:hover:text-cyan-400
+         transition-colors duration-150;
+}
+
+/* ============================================
+   Tutorial Progress
+   ============================================ */
+
+/**
+ * Progress Bar
+ * Usage: <div class="progress-bar"><div class="progress-bar__fill" style="width: 50%"></div></div>
+ */
+@utility progress-bar {
+  @apply w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-700;
+}
+
+@utility progress-bar__fill {
+  @apply h-full rounded-full bg-cyan-500 dark:bg-cyan-400
+         transition-all duration-300 ease-out;
+}
+
+/**
+ * TOC Item
+ * Usage: <a class="toc-item">Chapter 1</a>
+ */
+@utility toc-item {
+  @apply block py-1.5 px-3 -mx-3 rounded-lg
+         text-slate-700 dark:text-slate-300
+         hover:text-cyan-600 dark:hover:text-cyan-400
+         hover:bg-slate-100 dark:hover:bg-slate-800/50
+         transition-colors duration-150;
+}
+
+/**
+ * TOC Item - Active
+ * Usage: <a class="toc-item--active">Current Chapter</a>
+ */
+@utility toc-item--active {
+  @apply block py-1.5 px-3 -mx-3 rounded-lg
+         text-cyan-600 dark:text-cyan-400
+         bg-cyan-50 dark:bg-cyan-900/30
+         font-medium;
+}
+
+/* ============================================
+   Animation & Entrance Effects (Spark System)
+   ============================================ */
+
+/**
+ * Article Entrance Animation
+ * Usage: Add 'animate-entrance' class to article elements
+ * Design intent: Staggered fade-in from below for article list items
+ * Uses CSS nth-child for automatic staggering without JS/template logic
+ * Respects prefers-reduced-motion for accessibility
+ */
+@utility animate-entrance {
+  animation: article-enter 0.5s ease-[var(--ease-enter)] backwards;
+}
+
+/* Staggered delays using nth-child - works with single class */
+.animate-entrance:nth-child(1) { animation-delay: 0.05s; }
+.animate-entrance:nth-child(2) { animation-delay: 0.1s; }
+.animate-entrance:nth-child(3) { animation-delay: 0.15s; }
+.animate-entrance:nth-child(4) { animation-delay: 0.2s; }
+.animate-entrance:nth-child(5) { animation-delay: 0.25s; }
+.animate-entrance:nth-child(6) { animation-delay: 0.3s; }
+.animate-entrance:nth-child(7) { animation-delay: 0.35s; }
+.animate-entrance:nth-child(8) { animation-delay: 0.4s; }
+.animate-entrance:nth-child(9) { animation-delay: 0.45s; }
+.animate-entrance:nth-child(10) { animation-delay: 0.5s; }
+
+/* Staggered animation delays for article list items - utility classes */
+@utility animate-entrance-1 {
+  animation: article-enter 0.5s ease-[var(--ease-enter)] 0.05s backwards;
+}
+
+@utility animate-entrance-2 {
+  animation: article-enter 0.5s ease-[var(--ease-enter)] 0.1s backwards;
+}
+
+@utility animate-entrance-3 {
+  animation: article-enter 0.5s ease-[var(--ease-enter)] 0.15s backwards;
+}
+
+@utility animate-entrance-4 {
+  animation: article-enter 0.5s ease-[var(--ease-enter)] 0.2s backwards;
+}
+
+@utility animate-entrance-5 {
+  animation: article-enter 0.5s ease-[var(--ease-enter)] 0.25s backwards;
+}
+
+@keyframes article-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page fade-in animation */
+@utility animate-page-enter {
+  animation: page-enter 0.4s ease-[var(--ease-enter)];
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-entrance,
+  .animate-entrance-1,
+  .animate-entrance-2,
+  .animate-entrance-3,
+  .animate-entrance-4,
+  .animate-entrance-5,
+  .animate-page-enter {
+    animation: none;
+  }
+}
+
+/* ============================================
+   Scrollbar Utilities
+   ============================================ */
+
+/**
+ * Scrollbar Hide
+ * Usage: <div class="scrollbar-hide">Content with hidden scrollbar</div>
+ * Design intent: Hide scrollbar while maintaining scroll functionality
+ * Cross-browser solution for Firefox, Chrome, Safari, Edge
+ */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

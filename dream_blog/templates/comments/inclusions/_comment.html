@@ -1,32 +1,37 @@
 {% load static %}
-<div class="mt-5 flex {% if not comment.is_root %}pl-14{% endif %}"
+{# Single comment component with refined avatar and visual hierarchy #}
+{# Design intent: Circular avatar with subtle ring, clear nesting for replies #}
+<div class="mt-5 flex {% if not comment.is_root %}pl-12 md:pl-14{% endif %}"
      id="{{ comment.anchor }}">
+    {# Refined avatar with circular shape and subtle ring #}
     <div class="shrink-0">
-        <img class="rounded-sm"
-             width="48"
-             height="48"
-             alt=""
+        <img class="comment-avatar"
+             alt="{{ comment.user.name }}"
              src="{{ comment.user.social_avatar_url }}" />
     </div>
-    <div class="ml-2 min-w-0 w-full">
-        <div>
-            <span class="text-gray-900 dark:text-gray-100 font-medium">{{ comment.user.name }}</span>
+    <div class="ml-3 min-w-0 flex-1">
+        {# User info row with reply indicator #}
+        <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-slate-900 dark:text-slate-100 font-medium">{{ comment.user.name }}</span>
             {% if not comment.is_root %}
-                <img class="inline dark:invert"
-                     height="15"
-                     width="15"
-                     src="{% static 'share-forward-fill.svg' %}" />
-                <span class="text-gray-700 dark:text-gray-300">{{ comment.parent.user.name }}</span>
+                <svg class="w-4 h-4 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+                <span class="text-slate-600 dark:text-slate-400 text-sm">{{ comment.parent.user.name }}</span>
             {% endif %}
         </div>
-        <div class="text-gray-500 dark:text-gray-400 text-sm">{{ comment.submit_date | date:"Y-m-d H:i:s" }}</div>
-        <div class="max-w-none prose prose--comment">
+        {# Timestamp with subtle styling #}
+        <div class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">{{ comment.submit_date | date:"Y-m-d H:i" }}</div>
+        {# Comment content with prose styling #}
+        <div class="max-w-none prose prose--comment mt-2">
             {{ comment.comment_html | safe }}
         </div>
-        <div class="mt-1">
-            <span class="text-sm text-gray-500 dark:text-gray-400 reply hover:text-blue-600 dark:hover:text-blue-300 cursor-pointer transition-colors" data-cid="{{ comment.pk }}">回复</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400 hidden">正在加载评论框...</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400 hidden fold hover:text-blue-600 dark:hover:text-blue-300 cursor-pointer transition-colors">收起</span>
+        {# Action buttons with hover effects #}
+        <div class="mt-2 flex items-center gap-3">
+            <span class="text-sm text-slate-500 dark:text-slate-400 reply hover:text-cyan-600 dark:hover:text-cyan-400 cursor-pointer transition-colors duration-150"
+                  data-cid="{{ comment.pk }}">回复</span>
+            <span class="text-sm text-slate-500 dark:text-slate-400 hidden">正在加载评论框...</span>
+            <span class="text-sm text-slate-500 dark:text-slate-400 hidden fold hover:text-cyan-600 dark:hover:text-cyan-400 cursor-pointer transition-colors duration-150">收起</span>
         </div>
     </div>
 </div>

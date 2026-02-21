@@ -1,4 +1,6 @@
-<div class="mt-10 prose w-full max-w-none lg:max-w-[72ch]" id="content">
+{# Entry content wrapper with prose styling #}
+{# No max-width constraint: content fills available space naturally #}
+<div class="mt-10 prose w-full max-w-none" id="content">
   {{ entry.content_html | safe }}
-  <p class="text-center dark:text-gray-400">-- EOF --</p>
+  <p class="text-center dark:text-slate-400">-- EOF --</p>
 </div>

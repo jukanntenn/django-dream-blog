@@ -1,15 +1,27 @@
 {% if tutorials %}
-  <div>
-    <h3 class="text-xl">教程</h3>
-    <ul class="mt-3">
+  {# Tutorials sidebar with card-style items #}
+  {# Design intent: Compact spacing, consistent styling with columns #}
+  <div class="mt-4 lg:mt-5 first:mt-0">
+    <h3 class="sidebar-title">教程</h3>
+    <ul class="space-y-1">
       {% for tutorial in tutorials %}
-        <li class="flex mt-3 first:mt-0">
-          <div>
-            <div>
-              <a href="{{ tutorial.get_absolute_url }}" class="text-gray-900 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300">{{ tutorial.title }}</a>
+        <li>
+          {# Tutorial card with interactive hover effect #}
+          <a href="{{ tutorial.get_absolute_url }}"
+             class="block py-1.5 px-2 -mx-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors duration-150">
+            <div class="font-medium text-slate-900 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm">
+              {{ tutorial.title }}
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ tutorial.excerpt }}</div>
-          </div>
+            {% if tutorial.excerpt %}
+              <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">{{ tutorial.excerpt }}</div>
+            {% endif %}
+            {# Material count as subtle indicator #}
+            {% if tutorial.num_materials %}
+              <div class="mt-0.5 text-xs text-slate-400 dark:text-slate-500">
+                {{ tutorial.num_materials }} 个章节
+              </div>
+            {% endif %}
+          </a>
         </li>
       {% endfor %}
     </ul>

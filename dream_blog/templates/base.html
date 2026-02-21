@@ -38,12 +38,15 @@
       {% vite_hmr_client %}
       {% vite_asset 'src/main.ts' %}
     </head>
-    <body class="antialiased bg-white dark:bg-gray-900">
+    <body class="antialiased">
       {% include "inclusions/_nav.html" %}
-      <div class="max-w-7xl mx-auto px-4 lg:px-8">
+      {# Desktop: wider layout (max-w-[90rem]=1440px) for better content display on large screens #}
+      <div class="max-w-[90rem] mx-auto px-4 lg:px-8">
         <div class="flex flex-col lg:flex-row">
           <!-- left -->
-          <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 bg-white dark:bg-gray-900 opacity-100 right-auto overflow-y-auto bottom-0 left-0 duration-300 z-50 shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(2rem,calc(50%-38rem))] top-16 lg:w-64"
+          <!-- Left sidebar: fixed on desktop, slide-in on mobile -->
+          {# Mobile: background matches sidebar-card style; Desktop: transparent #}
+          <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 opacity-100 right-auto overflow-y-auto scrollbar-hide bottom-0 left-0 duration-300 z-50 bg-slate-50/80 dark:bg-slate-800/30 lg:bg-transparent lg:dark:bg-transparent shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(2rem,calc(50%-45rem))] top-16 lg:w-64"
                id="left">
             {% block left %}
               {% show_profile %}
@@ -55,7 +58,8 @@
             {% endblock main %}
           </div>
           <!-- right -->
-          <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(0px,calc(50%-38rem))] lg:top-16 lg:pt-6 lg:overflow-y-auto lg:bottom-0">
+          {# 右侧边栏：固定定位，可滚动但隐藏滚动条，保持视觉简洁 #}
+          <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(0px,calc(50%-45rem))] lg:top-16 lg:pt-6 lg:overflow-y-auto lg:bottom-0 scrollbar-hide">
             {% block right %}
               {% show_tutorials 999 %}
               {% show_columns 999 %}
@@ -64,7 +68,7 @@
         </div>
       </div>
       <span id="backtop"
-            class="opacity-0 fixed bottom-4 right-4 lg:right-[max(0px,calc(50%-25rem))] cursor-pointer transition-opacity duration-500 ease-in dark:invert">
+            class="opacity-0 fixed bottom-4 right-4 lg:right-[max(0px,calc(50%-29rem))] cursor-pointer transition-opacity duration-500 ease-in dark:invert">
         <img alt="" height="24" width="24" src="{% static 'arrow-up-line.svg' %}" />
       </span>
       {% include "inclusions/_footer.html" %}

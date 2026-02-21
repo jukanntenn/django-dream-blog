@@ -1,10 +1,10 @@
-<div class="mt-8">
-  <h3 class="text-xl">此专栏下的全部文章</h3>
-  <ul class="mt-3">
+<div class="mt-4 first:mt-0">
+  <h3 class="sidebar-title">此专栏下的全部文章</h3>
+  <ul class="space-y-1">
     {% for article in articles %}
       <li>
         <a href="{% url 'columns:article_detail' column.slug article.id %}"
-           class="text-sm text-blue-400 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400">{{ article.title }}</a>
+           class="block py-1 px-2 -mx-2 rounded-lg text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">{{ article.title }}</a>
       </li>
     {% endfor %}
   </ul>

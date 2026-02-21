@@ -7,7 +7,8 @@
     <h1 class="text-3xl">{{ material.title }}</h1>
     {% include "inclusions/_entry_meta.html" with entry=material %}
     {% include "inclusions/_entry_content.html" with entry=material %}
-    <div class="my-4 text-sm text-gray-700 dark:text-gray-300">
+    {# 上一篇/下一篇导航：prev_next 组件自带间距，无需额外 margin #}
+    <div class="text-sm text-slate-700 dark:text-slate-300">
         {% include "inclusions/_prev_next.html" with entry=material %}
     </div>
     {% show_comment_app material %}

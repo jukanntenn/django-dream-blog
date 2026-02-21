@@ -1,12 +1,24 @@
+{# Table of contents for tutorials #}
+{# Design intent: Clear chapter navigation with active state highlight #}
 <div class="toc">
-  <h3 class="text-xl">
-    <a href="{{ tutorial.get_absolute_url }}" class="text-gray-900 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300">{{ tutorial.title }}</a>
+  {# Tutorial title as clickable header #}
+  <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3">
+    <a href="{{ tutorial.get_absolute_url }}"
+       class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+      {{ tutorial.title }}
+    </a>
   </h3>
-  <ul>
+
+  {# Chapter list with active state #}
+  <ul class="space-y-0.5">
     {% for material in materials %}
       <li>
         <a href="{% url 'tutorials:material_detail' tutorial.slug material.id %}"
-           class="{% if material.id == current.id %}active{% endif %} text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-300">{{ material.title }}</a>
+           class="{% if material.id == current.id %}toc-item--active{% else %}toc-item{% endif %}">
+          {# Chapter number indicator #}
+          <span class="text-xs text-slate-400 dark:text-slate-500 mr-1.5">{{ forloop.counter }}.</span>
+          {{ material.title }}
+        </a>
       </li>
     {% endfor %}
   </ul>
