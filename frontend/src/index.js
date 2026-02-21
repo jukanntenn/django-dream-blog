@@ -52,11 +52,33 @@ function scrollToHash(hash, behavior) {
   if (!id) return false;
   const target = document.getElementById(id);
   if (!target) return false;
-  const top =
-    target.getBoundingClientRect().top +
-    window.pageYOffset -
-    getScrollOffsetTop();
-  window.scrollTo({ top: Math.max(0, top), behavior });
+  const isCommentTarget = !!target.closest("#comment-list");
+  if (!isCommentTarget) {
+    const top =
+      target.getBoundingClientRect().top +
+      window.pageYOffset -
+      getScrollOffsetTop();
+    window.scrollTo({ top: Math.max(0, top), behavior });
+    return true;
+  }
+
+  const navHeight = getScrollOffsetTop() - 12;
+  const viewportHeight = window.innerHeight;
+  const rect = target.getBoundingClientRect();
+
+  const elementTop = rect.top - navHeight;
+  const elementBottom = rect.bottom;
+
+  if (elementTop >= 0 && elementBottom <= viewportHeight) {
+    return true;
+  }
+
+  const currentScrollTop = window.pageYOffset;
+  const scrollTarget =
+    elementTop < 0
+      ? rect.top + currentScrollTop - navHeight
+      : rect.bottom + currentScrollTop - viewportHeight;
+  window.scrollTo({ top: Math.max(0, scrollTarget), behavior });
   return true;
 }
 
