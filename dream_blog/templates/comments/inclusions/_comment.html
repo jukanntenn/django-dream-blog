@@ -1,11 +1,11 @@
 {% load static %}
 {# Single comment component with refined avatar and visual hierarchy #}
-{# Design intent: Circular avatar with subtle ring, clear nesting for replies #}
-<div class="mt-5 flex{% if not comment.is_root %} pl-12 md:pl-14{% endif %}{% if is_new %} comment-new{% endif %}"
+{# Design intent: Rounded square avatar with subtle ring, clear nesting for replies #}
+<div class="mt-5 flex{% if not comment.is_root %} pl-8 md:pl-12 lg:pl-14{% endif %}{% if is_new %} comment-new{% endif %}"
      id="{{ comment.anchor }}">
-    {# Refined avatar with circular shape and subtle ring #}
+    {# Refined avatar with rounded square shape and subtle ring #}
     <div class="shrink-0">
-        <img class="comment-avatar"
+        <img class="w-10 h-10 md:w-12 md:h-12 rounded-xl object-cover ring-2 ring-slate-100 dark:ring-slate-700 bg-slate-100 dark:bg-slate-800"
              alt="{{ comment.user.name }}"
              src="{{ comment.user.social_avatar_url }}" />
     </div>

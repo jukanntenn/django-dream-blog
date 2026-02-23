@@ -646,10 +646,10 @@
 /**
  * Comment Avatar
  * Usage: <img class="comment-avatar" src="..." />
- * Design intent: Refined avatar with subtle ring for comments
+ * Design intent: Rounded square avatar with subtle ring for comments
  */
 @utility comment-avatar {
-  @apply w-12 h-12 rounded-full object-cover
+  @apply w-12 h-12 rounded-xl object-cover
          ring-2 ring-slate-100 dark:ring-slate-700
          bg-slate-100 dark:bg-slate-800;
 }
@@ -659,7 +659,7 @@
  * Usage: <img class="comment-avatar--sm" src="..." />
  */
 @utility comment-avatar--sm {
-  @apply w-10 h-10 rounded-full object-cover
+  @apply w-10 h-10 rounded-xl object-cover
          ring-2 ring-slate-100 dark:ring-slate-700
          bg-slate-100 dark:bg-slate-800;
 }
@@ -872,4 +872,55 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* ============================================
+   Toast Notification Component
+   ============================================ */
+
+/**
+ * Toast notification for user feedback
+ * Usage: new Toast('Message', { type: 'success' })
+ */
+@utility toast {
+  @apply fixed top-4 left-1/2 -translate-x-1/2 z-50
+         px-4 py-3 rounded-lg shadow-lg
+         text-sm font-medium text-white
+         transition-opacity duration-200;
+}
+
+@utility toast--success {
+  @apply bg-emerald-500 dark:bg-emerald-600;
+}
+
+@utility toast--error {
+  @apply bg-red-500 dark:bg-red-600;
+}
+
+@utility toast--info {
+  @apply bg-sky-500 dark:bg-sky-600;
+}
+
+@utility toast--fade-out {
+  @apply opacity-0;
+}
+
+/* ============================================
+   Comment Empty State
+   ============================================ */
+
+/**
+ * Empty state for comment section
+ * Usage: <div class="comment-empty">...</div>
+ */
+@utility comment-empty {
+  @apply py-12 text-center;
+}
+
+@utility comment-empty__icon {
+  @apply w-16 h-16 mx-auto mb-4 text-slate-300 dark:text-slate-600;
+}
+
+@utility comment-empty__text {
+  @apply text-slate-500 dark:text-slate-400 text-sm;
 }
