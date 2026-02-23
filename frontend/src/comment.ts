@@ -48,6 +48,10 @@ class Comment {
     }
   }
 
+  scrollToSelector(selector: string, behavior: ScrollBehavior = "smooth"): boolean {
+    return this.scrollToHash(selector, behavior);
+  }
+
   private handleSubmit(event: Event): void {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -277,17 +281,30 @@ class Comment {
     return current.nextElementSibling as HTMLElement;
   }
 
-  private scrollToHash(hash: string): void {
+  private scrollToHash(hash: string, behavior: ScrollBehavior = "smooth"): boolean {
     const id = hash.startsWith("#") ? hash.slice(1) : hash;
     const target = document.getElementById(id);
-    if (!target) return;
+    if (!target) return false;
 
     const navElem = document.getElementById("site-nav");
     const navHeight = navElem ? navElem.getBoundingClientRect().height : 0;
     const offset = navHeight + 12;
+    const viewportHeight = window.innerHeight;
+    const rect = target.getBoundingClientRect();
 
-    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    const elementTop = rect.top - offset;
+    const elementBottom = rect.bottom;
+    if (elementTop >= 0 && elementBottom <= viewportHeight) {
+      return true;
+    }
+
+    const currentScrollTop = window.pageYOffset;
+    const scrollTarget =
+      elementTop < 0
+        ? rect.top + currentScrollTop - offset
+        : rect.bottom + currentScrollTop - viewportHeight;
+    window.scrollTo({ top: Math.max(0, scrollTarget), behavior });
+    return true;
   }
 
   private showError(message: string): void {

@@ -47,41 +47,14 @@ function getScrollOffsetTop() {
   return navHeight + 12;
 }
 
-function scrollToHash(hash, behavior) {
-  if (!hash) return false;
-  const id = decodeURIComponent(hash.startsWith("#") ? hash.slice(1) : hash);
-  if (!id) return false;
-  const target = document.getElementById(id);
-  if (!target) return false;
-  const isCommentTarget = !!target.closest("#comment-list");
-  if (!isCommentTarget) {
-    const top =
-      target.getBoundingClientRect().top +
-      window.pageYOffset -
-      getScrollOffsetTop();
-    window.scrollTo({ top: Math.max(0, top), behavior });
-    return true;
-  }
-
-  const navHeight = getScrollOffsetTop() - 12;
-  const viewportHeight = window.innerHeight;
-  const rect = target.getBoundingClientRect();
-
-  const elementTop = rect.top - navHeight;
-  const elementBottom = rect.bottom;
-
-  if (elementTop >= 0 && elementBottom <= viewportHeight) {
-    return true;
-  }
-
-  const currentScrollTop = window.pageYOffset;
-  const scrollTarget =
-    elementTop < 0
-      ? rect.top + currentScrollTop - navHeight
-      : rect.bottom + currentScrollTop - viewportHeight;
-  window.scrollTo({ top: Math.max(0, scrollTarget), behavior });
-  return true;
+function scrollToElement(target, behavior) {
+  const top =
+    target.getBoundingClientRect().top + window.pageYOffset - getScrollOffsetTop();
+  window.scrollTo({ top: Math.max(0, top), behavior });
 }
+
+const commentModule = new Comment();
+commentModule.init();
 
 if (tocUlElem) {
   const tree = [];
@@ -102,10 +75,22 @@ if (tocUlElem) {
         ? href.slice(1)
         : null;
     if (!id) return;
-    const hash = `#${id}`;
-    const didScroll = scrollToHash(hash, "smooth");
-    if (!didScroll) return;
+    let decodedId = id;
+    try {
+      decodedId = decodeURIComponent(id);
+    } catch {}
+    const target = document.getElementById(decodedId);
+    if (!target) return;
+
+    if (target.closest("#comment-list")) {
+      const didScroll = commentModule.scrollToSelector(`#${decodedId}`, "smooth");
+      if (!didScroll) return;
+    } else {
+      scrollToElement(target, "smooth");
+    }
+
     e.preventDefault();
+    const hash = `#${decodedId}`;
     if (window.location.hash !== hash) {
       window.history.pushState(null, "", hash);
     }
@@ -132,10 +117,17 @@ var onReady = function onReady(fn) {
 // Handle initial hash scrolling
 onReady(function () {
   if (window.location.hash) {
-    scrollToHash(window.location.hash, "auto");
+    let decodedId = window.location.hash.slice(1);
+    try {
+      decodedId = decodeURIComponent(decodedId);
+    } catch {}
+    const target = document.getElementById(decodedId);
+    if (!target) return;
+
+    if (target.closest("#comment-list")) {
+      commentModule.scrollToSelector(`#${decodedId}`, "auto");
+    } else {
+      scrollToElement(target, "auto");
+    }
   }
 });
-
-// Initialize Comment module
-const commentModule = new Comment();
-commentModule.init();
