@@ -1,0 +1,6 @@
+{"file": ".trellis/workflow.md", "reason": "Project workflow and conventions"}
+{"file": ".trellis/spec/shared/index.md", "reason": "Shared coding standards"}
+{"file": ".trellis/spec/frontend/index.md", "reason": "Frontend development guide"}
+{"file": ".trellis/spec/frontend/components.md", "reason": "Component conventions"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Component patterns for TypeScript classes"}
+{"file": ".trellis/spec/frontend/hook-guidelines.md", "reason": "Module patterns and event handling"}
