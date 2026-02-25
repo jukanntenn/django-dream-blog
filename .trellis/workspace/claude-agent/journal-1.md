@@ -95,3 +95,35 @@ Replaced PostCSS-based Tailwind integration with dedicated Vite plugin for impro
 ### Next Steps
 
 - None - task complete
+
+
+## Session 3: Add VSCode tasks for dev server orchestration
+
+**Date**: 2026-02-25
+**Task**: Add VSCode tasks for dev server orchestration
+
+### Summary
+
+Created VSCode tasks.json for unified dev server management (Django + Vite). Fixed hatch build config to specify dream_blog package directory.
+
+### Main Changes
+
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `03dfc49` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
