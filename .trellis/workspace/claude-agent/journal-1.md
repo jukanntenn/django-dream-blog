@@ -181,3 +181,85 @@ Created VSCode tasks.json for unified dev server management (Django + Vite). Fix
 ### Next Steps
 
 - None - task complete
+
+
+## Session 5: Auto-commit auto-generated files in pre-commit
+
+**Date**: 2026-02-25
+**Task**: Auto-commit auto-generated files in pre-commit
+
+### Summary
+
+(Add summary)
+
+### Main Changes
+
+## Summary
+
+Solved pre-commit friction with auto-generated files (manifest.json and *.jsonl) by implementing git attributes + regex exclude pattern approach.
+
+## Problem
+
+- Pre-commit hooks modified auto-generated files and failed commits
+- Required manual re-add and retry cycles
+- Files: `frontend/dist/manifest.json` (Vite build) and `.trellis/tasks/**/*.jsonl` (task context)
+
+## Solution
+
+**Approach**: Git attributes + pre-commit exclude pattern
+
+1. Created `.gitattributes` with `linguist-generated` markers
+   - Marks files as auto-generated for GitHub and other tools
+   - GitHub hides these in diffs by default
+
+2. Updated `.pre-commit-config.yaml` with regex exclude pattern
+   - `exclude: ^(frontend/dist/manifest\.json|\.trellis/tasks/.*\.jsonl)$`
+   - Skips ALL hooks for these files
+
+3. Updated `CLAUDE.md` documentation
+   - Explains which files are auto-generated
+   - Documents how to add new auto-generated files
+
+## Implementation Details
+
+| File | Change |
+|------|--------|
+| `.gitattributes` | Created with linguist-generated markers |
+| `.pre-commit-config.yaml` | Added global exclude pattern |
+| `CLAUDE.md` | Added pre-commit configuration section |
+
+## Trade-offs
+
+- ✅ Standard git convention for generated files
+- ✅ Works with GitHub (hides in diffs)
+- ✅ Simple to maintain
+- ⚠️ Validation hooks (like check-yaml) also skip these files
+- ⚠️ Adding new files requires updating both .gitattributes and pre-commit config
+
+## Testing
+
+User verified the solution works - pre-commit no longer fails on auto-generated files.
+
+## Task
+
+- Task: `02-25-auto-commit-generated-files`
+- Status: Ready to archive
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `ea5f4ff` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
