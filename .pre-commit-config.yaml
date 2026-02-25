@@ -1,5 +1,10 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
+
+# Exclude auto-generated files from all hooks
+# These files are also marked with linguist-generated in .gitattributes
+exclude: ^(frontend/dist/manifest\.json|\.trellis/tasks/.*\.jsonl)$
+
 repos:
   - repo: https://github.com/astral-sh/uv-pre-commit
     # uv version.

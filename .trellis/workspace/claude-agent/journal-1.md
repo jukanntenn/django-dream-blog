@@ -127,3 +127,57 @@ Created VSCode tasks.json for unified dev server management (Django + Vite). Fix
 ### Next Steps
 
 - None - task complete
+
+
+## Session 4: dev-manager-mcp Integration
+
+**Date**: 2026-02-25
+**Task**: dev-manager-mcp Integration
+
+### Summary
+
+(Add summary)
+
+### Main Changes
+
+| Component | Description |
+|-----------|-------------|
+| Django | manage.py now reads PORT env variable (fallback: 8000) |
+| Vite | vite.config.js now reads PORT from process.env.PORT (fallback: 5173) |
+| Django-Vite | Added VITE_PORT env support in settings/base.py |
+| Documentation | New spec guide: .trellis/spec/guides/dev-server-mcp.md |
+| Documentation | Updated CLAUDE.md with MCP workflow instructions |
+| Config | Added .mcp.json template for MCP client configuration |
+
+**Key Features**:
+- Both Django and Vite servers respect PORT environment variable
+- Django fetches frontend assets from Vite using VITE_PORT
+- Workflow: Start Vite first → Get port → Start Django with VITE_PORT
+- Fallback: npm run dev if pnpm not found in MCP environment
+
+**Files Changed**:
+- `manage.py` - PORT env support for runserver
+- `frontend/vite.config.js` - server.port from process.env.PORT
+- `config/settings/base.py` - VITE_PORT support for django-vite
+- `CLAUDE.md` - MCP integration documentation
+- `.trellis/spec/guides/dev-server-mcp.md` - Comprehensive MCP guide
+- `.trellis/spec/guides/index.md` - Added new guide reference
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `88740bd` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

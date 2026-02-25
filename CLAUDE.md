@@ -103,3 +103,26 @@ See `.trellis/spec/guides/dev-server-mcp.md` for details.
 
 - Use English for comments, documentation, log messages and exception information in code
 - Don’t modify any files under the staticfiles directory--they’re auto-collected by Django
+
+## Pre-commit Configuration
+
+This project uses pre-commit hooks to maintain code quality. Auto-generated files are excluded from pre-commit checks to avoid unnecessary friction.
+
+### Auto-generated Files
+
+The following files are marked as `linguist-generated` in `.gitattributes` and excluded from pre-commit hooks:
+
+- `frontend/dist/manifest.json` - Vite build output (changes with every frontend build)
+- `.trellis/tasks/**/*.jsonl` - Task context files (AI agent workflow)
+
+These files are still committed to the repository but pre-commit hooks will not modify or validate them.
+
+### How It Works
+
+1. `.gitattributes` marks files with `linguist-generated` attribute (for GitHub and other tools)
+2. `.pre-commit-config.yaml` uses regex pattern to exclude these files from all hooks
+3. GitHub respects the `linguist-generated` attribute and hides these files in diffs by default
+
+To add new auto-generated files:
+1. Add the file pattern to `.gitattributes` with `linguist-generated`
+2. Add the file pattern to the `exclude` regex in `.pre-commit-config.yaml`
