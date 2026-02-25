@@ -80,3 +80,6 @@ omit = ["*/migrations/*", "*/tests/*", "dream_blog/scripts/*"]
 
 [tool.ruff]
 exclude = ["**/migrations/"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["dream_blog"]

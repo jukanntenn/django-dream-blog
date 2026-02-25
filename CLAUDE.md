@@ -50,6 +50,19 @@ All commands must be executed in the frontend/ directory, i.e., after running `c
 - `pnpm build` - Production build
 - `pnpm add <package>` - Install frontend dependency
 
+### VSCode Tasks
+
+Quick development server management via VSCode tasks:
+
+1. Open Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`)
+2. Run `Tasks: Run Task`
+3. Select one of:
+   - **Start All** - Start both Django and Vite servers in parallel (recommended)
+   - **Start Django** - Start only the Django development server
+   - **Start Vite** - Start only the Vite frontend server
+
+Each server runs in its own terminal tab, allowing individual stop/restart.
+
 ## Technology Stack
 
 - **Backend:** Django 5+ with AGSI
