@@ -63,6 +63,33 @@ Quick development server management via VSCode tasks:
 
 Each server runs in its own terminal tab, allowing individual stop/restart.
 
+### MCP Dev Server Integration
+
+When you need to start development servers for testing, use **dev-manager-mcp** to avoid port conflicts:
+
+**Workflow:** Start Vite first → Get its port → Start Django with VITE_PORT
+
+```python
+# Step 1: Start Vite server first (try pnpm, fallback to npm if fails)
+mcp__dev-manager__start(command="pnpm dev", cwd="/path/to/project/frontend")
+# If pnpm fails with "not found", retry with:
+mcp__dev-manager__start(command="npm run dev", cwd="/path/to/project/frontend")
+# Returns: { "port": 3011, ... }
+
+# Step 2: Start Django with VITE_PORT set to Vite's allocated port
+mcp__dev-manager__start(
+    command="VITE_PORT=3011 uv run python3 manage.py runserver",
+    cwd="/path/to/project"
+)
+```
+
+Both servers respect the `PORT` environment variable:
+- Django: Falls back to 8000 if PORT not set
+- Vite: Falls back to 5173 if PORT not set
+- Django needs `VITE_PORT` to know where to fetch frontend assets
+
+See `.trellis/spec/guides/dev-server-mcp.md` for details.
+
 ## Technology Stack
 
 - **Backend:** Django 5+ with AGSI

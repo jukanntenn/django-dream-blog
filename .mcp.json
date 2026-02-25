@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dev-manager": {
+      "command": "npx",
+      "args": ["dev-manager-mcp", "stdio"]
+    }
+  }
+}

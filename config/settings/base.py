@@ -2,6 +2,7 @@
 Base settings to build other settings files upon.
 """
 
+import os
 import sys
 from email.utils import getaddresses
 from pathlib import Path
@@ -302,7 +303,16 @@ CONSTANCE_CONFIG_FIELDSETS = {
 
 HITCOUNT_KEEP_HIT_ACTIVE = {"minutes": 1}
 
-DJANGO_VITE = {"default": {"dev_mode": True}}
+# django-vite configuration
+# When using dev-manager-mcp, set VITE_PORT env var to the allocated Vite server port
+# Example: mcp__dev-manager__start() returns port, set VITE_PORT when starting Django
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": True,
+        "dev_server_port": int(os.environ.get("VITE_PORT", "5173")),
+        "dev_server_host": "localhost",
+    }
+}
 
 # django-contrib-comments
 # -----------------------------------------------------------------------

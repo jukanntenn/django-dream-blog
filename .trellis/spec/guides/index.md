@@ -24,10 +24,20 @@ These guides help you **ask the right questions before coding**.
 | [Code Reuse Thinking Guide](./code-reuse-thinking-guide.md) | Identify patterns and reduce duplication | When you notice repeated patterns |
 | [Cross-Layer Thinking Guide](./cross-layer-thinking-guide.md) | Think through data flow across layers | Features spanning multiple layers |
 | [Cross-Platform Thinking Guide](./cross-platform-thinking-guide.md) | Catch platform-specific assumptions | Scripts, paths, commands |
+| [dev-manager-mcp Integration Guide](./dev-server-mcp.md) | Use MCP daemon for dev server management | When starting dev servers for testing |
 
 ---
 
 ## Quick Reference: Thinking Triggers
+
+### When to Use dev-manager-mcp
+
+- [ ] You need to start a dev server for testing
+- [ ] Running tests that require a running server
+- [ ] Verifying frontend-backend integration
+- [ ] Using Playwright or browser automation
+
+→ Read [dev-manager-mcp Integration Guide](./dev-server-mcp.md)
 
 ### When to Think About Cross-Layer Issues
 
