@@ -22,6 +22,19 @@ function katexMath() {
   });
 }
 
+function loadKatex() {
+  if (typeof katex !== "undefined") return Promise.resolve();
+  if (window.__katexLoadingPromise) return window.__katexLoadingPromise;
+  window.__katexLoadingPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.js";
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Failed to load KaTeX"));
+    document.head.appendChild(script);
+  });
+  return window.__katexLoadingPromise;
+}
+
 /**
  * Registers a callback to run when the DOM is ready.
  * Handles both modern browsers and legacy IE support.
@@ -44,10 +57,12 @@ function onReady(fn) {
  */
 function init() {
   onReady(function () {
-    // Render KaTeX math if library is available
-    if (typeof katex !== "undefined") {
-      katexMath();
-    }
+    if (!document.querySelector(".arithmatex")) return;
+    loadKatex()
+      .then(() => {
+        if (typeof katex !== "undefined") katexMath();
+      })
+      .catch(() => {});
   });
 }
 

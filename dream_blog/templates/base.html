@@ -35,6 +35,10 @@
             type="application/rss+xml"
             title="追梦人物的博客"
             href="{% url 'rss' %}" />
+      {% if debug %}
+        <link rel="stylesheet" href="{% vite_asset_url 'src/friendly.css' %}?direct" />
+        <link rel="stylesheet" href="{% vite_asset_url 'src/index.css' %}?direct" />
+      {% endif %}
       {% vite_hmr_client %}
       {% vite_asset 'src/main.ts' %}
     </head>
@@ -72,7 +76,5 @@
         <img alt="" height="24" width="24" src="{% static 'arrow-up-line.svg' %}" />
       </span>
       {% include "inclusions/_footer.html" %}
-      <script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
-      <script src="https://unpkg.com/mermaid@9.4.0/dist/mermaid.min.js"></script>
     </body>
   </html>

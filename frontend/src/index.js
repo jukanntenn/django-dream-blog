@@ -4,6 +4,7 @@ import Backtop from "./backtop";
 import ThemeSwitcher from "./theme-switcher";
 import Comment from "./comment";
 import "./scripts/katex";
+import "./scripts/mermaid";
 
 // 初始化主题切换器
 const themeSwitcherElement = document.getElementById("theme-switcher");
