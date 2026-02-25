@@ -126,8 +126,40 @@ onReady(function () {
 
     if (target.closest("#comment-list")) {
       commentModule.scrollToSelector(`#${decodedId}`, "auto");
+    } else if (decodedId === "comment-area") {
+      scrollToElement(target, "auto");
+      commentModule.focusForm();
     } else {
       scrollToElement(target, "auto");
     }
+  }
+});
+
+// Handle meta info comment link clicks on detail pages
+document.addEventListener("click", (e) => {
+  const link = e.target.closest && e.target.closest('a[href$="#comment-area"]');
+  if (!link) return;
+
+  const href = link.getAttribute("href");
+  if (!href) return;
+
+  // Check if this is a same-page link (detail page scenario)
+  // Index page links navigate to a different URL, let them proceed normally
+  const linkUrl = new URL(href, window.location.origin);
+  const isSamePage = linkUrl.pathname === window.location.pathname;
+
+  if (!isSamePage) return; // Let normal navigation happen
+
+  e.preventDefault();
+
+  const target = document.getElementById("comment-area");
+  if (!target) return;
+
+  scrollToElement(target, "smooth");
+  commentModule.focusForm();
+
+  // Update URL hash
+  if (window.location.hash !== "#comment-area") {
+    window.history.pushState(null, "", "#comment-area");
   }
 });

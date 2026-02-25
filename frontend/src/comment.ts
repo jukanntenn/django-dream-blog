@@ -52,6 +52,14 @@ class Comment {
     return this.scrollToHash(selector, behavior);
   }
 
+  focusForm(): void {
+    const textarea = this.formElem?.querySelector<HTMLTextAreaElement>("textarea");
+    if (textarea) {
+      // Use setTimeout to ensure scroll animation has started
+      setTimeout(() => textarea.focus(), 100);
+    }
+  }
+
   private handleSubmit(event: Event): void {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -139,6 +147,12 @@ class Comment {
 
         this.setupReplyForm(replyFormElem, replyBtn);
         (replyBtn.parentNode as HTMLElement)?.insertAdjacentElement("afterend", replyFormElem);
+
+        // Focus textarea after form is inserted
+        const textarea = replyFormElem.querySelector<HTMLTextAreaElement>("textarea");
+        if (textarea) {
+          setTimeout(() => textarea.focus(), 100);
+        }
       })
       .catch(() => {
         loadingSpan?.classList.add("hidden");
