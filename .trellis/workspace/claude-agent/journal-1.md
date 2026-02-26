@@ -263,3 +263,35 @@ User verified the solution works - pre-commit no longer fails on auto-generated 
 ### Next Steps
 
 - None - task complete
+
+
+## Session 6: Add column/tutorial name display above title on home page
+
+**Date**: 2026-02-26
+**Task**: Add column/tutorial name display above title on home page
+
+### Summary
+
+Improved home page layout by displaying column/tutorial names above post titles with distinct colors and clickable links
+
+### Main Changes
+
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `e17c455` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
