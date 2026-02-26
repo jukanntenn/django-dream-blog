@@ -762,12 +762,11 @@
 /**
  * TOC Item - Active
  * Usage: <a class="toc-item--active">Current Chapter</a>
+ * Design intent: Font highlight without background for cleaner look
  */
 @utility toc-item--active {
   @apply block py-1.5 px-3 -mx-3 rounded-lg
-         text-cyan-600 dark:text-cyan-400
-         bg-cyan-50 dark:bg-cyan-900/30
-         font-medium;
+         font-semibold text-cyan-600 dark:text-cyan-400;
 }
 
 /* ============================================
@@ -871,6 +870,27 @@
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/**
+ * Scrollbar Thin
+ * Usage: <div class="scrollbar-thin">Content with thin scrollbar</div>
+ * Design intent: Subtle 4px scrollbar for tutorial sidebar navigation
+ * Cross-browser solution for Firefox, Chrome, Safari, Edge
+ */
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(203 213 225) transparent; /* slate-300 */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(203 213 225);
+    border-radius: 2px;
   }
 }
 

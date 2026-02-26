@@ -6,7 +6,7 @@
   {% for entry in page_obj %}
     {# Staggered entrance animation - use animate-entrance for all items, CSS handles the rest #}
     <article class="animate-entrance
-                   mt-6 first:mt-0 pb-6 border-b border-slate-100/80 dark:border-slate-800/80 last:border-b-0">
+                   mt-6 first:mt-0 pb-6 border-b border-slate-100/80 dark:border-transparent last:border-b-0">
       {# Column/Tutorial name above title for articles and materials #}
       {% if entry.parent_title %}
         <div class="text-sm mb-1">

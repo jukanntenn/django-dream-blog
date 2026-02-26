@@ -1,43 +1,7 @@
 {% load entry_urls %}
-{# Entry meta info for index pages: date, views, comments with enhanced visual hierarchy #}
+{# Entry meta info for index pages: date, views, comments with dot separators #}
 {# Design intent: Compact layout with clear visual separation using dot separators #}
-<div class="article-meta mt-3">
-  {# Date with calendar icon for better visual recognition #}
-  <span class="flex items-center gap-1">
-    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-    </svg>
-    {{ entry.pub_date|date:"Y-m-d" }}
-  </span>
-
-  {# Views count #}
-  <span class="flex items-center gap-1">
-    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-    </svg>
-    {{ entry.views|default:0 }}
-  </span>
-
-  {# Comments link with hover effect #}
-  <a href="{{ entry|entry_url }}#comment-area"
-     class="flex items-center gap-1 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-150">
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
-    </svg>
-    {{ entry.comment_count }}
-  </a>
-
-  {# Type badges with distinct colors for columns and tutorials #}
-  {% if entry.type == 'a' %}
-    <a href="{% url 'columns:detail' entry.parent_slug %}"
-       class="badge--primary hover:bg-cyan-200 dark:hover:bg-cyan-800/70 transition-colors duration-150">
-      专栏
-    </a>
-  {% elif entry.type == 'm' %}
-    <a href="{% url 'tutorials:detail' entry.parent_slug %}"
-       class="badge--success hover:bg-emerald-200 dark:hover:bg-emerald-800/70 transition-colors duration-150">
-      教程
-    </a>
-  {% endif %}
+<div class="text-slate-500 dark:text-slate-400 text-sm mt-3">
+  <span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.pub_date|date:"Y-m-d" }}</span><span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.views|default:0 }} 阅读</span><a href="{{ entry|entry_url }}#comment-area"
+     class="text-slate-700 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-150">{{ entry.comment_count }} 评论</a>
 </div>

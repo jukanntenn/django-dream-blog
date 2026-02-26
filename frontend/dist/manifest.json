@@ -6,12 +6,12 @@
     "isEntry": true
   },
   "src/main.ts": {
-    "file": "assets/main-DQeXMW-S.js",
+    "file": "assets/main-_pYz__uf.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
     "css": [
-      "assets/main-DCw0JxKU.css"
+      "assets/main-CD4DFpnu.css"
     ]
   },
   "src/scripts/admin-preview-render.ts": {
@@ -21,7 +21,7 @@
     "isEntry": true
   },
   "src/styles/preview.css": {
-    "file": "assets/preview-DJp8KeWQ.css",
+    "file": "assets/preview-pgAn8nqE.css",
     "src": "src/styles/preview.css",
     "isEntry": true
   }

@@ -50,7 +50,7 @@
           <!-- left -->
           <!-- Left sidebar: fixed on desktop, slide-in on mobile -->
           {# Mobile: background matches sidebar-card style; Desktop: transparent #}
-          <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 opacity-100 right-auto overflow-y-auto scrollbar-hide bottom-0 left-0 duration-300 z-50 bg-slate-50/80 dark:bg-slate-800/30 lg:bg-transparent lg:dark:bg-transparent shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(4rem,calc(50%-43rem))] top-16 lg:w-64"
+          <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 opacity-100 right-auto overflow-y-auto scrollbar-hide bottom-0 left-0 duration-300 z-50 bg-slate-50/95 dark:bg-slate-800/95 lg:bg-transparent lg:dark:bg-transparent shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(4rem,calc(50%-43rem))] top-16 lg:w-64"
                id="left">
             {% block left %}
               {% show_profile %}
@@ -63,7 +63,7 @@
           </div>
           <!-- right -->
           {# 右侧边栏：固定定位，可滚动但隐藏滚动条，保持视觉简洁 #}
-          <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(2rem,calc(50%-43rem))] lg:top-16 lg:pt-6 lg:overflow-y-auto lg:bottom-0 scrollbar-hide">
+          <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(2rem,calc(50%-43rem))] lg:top-16 lg:pt-6 lg:overflow-y-auto lg:bottom-0 scrollbar-thin">
             {% block right %}
               {% show_tutorials 999 %}
               {% show_columns 999 %}
