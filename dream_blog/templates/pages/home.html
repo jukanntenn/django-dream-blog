@@ -7,12 +7,20 @@
     {# Staggered entrance animation - use animate-entrance for all items, CSS handles the rest #}
     <article class="animate-entrance
                    mt-6 first:mt-0 pb-6 border-b border-slate-100/80 dark:border-slate-800/80 last:border-b-0">
+      {# Column/Tutorial name above title for articles and materials #}
+      {% if entry.parent_title %}
+        <div class="text-sm mb-1">
+          <a href="{% if entry.type == 'a' %}{% url 'columns:detail' slug=entry.parent_slug %}{% else %}{% url 'tutorials:detail' slug=entry.parent_slug %}{% endif %}"
+             class="hover:underline focus:underline"
+             style="color: {% if entry.type == 'a' %}#7d5de7{% else %}#0e8a16{% endif %};">
+            {% if entry.type == 'a' %}专栏{% else %}教程{% endif %} · {{ entry.parent_title }}
+          </a>
+        </div>
+      {% endif %}
+
       {# Article title with hover effect #}
       <h2 class="text-xl font-semibold leading-snug">
         <a href="{{ entry|entry_url }}" class="article-title-link">
-          {% if entry.parent_title %}
-            <span class="text-cyan-600 dark:text-cyan-400">[{{ entry.parent_title }}]</span>
-          {% endif %}
           {{ entry.title }}
         </a>
       </h2>
