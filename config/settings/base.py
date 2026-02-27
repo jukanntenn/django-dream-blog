@@ -106,15 +106,19 @@ THIRD_PARTY_APPS = [
     "markdown_field",
     "huey.contrib.djhuey",
     "tree_comments",
+    "pure_pagination",
 ]
 LOCAL_APPS = [
     "dream_blog.columns",
     "dream_blog.core",
     # "dream_blog.tree_comments",
     "dream_blog.comments",
+    "dream_blog.friendlinks",
+    "dream_blog.notify",
     "dream_blog.posts",
     "dream_blog.tutorials",
     "dream_blog.users",
+    "dream_blog.webtools",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -198,6 +202,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
+                "notify.context_processors.notification_count",
             ],
         },
     }
@@ -384,3 +389,9 @@ SITE_ID = 1
 COMMENTS_APP = "comments"
 TREE_COMMENTS_COMMENT_MODEL = "comments.Comment"
 TREE_COMMENTS_COMMENT_FLAG_MODEL = "comments.CommentFlag"
+
+# Notification templates for django-notifications-hq
+NOTIFICATION_TEMPLATES = {
+    "comment": "notifications/inclusions/_comment.html",
+    "reply": "notifications/inclusions/_reply.html",
+}

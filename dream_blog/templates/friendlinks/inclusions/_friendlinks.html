@@ -1,0 +1,21 @@
+{% if friendlinks %}
+  {# FriendLinks sidebar with card-style items and visual hierarchy #}
+  {# Design intent: Compact spacing, each link as a clickable item with hover feedback #}
+  <div class="mt-4 lg:mt-5 first:mt-0">
+    <h3 class="sidebar-title">友情链接</h3>
+    <ul class="space-y-1">
+      {% for link in friendlinks %}
+        <li>
+          <a href="{{ link.site_link }}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="block py-1.5 px-2 -mx-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors duration-150">
+            <div class="font-medium text-slate-900 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm">
+              {{ link.site_name }}
+            </div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

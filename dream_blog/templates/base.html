@@ -1,4 +1,4 @@
-{% load django_vite tutorials_extra static core_extra columns_extra %}
+{% load django_vite tutorials_extra static core_extra columns_extra friendlinks_extra %}
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -67,6 +67,7 @@
             {% block right %}
               {% show_tutorials 999 %}
               {% show_columns 999 %}
+              {% show_friendlinks %}
             {% endblock right %}
           </div>
         </div>

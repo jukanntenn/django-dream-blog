@@ -1,0 +1,17 @@
+{"file": ".trellis/workflow.md", "reason": "Project workflow and conventions"}
+{"file": ".trellis/spec/shared/index.md", "reason": "Shared coding standards"}
+{"file": ".trellis/spec/backend/index.md", "reason": "Backend development guide"}
+{"file": ".trellis/spec/backend/api-module.md", "reason": "API module conventions"}
+{"file": ".trellis/spec/backend/quality.md", "reason": "Code quality requirements"}
+{"file": ".trellis/spec/frontend/index.md", "reason": "Frontend development guide"}
+{"file": ".trellis/spec/frontend/components.md", "reason": "Component conventions"}
+{"file": ".trellis/spec/backend/database-guidelines.md", "reason": "Model patterns and database guidelines"}
+{"file": ".trellis/spec/backend/directory-structure.md", "reason": "App structure and naming conventions"}
+{"file": "dream_blog/core/models.py", "reason": "TimeStampedModel base class pattern"}
+{"file": "dream_blog/posts/models.py", "reason": "Model pattern example with mixins"}
+{"file": "dream_blog/columns/models.py", "reason": "Model pattern example with simpler mixins"}
+{"file": "dream_blog/core/views.py", "reason": "SetHeadlineMixin implementation"}
+{"file": "dream_blog/posts/views.py", "reason": "View pattern example"}
+{"file": "dream_blog/posts/admin.py", "reason": "Admin registration pattern"}
+{"file": "dream_blog/columns/templatetags/columns_extra.py", "reason": "Template tag pattern"}
+{"file": "dream_blog/templates/columns/inclusions/_columns.html", "reason": "Sidebar inclusion template pattern"}
