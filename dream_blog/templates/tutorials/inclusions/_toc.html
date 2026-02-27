@@ -10,7 +10,7 @@
   </h3>
 
   {# Chapter list with active state #}
-  <ul class="space-y-0.5">
+  <ul class="space-y-0.5 max-h-[calc(100vh-20rem)] scrollbar-thin overflow-y-auto overflow-x-hidden">
     {% for material in materials %}
       <li>
         <a href="{% url 'tutorials:material_detail' tutorial.slug material.id %}"
