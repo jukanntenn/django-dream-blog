@@ -1,3 +1,4 @@
+{% load static %}
 {# Comment form with enhanced styling and focus states #}
 {# Design intent: Clean form layout with visual feedback on interactions #}
 <form action="{% url "comments:post" %}" method="post" class="comment-form">
@@ -21,9 +22,7 @@
             <div class="mt-3 flex items-center justify-between">
                 {# Markdown hint with official Markdown logo #}
                 <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
-                    <svg class="w-4 h-4" viewBox="0 0 208 128" fill="currentColor">
-                        <path d="M30 128V0h30l26 48 26-48h30v128h-30V56l-26 48-26-48v72H30zm128 0V0h30v128h-30z"/>
-                    </svg>
+                    <img class="w-4 h-4" src="{% static 'markdown-fill.svg' %}" alt="Markdown">
                     <span class="text-xs">支持 Markdown 语法</span>
                 </div>
                 {# Submit button with primary styling #}
