@@ -29,11 +29,11 @@ if __name__ == "__main__":
     sys.path.append(str(current_path / "dream_blog"))
 
     # Support PORT environment variable for runserver (for dev-manager-mcp integration)
-    if 'runserver' in sys.argv:
+    if "runserver" in sys.argv:
         # Check if port is already specified in command arguments
-        has_port_arg = any(':' in arg or arg.isdigit() for arg in sys.argv[1:])
+        has_port_arg = any(":" in arg or arg.isdigit() for arg in sys.argv[1:])
         if not has_port_arg:
-            port = os.environ.get('PORT', '8000')
-            sys.argv.append(f'0.0.0.0:{port}')
+            port = os.environ.get("PORT", "8000")
+            sys.argv.append(f"127.0.0.1:{port}")
 
     execute_from_command_line(sys.argv)
