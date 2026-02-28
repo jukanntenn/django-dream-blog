@@ -996,3 +996,60 @@
 body.lightbox-open {
   @apply overflow-hidden;
 }
+
+/* ============================================
+   Code Copy Component
+   ============================================ */
+
+/**
+ * Code Copy Button
+ * Copy button positioned in top-right of code blocks
+ * Usage: Auto-injected by code-copy.ts
+ */
+@utility code-copy-btn {
+  @apply absolute top-2 right-2
+         flex items-center justify-center
+         w-8 h-8 rounded
+         bg-slate-200/80 hover:bg-slate-300/80
+         dark:bg-slate-700/80 dark:hover:bg-slate-600/80
+         text-slate-600 hover:text-slate-800
+         dark:text-slate-400 dark:hover:text-slate-200
+         transition-all duration-150
+         focus:outline-none focus:ring-2 focus:ring-cyan-500/50
+         opacity-0;
+
+  /* Show on hover when parent is hovered */
+  .prose pre:hover &,
+  .prose .highlight:hover & {
+    @apply opacity-100;
+  }
+
+  /* Always show on touch devices */
+  @media (hover: none) {
+    @apply opacity-100;
+  }
+}
+
+@utility code-copy-btn--copied {
+  @apply bg-emerald-200/90 dark:bg-emerald-800/90
+         text-emerald-700 dark:text-emerald-300;
+}
+
+/**
+ * Code copy icons (SVG)
+ */
+@utility code-copy-icon {
+  @apply w-4 h-4;
+}
+
+@utility code-copy-icon--hidden {
+  @apply hidden;
+}
+
+/**
+ * Make code blocks relative for absolute positioning of copy button
+ */
+.prose pre,
+.prose .highlight {
+  @apply relative;
+}
