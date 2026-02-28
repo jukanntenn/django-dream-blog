@@ -32,7 +32,7 @@
     {# Pagination #}
     {% if is_paginated %}
       <div class="mt-6 flex justify-center">
-        {{ page_obj.render }}
+        {% include "inclusions/_pagination.html" %}
       </div>
     {% endif %}
   </div>

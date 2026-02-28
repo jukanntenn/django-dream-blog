@@ -106,7 +106,6 @@ THIRD_PARTY_APPS = [
     "markdown_field",
     "huey.contrib.djhuey",
     "tree_comments",
-    "pure_pagination",
 ]
 LOCAL_APPS = [
     "dream_blog.columns",
