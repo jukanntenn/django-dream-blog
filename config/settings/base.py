@@ -112,6 +112,7 @@ LOCAL_APPS = [
     "dream_blog.core",
     # "dream_blog.tree_comments",
     "dream_blog.comments",
+    "dream_blog.donate",
     "dream_blog.friendlinks",
     "dream_blog.notify",
     "dream_blog.posts",

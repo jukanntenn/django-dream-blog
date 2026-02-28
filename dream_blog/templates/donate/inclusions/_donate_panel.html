@@ -1,0 +1,150 @@
+{% load static %}
+
+<div class="space-y-5"
+     data-donate-panel
+     data-provider="wechatpay"
+     data-amount="299"
+     data-wechat-base="{% static 'donate/images/wechatpay' %}"
+     data-alipay-base="{% static 'donate/images/alipay' %}"
+     data-wechat-fallback="{% static 'donate/images/wechatpay0.png' %}"
+     data-alipay-fallback="{% static 'donate/images/alipay0.jpg' %}">
+  <div class="flex justify-center border-b border-slate-200 dark:border-slate-700">
+    <button type="button"
+            class="px-6 py-2 font-medium transition-colors text-green-600 border-b-2 border-green-600"
+            data-provider-button
+            data-provider-value="wechatpay"
+            aria-pressed="true">
+      微信
+    </button>
+    <button type="button"
+            class="px-6 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400"
+            data-provider-button
+            data-provider-value="alipay"
+            aria-pressed="false">
+      支付宝
+    </button>
+  </div>
+
+  <div class="flex justify-center">
+    <img src="{% static 'donate/images/wechatpay299.png' %}"
+         alt="赞助二维码"
+         class="w-72 h-72 object-contain border border-slate-200 dark:border-slate-700 rounded-lg"
+         data-qr />
+  </div>
+
+  <div class="flex flex-wrap justify-center gap-2 text-sm">
+    <button type="button"
+            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            data-amount-button
+            data-amount-value="99"
+            aria-pressed="false">
+      9.9
+    </button>
+    <button type="button"
+            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            data-amount-button
+            data-amount-value="199"
+            aria-pressed="false">
+      19.9
+    </button>
+    <button type="button"
+            class="px-3 py-1.5 rounded-md transition-colors text-red-600 font-semibold bg-red-50 dark:bg-red-900/20"
+            data-amount-button
+            data-amount-value="299"
+            aria-pressed="true">
+      29.9
+    </button>
+    <button type="button"
+            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            data-amount-button
+            data-amount-value="599"
+            aria-pressed="false">
+      59.9
+    </button>
+    <button type="button"
+            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            data-amount-button
+            data-amount-value="0"
+            aria-pressed="false">
+      任意
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    for (const panel of document.querySelectorAll("[data-donate-panel]")) {
+      const qr = panel.querySelector("[data-qr]")
+      const providerButtons = panel.querySelectorAll("[data-provider-button]")
+      const amountButtons = panel.querySelectorAll("[data-amount-button]")
+
+      const updateQr = () => {
+        const provider = panel.dataset.provider
+        const amount = panel.dataset.amount
+        const wechatBase = panel.dataset.wechatBase
+        const alipayBase = panel.dataset.alipayBase
+
+        const src =
+          provider === "alipay"
+            ? `${alipayBase}${amount}.jpg`
+            : `${wechatBase}${amount}.png`
+
+        qr.src = src
+      }
+
+      const setActiveButton = (buttons, activeValue, valueAttr) => {
+        for (const btn of buttons) {
+          const isActive = btn.dataset[valueAttr] === activeValue
+          btn.setAttribute("aria-pressed", isActive ? "true" : "false")
+
+          if (btn.hasAttribute("data-provider-button")) {
+            if (isActive) {
+              if (activeValue === "wechatpay") {
+                btn.className =
+                  "px-6 py-2 font-medium transition-colors text-green-600 border-b-2 border-green-600"
+              } else {
+                btn.className =
+                  "px-6 py-2 font-medium transition-colors text-blue-600 border-b-2 border-blue-600"
+              }
+            } else {
+              btn.className =
+                "px-6 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400"
+            }
+          } else {
+            if (isActive) {
+              btn.className =
+                "px-3 py-1.5 rounded-md transition-colors text-red-600 font-semibold bg-red-50 dark:bg-red-900/20"
+            } else {
+              btn.className =
+                "px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            }
+          }
+        }
+      }
+
+      for (const btn of providerButtons) {
+        btn.addEventListener("click", () => {
+          panel.dataset.provider = btn.dataset.providerValue
+          setActiveButton(providerButtons, panel.dataset.provider, "providerValue")
+          updateQr()
+        })
+      }
+
+      for (const btn of amountButtons) {
+        btn.addEventListener("click", () => {
+          panel.dataset.amount = btn.dataset.amountValue
+          setActiveButton(amountButtons, panel.dataset.amount, "amountValue")
+          updateQr()
+        })
+      }
+
+      qr.addEventListener("error", () => {
+        const fallback =
+          panel.dataset.provider === "alipay"
+            ? panel.dataset.alipayFallback
+            : panel.dataset.wechatFallback
+        if (qr.src !== fallback) qr.src = fallback
+      })
+    }
+  })
+</script>

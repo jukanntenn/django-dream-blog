@@ -29,6 +29,7 @@ urlpatterns = [
     path("sitemap.xml", sitemap, {"sitemaps": SITEMAPS}, name="sitemap"),
     path("rss.xml", RssFeed(), name="rss"),
     path("", include("dream_blog.urls")),
+    path("donate/", include("donate.urls")),
     path("posts/", include("posts.urls")),
     path("tutorials/", include("tutorials.urls")),
     path("columns/", include("columns.urls")),
