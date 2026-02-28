@@ -5,6 +5,8 @@ import ThemeSwitcher from "./theme-switcher";
 import Comment from "./comment";
 import "./scripts/katex";
 import "./scripts/mermaid";
+import { initLightbox } from "./lightbox";
+import { initCodeCopy } from "./code-copy";
 
 // 初始化主题切换器
 const themeSwitcherElement = document.getElementById("theme-switcher");
@@ -163,4 +165,10 @@ document.addEventListener("click", (e) => {
   if (window.location.hash !== "#comment-area") {
     window.history.pushState(null, "", "#comment-area");
   }
+});
+
+// Initialize UX features
+onReady(function () {
+  initLightbox();
+  initCodeCopy();
 });
