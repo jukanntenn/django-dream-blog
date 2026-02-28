@@ -734,7 +734,6 @@ dependencies = [
     { name = "django-md-field" },
     { name = "django-model-utils" },
     { name = "django-notifications-hq" },
-    { name = "django-pure-pagination" },
     { name = "django-tencentcos-storage" },
     { name = "django-tree-comments" },
     { name = "django-vite" },
@@ -785,7 +784,6 @@ requires-dist = [
     { name = "django-md-field", git = "https://github.com/jukanntenn/django-md-field.git?branch=main" },
     { name = "django-model-utils", specifier = ">=4.4.0,<5" },
     { name = "django-notifications-hq", git = "https://github.com/django-notifications/django-notifications" },
-    { name = "django-pure-pagination", specifier = ">=0.3.0,<1" },
     { name = "django-tencentcos-storage", git = "https://github.com/jukanntenn/django-tencentcos-storage?branch=main" },
     { name = "django-tree-comments", git = "https://github.com/jukanntenn/django-tree-comments?rev=502b412c63ad916a035ab74ab612c9658ecf42b8" },
     { name = "django-vite", specifier = ">=3.0.3,<4" },
@@ -916,12 +914,6 @@ dependencies = [
     { name = "packaging" },
     { name = "swapper" },
 ]
-
-[[package]]
-name = "django-pure-pagination"
-version = "0.3.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/55/43/50c475f408d3350cec340855970a5ce02ea12f5a53d520315f200b4847a1/django-pure-pagination-0.3.0.tar.gz", hash = "sha256:02b42561b8afb09f1fb6ac6dc81db13374f5f748640f31c8160a374274b54713", size = 10857, upload-time = "2015-12-26T22:50:50.607Z" }
 
 [[package]]
 name = "django-tencentcos-storage"
