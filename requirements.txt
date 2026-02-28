@@ -30,6 +30,7 @@ django-huey-email==0.0.1
 django-md-field @ git+https://github.com/jukanntenn/django-md-field.git@abc9edd3508b9b8e3b2e62325fa74319bc802155
 django-model-utils==4.5.1
 django-notifications-hq @ git+https://github.com/django-notifications/django-notifications@4c44bcea2504d9a3fcd26366b232a13732a08f2a
+django-pure-pagination==0.3.0
 django-tencentcos-storage @ git+https://github.com/jukanntenn/django-tencentcos-storage@35a642e249c18a27ff5b1d5742dec5e76771d6f7
 django-tree-comments @ git+https://github.com/jukanntenn/django-tree-comments@502b412c63ad916a035ab74ab612c9658ecf42b8
 django-vite==3.1.0

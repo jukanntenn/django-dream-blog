@@ -46,9 +46,9 @@
             <a href="{% url 'notify:notification_all' %}"
                class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors relative"
                aria-label="通知">
-              <i class="ri-notification-3-line text-slate-600 dark:text-slate-400{% if num_unread != 0 %} text-cyan-600 dark:text-cyan-400{% endif %}"></i>
+              <img class="dark:invert{% if num_unread != 0 %} text-cyan-600 dark:text-cyan-400{% endif %}" height="20" width="20" src="{% static 'notification-4-line.svg' %}" alt="通知" />
               {% if num_unread != 0 %}
-                <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-400 text-[10px] font-bold text-white dark:text-slate-900">
+                <span class="absolute -top-1.5 -right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-400 px-1 text-[10px] font-bold text-white dark:text-slate-900">
                   {% if num_unread > 99 %}99+{% else %}{{ num_unread }}{% endif %}
                 </span>
               {% endif %}

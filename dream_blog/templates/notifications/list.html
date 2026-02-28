@@ -2,38 +2,36 @@
 {% load notify_tags %}
 {% block title %}{{ headline }}{% endblock title %}
 {% block main %}
-  <div class="py-4">
-    {# Header with tabs #}
-    <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
-      <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ headline }}</h1>
-      <div class="flex items-center gap-4">
-        <a class="text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-           href="{% url 'notify:notification_all' %}">全部 ({{ num_all }})</a>
-        <a class="text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-           href="{% url 'notify:notification_unread' %}">未读 ({{ num_unread }})</a>
-        {% if num_unread > 0 %}
-          <a class="text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors"
-             href="{% url 'notifications:mark_all_as_read' %}">全部标为已读</a>
-        {% endif %}
-      </div>
+  {# Header with tabs #}
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ headline }}</h1>
+    <div class="flex items-center gap-4">
+      <a class="text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+         href="{% url 'notify:notification_all' %}">全部 ({{ num_all }})</a>
+      <a class="text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+         href="{% url 'notify:notification_unread' %}">未读 ({{ num_unread }})</a>
+      {% if num_unread > 0 %}
+        <a class="text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors"
+           href="{% url 'notifications:mark_all_as_read' %}">全部标为已读</a>
+      {% endif %}
     </div>
-    {# Notification list #}
-    <div class="space-y-4">
-      {% for notification in notifications %}
-        <div class="p-4 rounded-lg {% if notification.unread %}bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800{% else %}bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700{% endif %} transition-colors">
-          {% include notification|frag with target=notification.target actor=notification.actor %}
-        </div>
-      {% empty %}
-        <div class="text-center py-12 text-slate-500 dark:text-slate-400">
-          暂无通知
-        </div>
-      {% endfor %}
-    </div>
-    {# Pagination #}
-    {% if is_paginated %}
-      <div class="mt-6 flex justify-center">
-        {% include "inclusions/_pagination.html" %}
-      </div>
-    {% endif %}
   </div>
+  {# Notification list #}
+  <div class="space-y-4">
+    {% for notification in notifications %}
+      <div class="p-4 rounded-lg {% if notification.unread %}bg-cyan-50 dark:bg-cyan-900/20{% else %}bg-white dark:bg-slate-800{% endif %} transition-colors">
+        {% include notification|frag with target=notification.target actor=notification.actor %}
+      </div>
+    {% empty %}
+      <div class="text-center py-12 text-slate-500 dark:text-slate-400">
+        暂无通知
+      </div>
+    {% endfor %}
+  </div>
+  {# Pagination #}
+  {% if is_paginated %}
+    <div class="mt-6 flex justify-center">
+      {% include "inclusions/_pagination.html" %}
+    </div>
+  {% endif %}
 {% endblock main %}
