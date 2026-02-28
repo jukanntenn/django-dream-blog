@@ -4,6 +4,9 @@
     <h1 class="text-3xl">{{ article.title }}</h1>
     {% include "inclusions/_entry_meta.html" with entry=article %}
     {% include "inclusions/_entry_content.html" with entry=article %}
+    <div class="text-sm text-slate-700 dark:text-slate-300">
+        {% include "inclusions/_prev_next.html" with entry=article %}
+    </div>
     {% show_comment_app article %}
 {% endblock main %}
 {% block right %}

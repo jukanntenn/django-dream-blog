@@ -2,6 +2,7 @@ from core.models import (
     CommentsModel,
     EntryQuerySet,
     HitCountModel,
+    PreviousNextMixin,
     RichContentModel,
     TimeStampedModel,
 )
@@ -66,7 +67,13 @@ class ArticleQuerySet(EntryQuerySet):
 class ArticleManager(Manager.from_queryset(ArticleQuerySet)): ...
 
 
-class Article(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel):
+class Article(
+    PreviousNextMixin,
+    HitCountModel,
+    RichContentModel,
+    TimeStampedModel,
+    CommentsModel,
+):
     title = models.CharField(_("Title"), max_length=200)
     publish_date = models.DateTimeField(
         _("Publish Date"),
@@ -93,6 +100,22 @@ class Article(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel):
     @property
     def author(self):
         return self.column.author
+
+    @property
+    def prev(self):
+        return self.get_next_or_previous(
+            is_next=False,
+            ordering=["publish_date"],
+            column_id=self.column_id,
+        )
+
+    @property
+    def next(self):
+        return self.get_next_or_previous(
+            is_next=True,
+            ordering=["publish_date"],
+            column_id=self.column_id,
+        )
 
     def get_absolute_url(self):
         return reverse(
