@@ -1,0 +1,14 @@
+{% extends 'notifications/base.html' %}
+{% load notifications_tags %}
+
+{% block header %}
+  <div class="text-sm text-slate-900 dark:text-slate-100">
+    <span class="font-medium text-slate-600 dark:text-slate-400">{{ actor.name }}</span>
+    {% if target and target.content_object %}
+      评论了文章
+      <a class="text-cyan-600 dark:text-cyan-400 hover:underline" target="_blank" href="{{ target.content_object.get_absolute_url }}#c{{ target.pk }}">{{ target.content_object.title }}</a>
+    {% else %}
+      评论了已删除的内容
+    {% endif %}
+  </div>
+{% endblock %}

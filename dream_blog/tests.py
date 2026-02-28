@@ -24,5 +24,6 @@ def test_home_posts_ordering(tp):
     p1 = PostFactory(publish_date=now - timedelta(days=1), author=author)
 
     view = HomeView()
-    qs = view.get_queryset()
-    tp.assertQuerySetEqual(qs, [p1, p0])
+    rows = list(view.get_queryset())
+    assert [row["id"] for row in rows] == [p1.id, p0.id]
+    assert [row["type"] for row in rows] == ["p", "p"]

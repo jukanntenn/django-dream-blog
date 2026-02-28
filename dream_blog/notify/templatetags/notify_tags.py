@@ -24,4 +24,4 @@ def display(obj, request=None):
 @register.filter
 def frag(notification):
     verb = notification.verb
-    return "notifications/inclusions/_{verb}.html".format(verb=verb)
+    return "notifications/{verb}.html".format(verb=verb)

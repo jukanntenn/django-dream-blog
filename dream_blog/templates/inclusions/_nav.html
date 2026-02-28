@@ -1,4 +1,5 @@
 {% load static %}
+{% load notifications_tags %}
 {# Navigation bar: sticky header with theme switcher #}
 {# Design intent: Transparent background to show gradient, no border for natural layout #}
 <div id="site-nav"
@@ -16,29 +17,44 @@
             <span class="text-3xl whitespace-nowrap">🦋</span>
           </a>
         </div>
-        <!-- Theme switcher button with slate hover state -->
-        <button id="theme-switcher"
-                class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
-                aria-label="切换主题">
-          <img data-theme-icon="light"
-               height="20"
-               width="20"
-               src="{% static 'sun-fill.svg' %}"
-               alt="亮色模式"
-               class="dark:invert hidden" />
-          <img data-theme-icon="dark"
-               height="20"
-               width="20"
-               src="{% static 'moon-line.svg' %}"
-               alt="暗色模式"
-               class="dark:invert hidden" />
-          <img data-theme-icon="system"
-               height="20"
-               width="20"
-               src="{% static 'contrast-fill.svg' %}"
-               alt="跟随系统"
-               class="dark:invert hidden" />
-        </button>
+        <div class="flex items-center gap-2">
+          <!-- Theme switcher button with slate hover state -->
+          <button id="theme-switcher"
+                  class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
+                  aria-label="切换主题">
+            <img data-theme-icon="light"
+                 height="20"
+                 width="20"
+                 src="{% static 'sun-fill.svg' %}"
+                 alt="亮色模式"
+                 class="dark:invert hidden" />
+            <img data-theme-icon="dark"
+                 height="20"
+                 width="20"
+                 src="{% static 'moon-line.svg' %}"
+                 alt="暗色模式"
+                 class="dark:invert hidden" />
+            <img data-theme-icon="system"
+                 height="20"
+                 width="20"
+                 src="{% static 'contrast-fill.svg' %}"
+                 alt="跟随系统"
+                 class="dark:invert hidden" />
+          </button>
+          {% if user.is_authenticated %}
+            {% notifications_unread as num_unread %}
+            <a href="{% url 'notify:notification_all' %}"
+               class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors relative"
+               aria-label="通知">
+              <i class="ri-notification-3-line text-slate-600 dark:text-slate-400{% if num_unread != 0 %} text-cyan-600 dark:text-cyan-400{% endif %}"></i>
+              {% if num_unread != 0 %}
+                <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-400 text-[10px] font-bold text-white dark:text-slate-900">
+                  {% if num_unread > 99 %}99+{% else %}{{ num_unread }}{% endif %}
+                </span>
+              {% endif %}
+            </a>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

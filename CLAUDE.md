@@ -18,6 +18,10 @@ Keep this section up to date with the project structure. Use it as a reference t
   - `tutorials`: Blog tutorials
   - `columns`: Blog columns
   - `tree_comments`: BLog comments
+  - `notify/`: User notifications (comment replies, mentions)
+    - `factories.py`: Notification factory for testing
+    - `views.py`: Notification list views (all/unread)
+    - `templates/notifications/`: Notification display templates
   - `users`: User system (custom user model, social login with allauth)
 - `frontend/`: Vite + Tailwind frontend resources (build artifacts & source code)
 - `devops/`: Deployment-related files (Ansible, Supervisor, Caddy, etc.)

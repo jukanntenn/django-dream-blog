@@ -392,6 +392,10 @@ TREE_COMMENTS_COMMENT_FLAG_MODEL = "comments.CommentFlag"
 
 # Notification templates for django-notifications-hq
 NOTIFICATION_TEMPLATES = {
-    "comment": "notifications/inclusions/_comment.html",
-    "reply": "notifications/inclusions/_reply.html",
+    "comment": "notifications/comment.html",
+    "reply": "notifications/reply.html",
+}
+
+DJANGO_NOTIFICATIONS_CONFIG = {
+    "SOFT_DELETE": True,
 }
