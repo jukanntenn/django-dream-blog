@@ -1,6 +1,9 @@
 from core.views import SetHeadlineMixin
+from django.views.generic import ListView
 from hitcount.views import HitCountDetailView
 from posts.models import Post
+
+from core.entries import get_index_queryset
 
 
 class PostDetailView(SetHeadlineMixin, HitCountDetailView):
@@ -21,3 +24,12 @@ class PostDetailView(SetHeadlineMixin, HitCountDetailView):
 
     def get_headline(self):
         return f"{self.object.title} - 追梦人物的博客"
+
+
+class ArchivesView(SetHeadlineMixin, ListView):
+    template_name = "posts/archives.html"
+    context_object_name = "entries"
+    headline = "归档"
+
+    def get_queryset(self):
+        return get_index_queryset()
