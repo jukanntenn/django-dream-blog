@@ -76,6 +76,17 @@ class CommentsModel(models.Model):
         return self.comments.visible().count()
 
 
+class AlertsModel(models.Model):
+    alerts = GenericRelation(
+        "alerts.Alert",
+        content_type_field="content_type",
+        object_id_field="object_id",
+    )
+
+    class Meta:
+        abstract = True
+
+
 class HitCountModel(HitCountMixin, models.Model):
     hit_count_generic = GenericRelation(
         HitCount,

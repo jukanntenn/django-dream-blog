@@ -5,6 +5,7 @@
 {% endblock left %}
 {% block main %}
     <h1 class="text-3xl">{{ material.title }}</h1>
+    {% include "alerts/_alert_list.html" with entry=material %}
     {% include "inclusions/_entry_meta.html" with entry=material %}
     {% include "inclusions/_entry_content.html" with entry=material %}
     {% include "donate/inclusions/_donate_entry_panel.html" %}

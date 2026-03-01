@@ -1,4 +1,5 @@
 from core.models import (
+    AlertsModel,
     CommentsModel,
     EntryQuerySet,
     HitCountModel,
@@ -76,6 +77,7 @@ class Article(
     RichContentModel,
     TimeStampedModel,
     CommentsModel,
+    AlertsModel,
 ):
     title = models.CharField(_("Title"), max_length=200)
     publish_date = models.DateTimeField(

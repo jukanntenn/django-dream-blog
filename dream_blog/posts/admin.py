@@ -2,6 +2,7 @@ from core.admin import hide, show
 from django.contrib import admin
 from markdown_field.widgets import PreviewMarkdownWidget
 from markdown_field.fields import MarkdownField
+from alerts.admin import AlertInline
 from posts.models import Post
 
 
@@ -9,6 +10,7 @@ from posts.models import Post
 class PostAdmin(admin.ModelAdmin):
     actions = [hide, show]
     date_hierarchy = "publish_date"
+    inlines = [AlertInline]
     list_display = [
         "title",
         "hits",

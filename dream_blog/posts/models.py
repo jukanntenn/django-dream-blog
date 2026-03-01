@@ -1,4 +1,5 @@
 from core.models import (
+    AlertsModel,
     CommentsModel,
     EntryQuerySet,
     HitCountModel,
@@ -19,7 +20,7 @@ class PostManager(Manager.from_queryset(EntryQuerySet)):
     pass
 
 
-class Post(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel):
+class Post(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel, AlertsModel):
     title = models.CharField(_("Title"), max_length=200)
     excerpt = models.TextField(_("Excerpt"), blank=True)
     publish_date = models.DateTimeField(

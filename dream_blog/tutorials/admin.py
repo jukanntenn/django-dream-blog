@@ -1,5 +1,6 @@
 from core.admin import hide, show
 from django.contrib import admin
+from alerts.admin import AlertInline
 from markdown_field.widgets import PreviewMarkdownWidget
 from markdown_field.fields import MarkdownField
 from tutorials.models import Category, Material, Tutorial
@@ -60,6 +61,7 @@ class TutorialAdmin(admin.ModelAdmin):
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
     actions = [hide, show]
+    inlines = [AlertInline]
     list_display = [
         "title",
         "hits",

@@ -2,6 +2,7 @@
 {% load comments_extra columns_extra %}
 {% block main %}
     <h1 class="text-3xl">{{ article.title }}</h1>
+    {% include "alerts/_alert_list.html" with entry=article %}
     {% include "inclusions/_entry_meta.html" with entry=article %}
     {% include "inclusions/_entry_content.html" with entry=article %}
     {% include "donate/inclusions/_donate_entry_panel.html" %}

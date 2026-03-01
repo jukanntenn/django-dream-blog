@@ -1,6 +1,7 @@
 from columns.models import Article, Column
 from core.admin import hide, show
 from django.contrib import admin
+from alerts.admin import AlertInline
 from markdown_field.widgets import PreviewMarkdownWidget
 from markdown_field.fields import MarkdownField
 
@@ -47,6 +48,7 @@ class ColumnAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     actions = [hide, show]
+    inlines = [AlertInline]
     list_display = [
         "title",
         "hits",
