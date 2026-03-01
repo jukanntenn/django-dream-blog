@@ -115,7 +115,9 @@ LOCAL_APPS = [
     # "dream_blog.tree_comments",
     "dream_blog.comments",
     "dream_blog.donate",
+    "dream_blog.favorites",
     "dream_blog.friendlinks",
+    "dream_blog.newsletters",
     "dream_blog.notify",
     "dream_blog.posts",
     "dream_blog.share",
@@ -296,6 +298,8 @@ CONSTANCE_CONFIG = {
     "SOCIAL_LINK_EMAIL": ("", "Social Link Email", str),
     "COMMENT_EMAIL_SUBJECT": ("新的文章评论", "", str),
     "REPLY_EMAIL_SUBJECT": ("评论有了新回复", "", str),
+    "NEWSLETTERS_SUBSCRIPTION_CONFIRMATION_SUBJECT": ("欢迎订阅每周精选收藏", "", str),
+    "EMAIL_CONFIRMATION_EXPIRE_DAYS": (3, "", int),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
@@ -308,6 +312,10 @@ CONSTANCE_CONFIG_FIELDSETS = {
         "SOCIAL_LINK_EMAIL",
     ),
     "Email Options": ("COMMENT_EMAIL_SUBJECT", "REPLY_EMAIL_SUBJECT"),
+    "Newsletter Options": (
+        "NEWSLETTERS_SUBSCRIPTION_CONFIRMATION_SUBJECT",
+        "EMAIL_CONFIRMATION_EXPIRE_DAYS",
+    ),
 }
 
 HITCOUNT_KEEP_HIT_ACTIVE = {"minutes": 1}

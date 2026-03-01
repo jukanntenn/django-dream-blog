@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>欢迎订阅每周精选收藏</title>
+  </head>
+  <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+      <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
+          <h1 style="margin: 0; color: white; font-size: 24px; font-weight: bold;">欢迎订阅每周精选收藏</h1>
+        </div>
+        <div style="padding: 40px 30px;">
+          <p style="margin: 0 0 20px; color: #374151; font-size: 16px; line-height: 1.6;">
+            感谢您的订阅！请点击下方按钮确认您的邮箱地址。
+          </p>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="{{ link }}" style="display: inline-block; background: #667eea; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+              确认订阅
+            </a>
+          </div>
+          <p style="margin: 20px 0 0; color: #6b7280; font-size: 14px;">
+            如果按钮无法点击，请复制以下链接到浏览器打开：<br />
+            <a href="{{ link }}" style="color: #667eea; word-break: break-all;">{{ link }}</a>
+          </p>
+          <p style="margin: 30px 0 0; color: #9ca3af; font-size: 12px;">
+            此链接将在 {{ expire_days }} 天后失效。如果您没有订阅本邮件列表，请忽略此邮件。
+          </p>
+        </div>
+        <div style="background: #f9fafb; padding: 20px 30px; text-align: center;">
+          <p style="margin: 0; color: #9ca3af; font-size: 12px;">© 2026 每周精选收藏. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
