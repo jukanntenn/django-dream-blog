@@ -7,6 +7,7 @@ import "./scripts/katex";
 import "./scripts/mermaid";
 import { initLightbox } from "./lightbox";
 import { initCodeCopy } from "./code-copy";
+import { initShare } from "./share";
 
 // 初始化主题切换器
 const themeSwitcherElement = document.getElementById("theme-switcher");
@@ -171,4 +172,5 @@ document.addEventListener("click", (e) => {
 onReady(function () {
   initLightbox();
   initCodeCopy();
+  initShare();
 });

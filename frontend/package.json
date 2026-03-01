@@ -10,9 +10,13 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.1",
+    "@types/qrcode": "^1.5.6",
     "sass": "^1.70.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
   }
 }

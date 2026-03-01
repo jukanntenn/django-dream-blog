@@ -116,6 +116,7 @@ LOCAL_APPS = [
     "dream_blog.friendlinks",
     "dream_blog.notify",
     "dream_blog.posts",
+    "dream_blog.share",
     "dream_blog.tutorials",
     "dream_blog.users",
     "dream_blog.webtools",
