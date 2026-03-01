@@ -10,6 +10,9 @@ from django.db import models
 from django.db.models import Manager
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from taggit.managers import TaggableManager
+
+from tags.models import TaggedItem
 
 
 class PostManager(Manager.from_queryset(EntryQuerySet)):
@@ -30,6 +33,11 @@ class Post(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         verbose_name=_("Author"),
+    )
+    tags = TaggableManager(
+        verbose_name=_("tags"),
+        through=TaggedItem,
+        blank=True,
     )
 
     objects = PostManager()

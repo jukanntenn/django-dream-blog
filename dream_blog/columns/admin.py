@@ -64,3 +64,20 @@ class ArticleAdmin(admin.ModelAdmin):
     formfield_overrides = {
         MarkdownField: {"widget": PreviewMarkdownWidget}
     }
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "title",
+                    "column",
+                    "tags",
+                    "content",
+                    "comments_enabled",
+                    "hidden",
+                    "publish_date",
+                )
+            },
+        ),
+    )

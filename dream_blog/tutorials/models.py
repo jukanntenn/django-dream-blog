@@ -12,6 +12,9 @@ from django.db.models import Manager, QuerySet
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from model_utils.choices import Choices
+from taggit.managers import TaggableManager
+
+from tags.models import TaggedItem
 
 
 class Category(TimeStampedModel):
@@ -59,6 +62,11 @@ class Tutorial(HitCountModel, RichContentModel, TimeStampedModel):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
+    )
+    tags = TaggableManager(
+        verbose_name=_("tags"),
+        through=TaggedItem,
+        blank=True,
     )
 
     objects = TutorialManager()

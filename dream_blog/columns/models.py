@@ -12,6 +12,9 @@ from django.db.models import Count, Manager, QuerySet
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from taggit.managers import TaggableManager
+
+from tags.models import TaggedItem
 
 
 class ColumnQuerySet(QuerySet):
@@ -86,6 +89,11 @@ class Article(
         Column,
         verbose_name=_("Column"),
         on_delete=models.CASCADE,
+    )
+    tags = TaggableManager(
+        verbose_name=_("tags"),
+        through=TaggedItem,
+        blank=True,
     )
 
     objects = ArticleManager()

@@ -35,6 +35,7 @@ class PostAdmin(admin.ModelAdmin):
                 "fields": (
                     "title",
                     "excerpt",
+                    "tags",
                     "content",
                     "comments_enabled",
                     "hidden",

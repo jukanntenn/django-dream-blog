@@ -46,6 +46,7 @@ class TutorialAdmin(admin.ModelAdmin):
                     "hidden",
                     "comments_enabled",
                     "category",
+                    "tags",
                 )
             },
         ),
