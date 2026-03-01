@@ -36,3 +36,10 @@ TEMPLATES[0]["OPTIONS"]["debug"] = True  # type: ignore # noqa: F405
 MEDIA_URL = "http://media.testserver/"
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+HAYSTACK_CONNECTIONS = {
+    "default": {
+        "ENGINE": "haystack.backends.simple_backend.SimpleEngine",
+    }
+}
+HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.BaseSignalProcessor"

@@ -95,6 +95,7 @@ THIRD_PARTY_APPS = [
     "constance",
     "django_vite",
     "django_extensions",
+    "haystack",
     "hitcount",
     "taggit",
     # "django_comments",
@@ -120,6 +121,7 @@ LOCAL_APPS = [
     "dream_blog.newsletters",
     "dream_blog.notify",
     "dream_blog.posts",
+    "dream_blog.search",
     "dream_blog.share",
     "dream_blog.tags",
     "dream_blog.tutorials",
@@ -411,3 +413,13 @@ NOTIFICATION_TEMPLATES = {
 DJANGO_NOTIFICATIONS_CONFIG = {
     "SOFT_DELETE": True,
 }
+
+HAYSTACK_CONNECTIONS = {
+    "default": {
+        "ENGINE": "search.backends.whoosh_cn_backend.WhooshJiebaEngine",
+        "PATH": BASE_DIR / "index" / "whoosh",
+    }
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
+HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
+HAYSTACK_CUSTOM_HIGHLIGHTER = "search.utils.Highlighter"

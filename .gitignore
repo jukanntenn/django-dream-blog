@@ -166,5 +166,6 @@ staticfiles/
 media/
 backup/
 huey.db
+index/
 .trae/documents/
 docs/plans/

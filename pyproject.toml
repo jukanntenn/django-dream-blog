@@ -31,6 +31,9 @@ dependencies = [
     "django-huey-email>=0.0.1,<0.0.2",
     "django-md-field",
     "django-tree-comments",
+    "django-haystack>=3.2.1,<4",
+    "whoosh>=2.7.4,<3",
+    "jieba>=0.42.1,<1",
 ]
 
 [dependency-groups]

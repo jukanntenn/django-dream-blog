@@ -42,3 +42,22 @@ def show_profile():
         "profile": profile,
     }
     return context
+
+
+@register.simple_tag(takes_context=True)
+def querystring(context, **kwargs):
+    request = context.get("request")
+    if request is None:
+        return ""
+
+    querydict = request.GET.copy()
+    for key, value in kwargs.items():
+        if value is None or value == "":
+            querydict.pop(key, None)
+        else:
+            querydict[key] = value
+
+    encoded = querydict.urlencode()
+    if not encoded:
+        return "?"
+    return f"?{encoded}"
