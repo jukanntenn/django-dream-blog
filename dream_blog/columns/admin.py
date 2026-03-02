@@ -9,6 +9,7 @@ from markdown_field.widgets import PreviewMarkdownWidget
 @admin.register(Column)
 class ColumnAdmin(admin.ModelAdmin):
     actions = [hide, show]
+    inlines = [AlertInline]
     list_display = [
         "id",
         "title",

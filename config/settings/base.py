@@ -242,7 +242,7 @@ EMAIL_BACKEND = env(
     default="django.core.mail.backends.smtp.EmailBackend",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
-EMAIL_TIMEOUT = 5
+EMAIL_TIMEOUT = 30
 
 
 # ADMIN

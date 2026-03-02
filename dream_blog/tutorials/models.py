@@ -38,7 +38,7 @@ class TutorialManager(Manager.from_queryset(TutorialQuerySet)):
     pass
 
 
-class Tutorial(HitCountModel, RichContentModel, TimeStampedModel):
+class Tutorial(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
     STATUS = Choices(
         (1, "writing", _("Writing")),
         (2, "completed", _("Completed")),

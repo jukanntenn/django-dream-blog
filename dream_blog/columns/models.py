@@ -30,7 +30,7 @@ class ColumnManager(Manager.from_queryset(ColumnQuerySet)):
     pass
 
 
-class Column(HitCountModel, RichContentModel, TimeStampedModel):
+class Column(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
     title = models.CharField(_("Title"), max_length=150)
     slug = models.SlugField(_("Slug"), unique=True)
     excerpt = models.TextField(_("Excerpt"), blank=True)

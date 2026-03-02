@@ -15,6 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Tutorial)
 class TutorialAdmin(admin.ModelAdmin):
     actions = [hide, show]
+    inlines = [AlertInline]
     list_display = [
         "id",
         "title",

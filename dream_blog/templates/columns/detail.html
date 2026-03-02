@@ -2,6 +2,7 @@
 {% load columns_extra %}
 {% block main %}
   <h1 class="text-3xl">{{ column.title }}</h1>
+  {% include "alerts/_alert_list.html" with entry=column %}
   <div class="text-slate-700 dark:text-slate-300 mt-3">{{ column.excerpt }}</div>
   <div class="text-slate-600 dark:text-slate-400 mt-3">{{ column.num_articles }} 篇文章</div>
   <div class="mt-10">

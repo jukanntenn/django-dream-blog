@@ -9,6 +9,10 @@ def test_auto_set_admin_as_tutorial_author(admin_client, admin_user):
         "slug": "test-tutorial",
         "content": "Test content",
         "status": Tutorial.STATUS.writing,
+        "alerts-alert-content_type-object_id-TOTAL_FORMS": "0",
+        "alerts-alert-content_type-object_id-INITIAL_FORMS": "0",
+        "alerts-alert-content_type-object_id-MIN_NUM_FORMS": "0",
+        "alerts-alert-content_type-object_id-MAX_NUM_FORMS": "1000",
     }
     response = admin_client.post(url, data=data)
     assert response.status_code == 302
