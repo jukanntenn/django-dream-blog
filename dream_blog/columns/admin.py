@@ -1,15 +1,16 @@
+from alerts.admin import AlertInline
 from columns.models import Article, Column
 from core.admin import hide, show
 from django.contrib import admin
-from alerts.admin import AlertInline
-from markdown_field.widgets import PreviewMarkdownWidget
 from markdown_field.fields import MarkdownField
+from markdown_field.widgets import PreviewMarkdownWidget
 
 
 @admin.register(Column)
 class ColumnAdmin(admin.ModelAdmin):
     actions = [hide, show]
     list_display = [
+        "id",
         "title",
         "slug",
         "created_at",
@@ -20,9 +21,7 @@ class ColumnAdmin(admin.ModelAdmin):
 
     search_fields = ["title", "content"]
 
-    formfield_overrides = {
-        MarkdownField: {"widget": PreviewMarkdownWidget}
-    }
+    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
 
     fieldsets = (
         (
@@ -50,6 +49,7 @@ class ArticleAdmin(admin.ModelAdmin):
     actions = [hide, show]
     inlines = [AlertInline]
     list_display = [
+        "id",
         "title",
         "hits",
         "publish_date",
@@ -63,9 +63,7 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ["title"]
     list_filter = ["column"]
 
-    formfield_overrides = {
-        MarkdownField: {"widget": PreviewMarkdownWidget}
-    }
+    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
 
     fieldsets = (
         (

@@ -1,8 +1,8 @@
+from alerts.admin import AlertInline
 from core.admin import hide, show
 from django.contrib import admin
-from markdown_field.widgets import PreviewMarkdownWidget
 from markdown_field.fields import MarkdownField
-from alerts.admin import AlertInline
+from markdown_field.widgets import PreviewMarkdownWidget
 from posts.models import Post
 
 
@@ -12,6 +12,7 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = "publish_date"
     inlines = [AlertInline]
     list_display = [
+        "id",
         "title",
         "hits",
         "publish_date",
@@ -26,9 +27,7 @@ class PostAdmin(admin.ModelAdmin):
         "comments_enabled",
     ]
 
-    formfield_overrides = {
-        MarkdownField: {"widget": PreviewMarkdownWidget}
-    }
+    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
 
     fieldsets = (
         (

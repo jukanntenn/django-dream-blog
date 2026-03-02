@@ -1,8 +1,8 @@
+from alerts.admin import AlertInline
 from core.admin import hide, show
 from django.contrib import admin
-from alerts.admin import AlertInline
-from markdown_field.widgets import PreviewMarkdownWidget
 from markdown_field.fields import MarkdownField
+from markdown_field.widgets import PreviewMarkdownWidget
 from tutorials.models import Category, Material, Tutorial
 
 
@@ -16,6 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class TutorialAdmin(admin.ModelAdmin):
     actions = [hide, show]
     list_display = [
+        "id",
         "title",
         "slug",
         "status",
@@ -30,9 +31,7 @@ class TutorialAdmin(admin.ModelAdmin):
     search_fields = ["title", "content"]
     list_filter = ["category"]
 
-    formfield_overrides = {
-        MarkdownField: {"widget": PreviewMarkdownWidget}
-    }
+    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
 
     fieldsets = (
         (
@@ -63,6 +62,7 @@ class MaterialAdmin(admin.ModelAdmin):
     actions = [hide, show]
     inlines = [AlertInline]
     list_display = [
+        "id",
         "title",
         "hits",
         "publish_date",
@@ -76,6 +76,4 @@ class MaterialAdmin(admin.ModelAdmin):
     search_fields = ["title"]
     list_filter = ["tutorial"]
 
-    formfield_overrides = {
-        MarkdownField: {"widget": PreviewMarkdownWidget}
-    }
+    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
