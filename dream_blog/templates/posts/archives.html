@@ -1,29 +1,33 @@
 {% extends "base.html" %}
 {% load entry_urls %}
 {% block main %}
-  <h1 class="text-3xl font-semibold">归档</h1>
-  <div class="mt-6 space-y-6">
+  <h1 class="text-4xl font-semibold text-slate-900 dark:text-slate-100">归档</h1>
+  <div class="mt-8 space-y-8">
     {% if entries %}
       {% regroup entries by pub_date|date:"Y" as year_entries %}
       {% for year in year_entries %}
-        <section class="space-y-3">
-          <h2 class="text-xl font-semibold">{{ year.grouper }}年</h2>
+        <section class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">{{ year.grouper }}年</h2>
           {% regroup year.list by pub_date|date:"m" as month_entries %}
-          <div class="space-y-4">
+          <div class="space-y-6">
             {% for month in month_entries %}
-              <div class="space-y-2">
-                <div class="text-sm font-medium text-slate-700 dark:text-slate-200">
+              <div class="space-y-3">
+                <div class="text-base font-medium text-slate-700 dark:text-slate-200">
                   {{ month.grouper }}月 ({{ month.list|length }}篇)
                 </div>
-                <ul class="space-y-1">
+                <ul class="space-y-2">
                   {% for entry in month.list %}
-                    <li class="text-sm">
+                    <li class="text-base">
                       <span class="text-slate-500 dark:text-slate-400">{{ entry.pub_date|date:"m-d" }}</span>
-                      <a href="{{ entry|entry_url }}" class="ml-2 hover:underline">
+                      <a href="{{ entry|entry_url }}" class="ml-3 text-slate-900 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
                         {{ entry.title }}
                       </a>
                       {% if entry.parent_title %}
-                        <span class="ml-1 text-xs text-slate-500 dark:text-slate-400">({{ entry.parent_title }})</span>
+                        {% if entry.type == 'a' %}
+                          <span class="ml-2 text-sm text-purple-600 dark:text-purple-400">({{ entry.parent_title }})</span>
+                        {% else %}
+                          <span class="ml-2 text-sm text-emerald-600 dark:text-emerald-400">({{ entry.parent_title }})</span>
+                        {% endif %}
                       {% endif %}
                     </li>
                   {% endfor %}

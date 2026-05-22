@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="space-y-5"
+<div class="space-y-6"
      data-donate-panel
      data-provider="wechatpay"
      data-amount="299"
@@ -8,16 +8,18 @@
      data-alipay-base="{% static 'donate/images/alipay' %}"
      data-wechat-fallback="{% static 'donate/images/wechatpay0.png' %}"
      data-alipay-fallback="{% static 'donate/images/alipay0.jpg' %}">
-  <div class="flex justify-center border-b border-slate-200 dark:border-slate-700">
+
+  {# Provider selector - no border, color-based active state #}
+  <div class="flex justify-center gap-6">
     <button type="button"
-            class="px-6 py-2 font-medium transition-colors text-green-600 border-b-2 border-green-600"
+            class="px-4 py-2 font-medium transition-colors text-green-600 dark:text-green-400"
             data-provider-button
             data-provider-value="wechatpay"
             aria-pressed="true">
       微信
     </button>
     <button type="button"
-            class="px-6 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400"
+            class="px-4 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
             data-provider-button
             data-provider-value="alipay"
             aria-pressed="false">
@@ -25,44 +27,46 @@
     </button>
   </div>
 
+  {# QR code - no border #}
   <div class="flex justify-center">
     <img src="{% static 'donate/images/wechatpay299.png' %}"
          alt="赞助二维码"
-         class="w-72 h-72 object-contain border border-slate-200 dark:border-slate-700 rounded-lg"
+         class="w-72 h-72 object-contain rounded-xl shadow-sm"
          data-qr />
   </div>
 
+  {# Amount buttons - ghost style #}
   <div class="flex flex-wrap justify-center gap-2 text-sm">
     <button type="button"
-            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
             data-amount-button
             data-amount-value="99"
             aria-pressed="false">
       9.9
     </button>
     <button type="button"
-            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
             data-amount-button
             data-amount-value="199"
             aria-pressed="false">
       19.9
     </button>
     <button type="button"
-            class="px-3 py-1.5 rounded-md transition-colors text-red-600 font-semibold bg-red-50 dark:bg-red-900/20"
+            class="px-4 py-2 rounded-lg transition-colors text-cyan-600 dark:text-cyan-400 font-semibold"
             data-amount-button
             data-amount-value="299"
             aria-pressed="true">
       29.9
     </button>
     <button type="button"
-            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
             data-amount-button
             data-amount-value="599"
             aria-pressed="false">
       59.9
     </button>
     <button type="button"
-            class="px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
             data-amount-button
             data-amount-value="0"
             aria-pressed="false">
@@ -101,22 +105,22 @@
             if (isActive) {
               if (activeValue === "wechatpay") {
                 btn.className =
-                  "px-6 py-2 font-medium transition-colors text-green-600 border-b-2 border-green-600"
+                  "px-4 py-2 font-medium transition-colors text-green-600 dark:text-green-400"
               } else {
                 btn.className =
-                  "px-6 py-2 font-medium transition-colors text-blue-600 border-b-2 border-blue-600"
+                  "px-4 py-2 font-medium transition-colors text-blue-600 dark:text-blue-400"
               }
             } else {
               btn.className =
-                "px-6 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400"
+                "px-4 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
             }
           } else {
             if (isActive) {
               btn.className =
-                "px-3 py-1.5 rounded-md transition-colors text-red-600 font-semibold bg-red-50 dark:bg-red-900/20"
+                "px-4 py-2 rounded-lg transition-colors text-cyan-600 dark:text-cyan-400 font-semibold"
             } else {
               btn.className =
-                "px-3 py-1.5 rounded-md transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+                "px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
             }
           }
         }

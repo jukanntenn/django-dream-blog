@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% load comments_extra %}
+{% load comments_extra share_tags %}
 {% block main %}
     <h1 class="text-3xl">{{ post.title }}</h1>
     {% include "alerts/_alert_list.html" with entry=post %}
     {% include "inclusions/_entry_meta.html" with entry=post %}
     {% include "inclusions/_entry_content.html" with entry=post %}
     {% include "donate/inclusions/_donate_entry_panel.html" %}
+    {% share_icons post %}
     {% show_comment_app post %}
 {% endblock main %}
 {% block right %}

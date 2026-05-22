@@ -1053,3 +1053,24 @@ body.lightbox-open {
 .prose .highlight {
   @apply relative;
 }
+
+/* ============================================
+   Django Form Widget Overrides
+   ============================================ */
+
+/**
+ * Django Secret Key form inputs
+ * Target: webtools/django_secret_key.html
+ */
+input[name="prefix"],
+input[name="suffix"] {
+  @apply input;
+}
+
+/**
+ * Newsletter subscription email input
+ * Target: newsletters/subscription.html
+ */
+input[type="email"][name="email"] {
+  @apply input;
+}

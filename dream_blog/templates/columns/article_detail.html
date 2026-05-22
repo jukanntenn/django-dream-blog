@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% load comments_extra columns_extra %}
+{% load comments_extra columns_extra share_tags %}
 {% block main %}
     <h1 class="text-3xl">{{ article.title }}</h1>
     {% include "alerts/_alert_list.html" with entry=article %}
     {% include "inclusions/_entry_meta.html" with entry=article %}
     {% include "inclusions/_entry_content.html" with entry=article %}
     {% include "donate/inclusions/_donate_entry_panel.html" %}
+    {% share_icons article %}
     <div class="text-sm text-slate-700 dark:text-slate-300">
         {% include "inclusions/_prev_next.html" with entry=article %}
     </div>

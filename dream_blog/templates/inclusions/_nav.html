@@ -19,28 +19,30 @@
         </div>
         <div class="flex items-center gap-2">
           <a href="{% url 'archives' %}"
-             class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
+             class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
             归档
           </a>
           <a href="{% url 'favorites:issue_list' %}"
-             class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
+             class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
             精选
           </a>
           <a href="{% url 'donate:donate' %}"
-             class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
+             class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
             赞助
           </a>
           <form action="{% url 'search:search' %}" class="hidden md:flex items-center">
-            <input name="q"
-                   type="search"
-                   placeholder="搜索..."
-                   required
-                   class="px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 rounded-l-lg bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
-            <button type="submit"
-                    class="px-3 py-2 bg-slate-100 dark:bg-slate-800 border border-l-0 border-slate-300 dark:border-slate-600 rounded-r-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                    aria-label="搜索">
-              <img class="dark:invert" height="16" width="16" src="{% static 'search-line.svg' %}" alt="搜索" />
-            </button>
+            <div class="relative flex items-center">
+              <input name="q"
+                     type="search"
+                     placeholder="搜索..."
+                     required
+                     class="pr-10 pl-3 py-2 text-sm bg-slate-100 dark:bg-slate-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500/50 placeholder:text-slate-400 dark:placeholder:text-slate-500 w-48 focus:w-64 transition-all duration-200" />
+              <button type="submit"
+                      class="absolute right-2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                      aria-label="搜索">
+                <img class="dark:invert" height="16" width="16" src="{% static 'search-line.svg' %}" alt="搜索" />
+              </button>
+            </div>
           </form>
           <button id="search-toggle"
                   class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors md:hidden"
@@ -83,6 +85,36 @@
               {% endif %}
             </a>
           {% endif %}
+          {# Mobile menu dropdown trigger - hidden on desktop #}
+          <button id="mobile-menu-trigger"
+                  class="lg:hidden p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
+                  aria-label="菜单"
+                  aria-expanded="false"
+                  aria-controls="mobile-menu">
+            <img class="dark:invert" height="20" width="20" src="{% static 'more-2-fill.svg' %}" alt="菜单" />
+          </button>
+        </div>
+      </div>
+
+      {# Mobile dropdown menu #}
+      <div id="mobile-menu"
+           class="hidden lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 shadow-lg"
+           aria-hidden="true">
+        <div class="max-w-[90rem] mx-auto px-4 lg:px-8 py-3">
+          <div class="flex flex-col gap-1">
+            <a href="{% url 'archives' %}"
+               class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+              归档
+            </a>
+            <a href="{% url 'favorites:issue_list' %}"
+               class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+              精选
+            </a>
+            <a href="{% url 'donate:donate' %}"
+               class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+              赞助
+            </a>
+          </div>
         </div>
       </div>
       <div id="search-overlay"

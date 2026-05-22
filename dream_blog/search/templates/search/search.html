@@ -7,18 +7,18 @@
 
 {% block main %}
   <div class="mx-auto max-w-4xl px-4 py-8">
-    <h1 class="text-3xl font-bold">搜索结果</h1>
+    <h1 class="text-3xl font-semibold text-slate-900 dark:text-slate-100">搜索结果</h1>
 
     {% if query %}
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
-        搜索 “{{ query }}” 找到 {{ hits }} 条结果
+      <p class="mt-4 text-base text-slate-600 dark:text-slate-400">
+        搜索 "{{ query }}" 找到 {{ hits }} 条结果
       </p>
 
-      <div class="mt-6 space-y-4">
+      <div class="mt-8 space-y-6">
         {% for result in page_obj.object_list %}
           {% include "search/_search_item.html" with result=result query=query %}
         {% empty %}
-          <div class="rounded-lg bg-slate-100 py-12 text-center dark:bg-slate-800">
+          <div class="py-16 text-center">
             <p class="text-lg text-slate-600 dark:text-slate-400">没有找到相关结果</p>
             <p class="mt-2 text-sm text-slate-500 dark:text-slate-500">请尝试其他关键词</p>
           </div>
@@ -31,7 +31,7 @@
         </div>
       {% endif %}
     {% else %}
-      <div class="mt-6 rounded-lg bg-slate-100 py-12 text-center dark:bg-slate-800">
+      <div class="mt-8 py-16 text-center">
         <p class="text-lg text-slate-600 dark:text-slate-400">请输入搜索关键词</p>
       </div>
     {% endif %}
