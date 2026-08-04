@@ -15,9 +15,7 @@ class AllNotificationsListView(SetHeadlineMixin, AllNotificationsList):
         if context.get("is_paginated"):
             page_obj = context["page_obj"]
             paginator = context["paginator"]
-            context["elided_page_range"] = paginator.get_elided_page_range(
-                page_obj.number
-            )
+            context["elided_page_range"] = paginator.get_elided_page_range(page_obj.number)
         return context
 
 
@@ -34,7 +32,5 @@ class UnreadNotificationsListView(SetHeadlineMixin, UnreadNotificationsList):
         if context.get("is_paginated"):
             page_obj = context["page_obj"]
             paginator = context["paginator"]
-            context["elided_page_range"] = paginator.get_elided_page_range(
-                page_obj.number
-            )
+            context["elided_page_range"] = paginator.get_elided_page_range(page_obj.number)
         return context

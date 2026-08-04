@@ -1,6 +1,4 @@
-import pytest
 from django.utils.html import strip_tags
-
 from search.utils import Highlighter
 
 

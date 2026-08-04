@@ -1,9 +1,8 @@
 from datetime import timedelta
 
 import pytest
-from django.utils import timezone
-
 from columns.models import Article, Column
+from django.utils import timezone
 from posts.tests.factories import PostFactory
 from search.search_indexes.article_index import ArticleIndex
 from search.search_indexes.material_index import MaterialIndex

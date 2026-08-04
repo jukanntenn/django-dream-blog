@@ -9,8 +9,6 @@ class NotificationFactory(DjangoModelFactory):
     class Meta:
         model = Notification
 
-    recipient = factory.SubFactory(
-        UserFactory, username=factory.Sequence(lambda n: f"recipient_{n}")
-    )
+    recipient = factory.SubFactory(UserFactory, username=factory.Sequence(lambda n: f"recipient_{n}"))
     actor = factory.SubFactory(UserFactory, username=factory.Sequence(lambda n: f"actor_{n}"))
     verb = "comment"

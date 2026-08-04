@@ -71,14 +71,10 @@ def test_material_detail_view_hits(tp: TestCase, material: Material):
 def test_can_not_see_invisible_material(tp: TestCase):
     hidden_tutorial = TutorialFactory(hidden=True)
     material = MaterialFactory(tutorial=hidden_tutorial)
-    response = tp.get(
-        "tutorials:material_detail", slug=hidden_tutorial.slug, pk=material.pk
-    )
+    response = tp.get("tutorials:material_detail", slug=hidden_tutorial.slug, pk=material.pk)
     tp.assert_http_404_not_found(response)
 
     tutorial = TutorialFactory(hidden=False)
     hidden_material = MaterialFactory(tutorial=hidden_tutorial, hidden=True)
-    response = tp.get(
-        "tutorials:material_detail", slug=tutorial.slug, pk=hidden_material.pk
-    )
+    response = tp.get("tutorials:material_detail", slug=tutorial.slug, pk=hidden_material.pk)
     tp.assert_http_404_not_found(response)

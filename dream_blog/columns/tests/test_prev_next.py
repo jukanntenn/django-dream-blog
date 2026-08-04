@@ -1,9 +1,8 @@
 from datetime import timedelta
 
 import pytest
-from django.utils import timezone
-
 from columns.models import Article, Column
+from django.utils import timezone
 
 pytestmark = pytest.mark.django_db
 

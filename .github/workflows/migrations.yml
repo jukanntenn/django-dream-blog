@@ -1,0 +1,27 @@
+name: Migrations
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dream_blog/**/models.py'
+      - 'dream_blog/**/migrations/**'
+  pull_request:
+    paths:
+      - 'dream_blog/**/models.py'
+      - 'dream_blog/**/migrations/**'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --no-install-project
+      - run: uv run python manage.py makemigrations --check --dry-run
+        env:
+          DJANGO_SETTINGS_MODULE: config.settings.test

@@ -25,17 +25,13 @@ class CommentModerator(DjangoCommentModerator):
         notification_data = []
         if comment.user != author:
             # 博主接收的通知
-            notification_data.append(
-                {"recipient": author, "verb": "comment", "target": comment}
-            )
+            notification_data.append({"recipient": author, "verb": "comment", "target": comment})
 
         if comment.parent:
             parent_user = comment.parent.user
             # 不是自己评论自己，通知被评论者
             if comment.user != parent_user:
-                notification_data.append(
-                    {"recipient": parent_user, "verb": "reply", "target": comment}
-                )
+                notification_data.append({"recipient": parent_user, "verb": "reply", "target": comment})
 
         if not notification_data:
             return
@@ -52,9 +48,7 @@ class CommentModerator(DjangoCommentModerator):
             "comment": comment,
             "content_object": content_object,
             "site": get_current_site(request),
-            "link": request.build_absolute_uri(content_object.get_absolute_url())
-            + "#c"
-            + str(comment.pk),
+            "link": request.build_absolute_uri(content_object.get_absolute_url()) + "#c" + str(comment.pk),
         }
         msg_txt = tmpl_txt.render(c)
         msg_html = tmpl_html.render(c)
@@ -80,9 +74,7 @@ class CommentModerator(DjangoCommentModerator):
             "comment": comment,
             "content_object": content_object,
             "site": get_current_site(request),
-            "link": request.build_absolute_uri(content_object.get_absolute_url())
-            + "#c"
-            + str(comment.pk),
+            "link": request.build_absolute_uri(content_object.get_absolute_url()) + "#c" + str(comment.pk),
         }
         msg_txt = tmpl_txt.render(c)
         msg_html = tmpl_html.render(c)

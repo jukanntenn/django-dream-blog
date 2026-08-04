@@ -1,10 +1,9 @@
+from columns.models import Article
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.views.generic import TemplateView
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet
-
-from columns.models import Article
 from posts.models import Post
 from tutorials.models import Material, Tutorial
 
@@ -17,10 +16,7 @@ class SearchView(TemplateView):
         sqs = SearchQuerySet().models(Post, Material, Tutorial, Article)
         form = SearchForm(request.GET or None, searchqueryset=sqs)
 
-        if query and form.is_valid():
-            results = form.search().load_all()
-        else:
-            results = sqs.none()
+        results = form.search().load_all() if query and form.is_valid() else sqs.none()
 
         results_per_page = getattr(settings, "HAYSTACK_SEARCH_RESULTS_PER_PAGE", 20)
         paginator = Paginator(results, results_per_page)

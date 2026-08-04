@@ -1,35 +1,30 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block title %}{{ headline }}{% endblock title %}
-
 {% block main %}
-  <div class="space-y-6">
-    <div class="space-y-3">
-      <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ headline }}</h1>
-      <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-        如果觉得本博客的教程对你有帮助，不妨小额赞助博主一下，鼓励博主继续写出更多高质量的教程。
-      </p>
-    </div>
-
-    <div class="bg-white dark:bg-slate-800 rounded-lg p-6">
-      {% include "donate/inclusions/_donate_panel.html" %}
-      <noscript>
-        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <figure class="text-center">
-            <img src="{% static 'donate/images/wechatpay299.png' %}"
-                 alt="微信支付收款二维码"
-                 class="w-72 h-72 mx-auto object-contain border border-slate-200 dark:border-slate-700 rounded-lg" />
-            <figcaption class="mt-3 text-sm text-slate-600 dark:text-slate-400">微信支付</figcaption>
-          </figure>
-          <figure class="text-center">
-            <img src="{% static 'donate/images/alipay299.jpg' %}"
-                 alt="支付宝收款二维码"
-                 class="w-72 h-72 mx-auto object-contain border border-slate-200 dark:border-slate-700 rounded-lg" />
-            <figcaption class="mt-3 text-sm text-slate-600 dark:text-slate-400">支付宝</figcaption>
-          </figure>
+    <div class="space-y-6">
+        <div class="space-y-3">
+            <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ headline }}</h1>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">如果觉得本博客的教程对你有帮助，不妨小额赞助博主一下，鼓励博主继续写出更多高质量的教程。</p>
         </div>
-      </noscript>
+        <div class="bg-white dark:bg-slate-800 rounded-lg p-6">
+            {% include "donate/inclusions/_donate_panel.html" %}
+            <noscript>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <figure class="text-center">
+                        <img src="{% static 'donate/images/wechatpay299.png' %}"
+                             alt="微信支付收款二维码"
+                             class="w-72 h-72 mx-auto object-contain border border-slate-200 dark:border-slate-700 rounded-lg" />
+                        <figcaption class="mt-3 text-sm text-slate-600 dark:text-slate-400">微信支付</figcaption>
+                    </figure>
+                    <figure class="text-center">
+                        <img src="{% static 'donate/images/alipay299.jpg' %}"
+                             alt="支付宝收款二维码"
+                             class="w-72 h-72 mx-auto object-contain border border-slate-200 dark:border-slate-700 rounded-lg" />
+                        <figcaption class="mt-3 text-sm text-slate-600 dark:text-slate-400">支付宝</figcaption>
+                    </figure>
+                </div>
+            </noscript>
+        </div>
     </div>
-  </div>
 {% endblock main %}

@@ -14,13 +14,10 @@ def show_columns(num=5):
 
 @register.inclusion_tag("columns/inclusions/_toc.html")
 def show_column_toc(column, current=None):
-    articles = (
-        column.article_set.visible().order_by("-publish_date").values("id", "title")
-    )
+    articles = column.article_set.visible().order_by("-publish_date").values("id", "title")
 
-    context = {
+    return {
         "column": column,
         "articles": articles,
         "current": current,
     }
-    return context

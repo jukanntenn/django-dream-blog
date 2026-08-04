@@ -1,5 +1,4 @@
 import pytest
-
 from alerts.models import Alert
 from columns.models import Article, Column
 from core.models import AlertsModel

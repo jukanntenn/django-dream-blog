@@ -1,11 +1,18 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python Debugger: Django manage.py with Arguments",
+      "name": "Django: runserver",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["runserver", "--noreload", "127.0.0.1:8000"],
+      "django": true,
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Django: manage.py with Arguments",
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/manage.py",
@@ -15,13 +22,14 @@
       "justMyCode": false
     },
     {
-      "name": "Python Debugger: Django",
+      "name": "pytest (current file)",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/manage.py",
-      "args": ["runserver"],
-      "django": true,
-      "autoStartBrowser": false
+      "module": "pytest",
+      "args": ["${file}", "-v", "--no-header", "--reuse-db"],
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "env": { "DJANGO_SETTINGS_MODULE": "config.settings.test" }
     }
   ]
 }

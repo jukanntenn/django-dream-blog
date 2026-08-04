@@ -2,27 +2,29 @@
 {# Profile sidebar: blogger info and social links #}
 {# Design intent: Natural content flow - no wrapper card, content forms its own visual block #}
 <div class="space-y-3">
-  {# Blogger name and badge - clean layout without avatar #}
-  <div class="flex items-center gap-2">
-    <span class="text-lg font-semibold text-slate-900 dark:text-slate-100">{{ profile.blogger }}</span>
-    <span class="badge--success text-xs">博主</span>
-  </div>
-
-  {# Slogan with comfortable leading and subtle color #}
-  <div class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{{ profile.slogan }}</div>
-
-  {# Social links with hover feedback #}
-  <div class="flex items-center gap-3">
-    {% for slink in profile.social_links %}
-      {% if slink.url %}
-        <a class="p-1.5 rounded-lg hover:bg-slate-200/80 dark:hover:bg-slate-700/50 transition-colors duration-150"
-           href="{{ slink.url }}"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="{{ slink.name|default:'Social link' }}">
-          <img class="dark:invert w-5 h-5" alt="{{ slink.name|default:'Social icon' }}" height="20" width="20" src="{% static slink.icon %}" />
-        </a>
-      {% endif %}
-    {% endfor %}
-  </div>
+    {# Blogger name and badge - clean layout without avatar #}
+    <div class="flex items-center gap-2">
+        <span class="text-lg font-semibold text-slate-900 dark:text-slate-100">{{ profile.blogger }}</span>
+        <span class="badge--success text-xs">博主</span>
+    </div>
+    {# Slogan with comfortable leading and subtle color #}
+    <div class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{{ profile.slogan }}</div>
+    {# Social links with hover feedback #}
+    <div class="flex items-center gap-3">
+        {% for slink in profile.social_links %}
+            {% if slink.url %}
+                <a class="p-1.5 rounded-lg hover:bg-slate-200/80 dark:hover:bg-slate-700/50 transition-colors duration-150"
+                   href="{{ slink.url }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="{{ slink.name|default:'Social link' }}">
+                    <img class="dark:invert w-5 h-5"
+                         alt="{{ slink.name|default:'Social icon' }}"
+                         height="20"
+                         width="20"
+                         src="{% static slink.icon %}" />
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>

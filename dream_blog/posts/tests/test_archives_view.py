@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 import pytest
+from columns.models import Article, Column
 from core.templatetags.entry_urls import entry_url
 from django.utils import timezone
 from django.utils.text import slugify
@@ -8,8 +9,6 @@ from posts.tests.factories import PostFactory
 from test_plus.plugin import TestCase
 from tutorials.tests.factories import MaterialFactory, TutorialFactory
 from users.tests.factories import UserFactory
-
-from columns.models import Article, Column
 
 pytestmark = pytest.mark.django_db
 

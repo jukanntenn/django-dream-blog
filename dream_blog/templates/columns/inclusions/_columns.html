@@ -1,26 +1,26 @@
 {% if columns %}
-  {# Columns sidebar with card-style items and visual hierarchy #}
-  {# Design intent: Compact spacing, each column as a clickable item with hover feedback #}
-  <div class="mt-4 lg:mt-5 first:mt-0">
-    <h3 class="sidebar-title">专栏</h3>
-    <ul class="space-y-1">
-      {% for column in columns %}
-        <li>
-          {# Column card with interactive hover effect #}
-          <a href="{{ column.get_absolute_url }}"
-             class="block py-1.5 px-2 -mx-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors duration-150">
-            <div class="font-medium text-slate-900 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm">
-              {{ column.title }}
-            </div>
-            {% if column.excerpt %}
-              <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">{{ column.excerpt }}</div>
-            {% endif %}
-            <div class="flex items-center justify-between mt-0.5">
-              <span class="text-xs text-slate-400 dark:text-slate-500">{{ column.num_articles }} 篇文章</span>
-            </div>
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
+    {# Columns sidebar with card-style items and visual hierarchy #}
+    {# Design intent: Compact spacing, each column as a clickable item with hover feedback #}
+    <div class="mt-4 lg:mt-5 first:mt-0">
+        <h3 class="sidebar-title">专栏</h3>
+        <ul class="space-y-1">
+            {% for column in columns %}
+                <li>
+                    {# Column card with interactive hover effect #}
+                    <a href="{{ column.get_absolute_url }}"
+                       class="block py-1.5 px-2 -mx-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors duration-150">
+                        <div class="font-medium text-slate-900 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm">
+                            {{ column.title }}
+                        </div>
+                        {% if column.excerpt %}
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">{{ column.excerpt }}</div>
+                        {% endif %}
+                        <div class="flex items-center justify-between mt-0.5">
+                            <span class="text-xs text-slate-400 dark:text-slate-500">{{ column.num_articles }} 篇文章</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endif %}

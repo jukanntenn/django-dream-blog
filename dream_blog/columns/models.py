@@ -14,7 +14,6 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
-
 from tags.models import TaggedItem
 
 
@@ -55,7 +54,7 @@ class Column(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
     @cached_property
     def num_articles(self):
         if hasattr(self, "article_count"):
-            return getattr(self, "article_count")
+            return self.article_count
 
         return self.article_set.count()
 

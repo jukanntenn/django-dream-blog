@@ -21,10 +21,7 @@ class TestMaterial:
         assert str(material) == material.title
 
     def test_get_absolute_url(self, material):
-        assert (
-            material.get_absolute_url()
-            == f"/tutorials/{material.tutorial.slug}/materials/{material.pk}/"
-        )
+        assert material.get_absolute_url() == f"/tutorials/{material.tutorial.slug}/materials/{material.pk}/"
 
     def test_hits_property(self, material):
         assert material.hits == 0

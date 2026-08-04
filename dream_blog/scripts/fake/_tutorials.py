@@ -14,9 +14,9 @@ def run():
     for category in Category.objects.all():
         TutorialFactory.create_batch(3, category=category, author=author)
 
-    print(f"Created 9 tutorials")
+    print("Created 9 tutorials")
 
     for tutorial in Tutorial.objects.all():
         MaterialFactory.create_batch(10, tutorial=tutorial)
 
-    print(f"Created 90 tutorial materials")
+    print("Created 90 tutorial materials")

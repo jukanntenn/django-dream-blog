@@ -1,8 +1,7 @@
+from alerts.models import Alert
 from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.translation import gettext_lazy as _
-
-from alerts.models import Alert
 
 
 class AlertInline(GenericTabularInline):
@@ -19,9 +18,8 @@ class AlertAdmin(admin.ModelAdmin):
     search_fields = ["text"]
     ordering = ["rank", "-created_at"]
 
+    @admin.display(description=_("Text"))
     def text_preview(self, obj):
         if len(obj.text) > 50:
             return f"{obj.text[:50]}..."
         return obj.text
-
-    text_preview.short_description = _("Text")

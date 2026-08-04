@@ -12,7 +12,7 @@ from model_utils.fields import AutoCreatedField, AutoLastModifiedField
 
 def _compensate(value):
     if value.startswith("--"):
-        return value.lstrip("--")
+        return value.lstrip("-")
     return value
 
 
@@ -41,6 +41,9 @@ class TimeStampedModel(models.Model):
 class RichContentModel(models.Model):
     content = MarkdownField(_("Content"))
 
+    class Meta:
+        abstract = True
+
     @property
     def toc(self):
         return self.content.toc
@@ -48,9 +51,6 @@ class RichContentModel(models.Model):
     @property
     def content_html(self):
         return self.content.html
-
-    class Meta:
-        abstract = True
 
 
 class CommentsModel(models.Model):
@@ -71,7 +71,7 @@ class CommentsModel(models.Model):
     @cached_property
     def num_comments(self):
         if hasattr(self, "comment_count"):
-            return getattr(self, "comment_count")
+            return self.comment_count
 
         return self.comments.visible().count()
 
@@ -105,9 +105,7 @@ class HitCountModel(HitCountMixin, models.Model):
 class PreviousNextMixin:
     def get_next_or_previous(self, is_next, ordering=None, value_fields=None, **kwargs):
         if not self.pk:
-            raise ValueError(
-                _("get_next/get_previous cannot be used on unsaved objects.")
-            )
+            raise ValueError(_("get_next/get_previous cannot be used on unsaved objects."))
 
         op = "gt" if is_next else "lt"
         order = "" if is_next else "-"
@@ -124,18 +122,18 @@ class PreviousNextMixin:
         if ordering[0].startswith("-"):
             op = "lt" if is_next else "gt"
 
-        q = Q(**{"%s__%s" % (param_field, op): param_value})
+        q = Q(**{f"{param_field}__{op}": param_value})
 
         if not self._meta.get_field(param_field).unique:
             op = "gt" if is_next else "lt"
-            q = q | Q(**{param_field: param_value, "pk__%s" % op: self.pk})
+            q = q | Q(**{param_field: param_value, f"pk__{op}": self.pk})
             ordering.append("pk")
 
         qs = (
             self.__class__._default_manager.visible()
             .filter(**kwargs)
             .filter(q)
-            .order_by(*[_compensate("%s%s" % (order, field)) for field in ordering])
+            .order_by(*[_compensate(f"{order}{field}") for field in ordering])
         )
 
         if value_fields is not None:

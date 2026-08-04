@@ -39,7 +39,7 @@ class Comment(AbstractComment):
         db_table = "tree_comments_treecomment"
 
     def __str__(self):
-        return "%s: %s..." % (self.name, self.comment.text[:50])
+        return f"{self.name}: {self.comment.text[:50]}..."
 
     @property
     def is_root(self):

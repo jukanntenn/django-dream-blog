@@ -1,5 +1,4 @@
 import pytest
-
 from alerts.models import Alert
 from posts.tests.factories import PostFactory
 

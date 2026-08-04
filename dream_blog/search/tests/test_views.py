@@ -2,9 +2,8 @@ from datetime import timedelta
 
 import pytest
 from django.test import Client
-from django.utils.html import strip_tags
 from django.utils import timezone
-
+from django.utils.html import strip_tags
 from posts.models import Post
 from posts.tests.factories import PostFactory
 
@@ -50,9 +49,7 @@ class TestSearchView:
         content = response.content.decode()
         assert post.title in strip_tags(content)
 
-    def test_search_view_pagination_preserves_querystring(
-        self, client, settings, tmp_path, user
-    ):
+    def test_search_view_pagination_preserves_querystring(self, client, settings, tmp_path, user):
         settings.HAYSTACK_CONNECTIONS = {
             "default": {
                 "ENGINE": "search.backends.whoosh_cn_backend.WhooshJiebaEngine",

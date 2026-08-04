@@ -42,3 +42,29 @@ def test_unread_notifications_list_authenticated(client):
     url = reverse("notify:notification_unread")
     response = client.get(url)
     assert response.status_code == 200
+
+
+def test_all_notifications_pagination(client):
+    user = UserFactory()
+    client.force_login(user)
+    NotificationFactory.create_batch(15, recipient=user)
+
+    url = reverse("notify:notification_all")
+    response = client.get(url)
+    assert response.status_code == 200
+    assert response.context["is_paginated"] is True
+    assert "elided_page_range" in response.context
+    assert response.context["num_all"] == 15
+
+
+def test_unread_notifications_pagination(client):
+    user = UserFactory()
+    client.force_login(user)
+    NotificationFactory.create_batch(15, recipient=user, unread=True)
+
+    url = reverse("notify:notification_unread")
+    response = client.get(url)
+    assert response.status_code == 200
+    assert response.context["is_paginated"] is True
+    assert "elided_page_range" in response.context
+    assert response.context["num_unread"] == 15

@@ -9,8 +9,7 @@ class ColumnDetailView(SetHeadlineMixin, HitCountDetailView):
     template_name = "columns/detail.html"
 
     def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        return response
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -31,20 +30,13 @@ class ArticleDetailView(SetHeadlineMixin, HitCountDetailView):
     template_name = "columns/article_detail.html"
 
     def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        return response
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        return (
-            Article.objects.visible()
-            .select_related("column")
-            .order_by("-publish_date")
-            .with_comment_count()
-        )
+        return Article.objects.visible().select_related("column").order_by("-publish_date").with_comment_count()
 
     def get_headline(self):
         return f"{self.object.title} - {self.object.column.title}"

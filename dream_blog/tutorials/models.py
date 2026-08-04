@@ -14,7 +14,6 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from model_utils.choices import Choices
 from taggit.managers import TaggableManager
-
 from tags.models import TaggedItem
 
 

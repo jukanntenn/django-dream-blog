@@ -1,14 +1,13 @@
 {% load django_vite tutorials_extra static core_extra columns_extra friendlinks_extra %}
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- 防止 FOUC (Flash of Unstyled Content) -->
-    <script>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- 防止 FOUC (Flash of Unstyled Content) -->
+        <script>
       // 立即执行，避免页面闪烁
       (function() {
         const theme = localStorage.getItem('theme');
@@ -20,63 +19,63 @@
           document.documentElement.classList.add('light');
         }
       })();
-    </script>
-
-    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.css"
-          rel="stylesheet">
-    <link rel="icon"
-          href="data:image/svg+xml, <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22> <text y=%22.9em%22 font-size=%2290%22>🦋</text> </svg> " />
-      <title>
-        {% block title %}
-          {{ headline }}
-        {% endblock title %}
-      </title>
-      <link rel="alternate"
-            type="application/rss+xml"
-            title="追梦人物的博客"
-            href="{% url 'rss' %}" />
-      {% if debug %}
-        <link rel="stylesheet" href="{% vite_asset_url 'src/friendly.css' %}?direct" />
-        <link rel="stylesheet" href="{% vite_asset_url 'src/index.css' %}?direct" />
-      {% endif %}
-      {% vite_hmr_client %}
-      {% vite_asset 'src/main.ts' %}
+        </script>
+        <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.min.css"
+              rel="stylesheet">
+        <link rel="icon"
+              href="data:image/svg+xml, <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22> <text y=%22.9em%22 font-size=%2290%22>🦋</text> </svg> " />
+        <title>
+            {% block title %}
+                {{ headline }}
+            {% endblock title %}
+        </title>
+        <link rel="alternate"
+              type="application/rss+xml"
+              title="追梦人物的博客"
+              href="{% url 'rss' %}" />
+        {% if debug %}
+            <link rel="stylesheet"
+                  href="{% vite_asset_url 'src/friendly.css' %}?direct" />
+            <link rel="stylesheet" href="{% vite_asset_url 'src/index.css' %}?direct" />
+        {% endif %}
+        {% vite_hmr_client %}
+        {% vite_asset 'src/main.ts' %}
     </head>
     <body class="antialiased">
-      {% include "inclusions/_nav.html" %}
-      {# Desktop: wider layout (max-w-[90rem]=1440px) for better content display on large screens #}
-      <div class="max-w-[90rem] mx-auto px-4 lg:px-8">
-        <div class="flex flex-col lg:flex-row">
-          <!-- left -->
-          <!-- Left sidebar: fixed on desktop, slide-in on mobile -->
-          {# Mobile: background matches sidebar-card style; Desktop: transparent #}
-          <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 opacity-100 right-auto overflow-y-auto scrollbar-hide bottom-0 left-0 duration-300 z-50 bg-slate-50/95 dark:bg-slate-800/95 lg:bg-transparent lg:dark:bg-transparent shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(4rem,calc(50%-43rem))] top-16 lg:w-64"
-               id="left">
-            {% block left %}
-              {% show_profile %}
-            {% endblock left %}
-          </div>
-          <!-- main -->
-          <div class="w-full pt-6 lg:px-64">
-            {% block main %}
-            {% endblock main %}
-          </div>
-          <!-- right -->
-          {# 右侧边栏：固定定位，可滚动但隐藏滚动条，保持视觉简洁 #}
-          <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(2rem,calc(50%-43rem))] lg:top-16 lg:pt-6 lg:overflow-y-auto lg:bottom-0 scrollbar-thin">
-            {% block right %}
-              {% show_tutorials 999 %}
-              {% show_columns 999 %}
-              {% show_friendlinks %}
-            {% endblock right %}
-          </div>
+        {% include "inclusions/_nav.html" %}
+        {# Desktop: wider layout (max-w-[90rem]=1440px) for better content display on large screens #}
+        <div class="max-w-[90rem] mx-auto px-4 lg:px-8">
+            <div class="flex flex-col lg:flex-row">
+                <!-- left -->
+                <!-- Left sidebar: fixed on desktop, slide-in on mobile -->
+                {# Mobile: background matches sidebar-card style; Desktop: transparent #}
+                <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 opacity-100 right-auto overflow-y-auto scrollbar-hide bottom-0 left-0 duration-300 z-50 bg-slate-50/95 dark:bg-slate-800/95 lg:bg-transparent lg:dark:bg-transparent shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(4rem,calc(50%-43rem))] top-16 lg:w-64"
+                     id="left">
+                    {% block left %}
+                        {% show_profile %}
+                    {% endblock left %}
+                </div>
+                <!-- main -->
+                <div class="w-full pt-6 lg:px-64">
+                    {% block main %}
+                    {% endblock main %}
+                </div>
+                <!-- right -->
+                {# 右侧边栏：固定定位，可滚动但隐藏滚动条，保持视觉简洁 #}
+                <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(2rem,calc(50%-43rem))] lg:top-16 lg:pt-6 lg:overflow-y-auto lg:bottom-0 scrollbar-thin">
+                    {% block right %}
+                        {% show_tutorials 999 %}
+                        {% show_columns 999 %}
+                        {% show_friendlinks %}
+                    {% endblock right %}
+                </div>
+            </div>
         </div>
-      </div>
-      <span id="backtop"
-            class="opacity-0 fixed bottom-4 right-4 lg:right-[max(0px,calc(50%-29rem))] cursor-pointer transition-opacity duration-500 ease-in dark:invert">
-        <img alt="" height="24" width="24" src="{% static 'arrow-up-line.svg' %}" />
-      </span>
-      {% include "inclusions/_footer.html" %}
-      {% include "share/_share_modal.html" %}
+        <span id="backtop"
+              class="opacity-0 fixed bottom-4 right-4 lg:right-[max(0px,calc(50%-29rem))] cursor-pointer transition-opacity duration-500 ease-in dark:invert">
+            <img alt="" height="24" width="24" src="{% static 'arrow-up-line.svg' %}" />
+        </span>
+        {% include "inclusions/_footer.html" %}
+        {% include "share/_share_modal.html" %}
     </body>
-  </html>
+</html>

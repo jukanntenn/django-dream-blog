@@ -1,45 +1,38 @@
 {% extends "base.html" %}
 {% load entry_urls %}
 {% block main %}
-  {# Article list with compact spacing and staggered entrance animation #}
-  {# Design intent: Tighter spacing (mt-6) improves scanability, entrance animation adds polish #}
-  {% for entry in page_obj %}
-    {# Staggered entrance animation - use animate-entrance for all items, CSS handles the rest #}
-    <article class="animate-entrance
-                   mt-6 first:mt-0 pb-6 border-b border-slate-100/80 dark:border-transparent last:border-b-0">
-      {# Column/Tutorial name above title for articles and materials #}
-      {% if entry.parent_title %}
-        <div class="text-sm mb-1">
-          <a href="{% if entry.type == 'a' %}{% url 'columns:detail' slug=entry.parent_slug %}{% else %}{% url 'tutorials:detail' slug=entry.parent_slug %}{% endif %}"
-             class="hover:underline focus:underline"
-             style="color: {% if entry.type == 'a' %}#7d5de7{% else %}#0e8a16{% endif %};">
-            {% if entry.type == 'a' %}专栏{% else %}教程{% endif %} · {{ entry.parent_title }}
-          </a>
+    {# Article list with compact spacing and staggered entrance animation #}
+    {# Design intent: Tighter spacing (mt-6) improves scanability, entrance animation adds polish #}
+    {% for entry in page_obj %}
+        {# Staggered entrance animation - use animate-entrance for all items, CSS handles the rest #}
+        <article class="animate-entrance mt-6 first:mt-0 pb-6 border-b border-slate-100/80 dark:border-transparent last:border-b-0">
+            {# Column/Tutorial name above title for articles and materials #}
+            {% if entry.parent_title %}
+                <div class="text-sm mb-1">
+                    <a href="{% if entry.type == 'a' %}{% url 'columns:detail' slug=entry.parent_slug %}{% else %}{% url 'tutorials:detail' slug=entry.parent_slug %}{% endif %}"
+                       class="hover:underline focus:underline"
+                       style="color: {% if entry.type == 'a' %}#7d5de7{% else %}#0e8a16{% endif %}">
+                        {% if entry.type == 'a' %}专栏{% else %}教程{% endif %} · {{ entry.parent_title }}
+                    </a>
+                </div>
+            {% endif %}
+            {# Article title with hover effect #}
+            <h2 class="text-xl font-semibold leading-snug">
+                <a href="{{ entry|entry_url }}" class="article-title-link">{{ entry.title }}</a>
+            </h2>
+            {# Brief description with subtle styling #}
+            {% if entry.brief %}
+                <p class="article-brief mt-2">{{ entry.brief }}</p>
+            {% endif %}
+            {% include "inclusions/_entry_meta_index.html" with entry=entry %}
+        </article>
+    {% empty %}
+        <div class="text-center py-12 text-slate-500 dark:text-slate-400">
+            <p>暂无文章</p>
         </div>
-      {% endif %}
-
-      {# Article title with hover effect #}
-      <h2 class="text-xl font-semibold leading-snug">
-        <a href="{{ entry|entry_url }}" class="article-title-link">
-          {{ entry.title }}
-        </a>
-      </h2>
-
-      {# Brief description with subtle styling #}
-      {% if entry.brief %}
-        <p class="article-brief mt-2">{{ entry.brief }}</p>
-      {% endif %}
-
-      {% include "inclusions/_entry_meta_index.html" with entry=entry %}
-    </article>
-  {% empty %}
-    <div class="text-center py-12 text-slate-500 dark:text-slate-400">
-      <p>暂无文章</p>
-    </div>
-  {% endfor %}
-
-  {% if is_paginated %}
-    {# Pagination with reduced top margin #}
-    <div class="mt-8 flex justify-center">{% include "inclusions/_pagination.html" %}</div>
-  {% endif %}
+    {% endfor %}
+    {% if is_paginated %}
+        {# Pagination with reduced top margin #}
+        <div class="mt-8 flex justify-center">{% include "inclusions/_pagination.html" %}</div>
+    {% endif %}
 {% endblock main %}

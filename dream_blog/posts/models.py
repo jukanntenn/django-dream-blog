@@ -12,7 +12,6 @@ from django.db.models import Manager
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
-
 from tags.models import TaggedItem
 
 

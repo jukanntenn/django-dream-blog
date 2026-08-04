@@ -12,7 +12,7 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         if name:
             try:
                 User.objects.get(name=name)
-                name = "%s_%s" % (name, sociallogin.account.provider)
+                name = f"{name}_{sociallogin.account.provider}"
                 user_field(user, "name", name)
             except User.DoesNotExist:
                 user_field(user, "name", name)

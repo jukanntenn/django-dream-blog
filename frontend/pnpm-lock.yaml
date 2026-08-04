@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@jukanntenn/kutsu':
+        specifier: 0.1.0-rc.1
+        version: 0.1.0-rc.1(@popperjs/core@2.11.8)
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -15,6 +18,9 @@ importers:
       '@playwright/test':
         specifier: ^1.58.2
         version: 1.58.2
+      '@popperjs/core':
+        specifier: ^2.11.8
+        version: 2.11.8
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@5.4.19(@types/node@25.3.3)(lightningcss@1.31.1)(sass@1.89.2))
@@ -190,6 +196,15 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
+  '@jukanntenn/kutsu@0.1.0-rc.1':
+    resolution: {integrity: sha512-f/KU/IQdOwW8EZF7NLzlabrXWPRqVgPbrqQbhW7HNURsZwOAGT1OhD5fuPHJqHHi43zI7g/4yGHlky5eQ1t8FA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@popperjs/core': ^2.11.5
+    peerDependenciesMeta:
+      '@popperjs/core':
+        optional: true
+
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
     engines: {node: '>= 10.0.0'}
@@ -282,6 +297,9 @@ packages:
     resolution: {integrity: sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@popperjs/core@2.11.8':
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
   '@rollup/rollup-android-arm-eabi@4.44.2':
     resolution: {integrity: sha512-g0dF8P1e2QYPOj1gu7s/3LVP6kze9A7m6x0BZ9iTdXK8N5c2V7cpBKHV3/9A4Zd8xxavdhK0t4PnqjkqVmUc9Q==}
@@ -939,6 +957,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  '@jukanntenn/kutsu@0.1.0-rc.1(@popperjs/core@2.11.8)':
+    optionalDependencies:
+      '@popperjs/core': 2.11.8
+
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true
 
@@ -1003,6 +1025,8 @@ snapshots:
   '@playwright/test@1.58.2':
     dependencies:
       playwright: 1.58.2
+
+  '@popperjs/core@2.11.8': {}
 
   '@rollup/rollup-android-arm-eabi@4.44.2':
     optional: true

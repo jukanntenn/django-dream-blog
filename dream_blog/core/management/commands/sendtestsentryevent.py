@@ -8,4 +8,4 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **kwargs):
-        1 / 0
+        return 1 / 0

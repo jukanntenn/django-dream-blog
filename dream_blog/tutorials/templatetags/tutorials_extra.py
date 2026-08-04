@@ -9,11 +9,7 @@ register = template.Library()
     "tutorials/inclusions/_tutorials.html",
 )
 def show_tutorials(num=5):
-    tutorials = (
-        Tutorial.objects.filter(hidden=False)
-        .select_related("category")
-        .order_by("-created_at")[:num]
-    )
+    tutorials = Tutorial.objects.filter(hidden=False).select_related("category").order_by("-created_at")[:num]
     return {"tutorials": tutorials}
 
 
@@ -29,9 +25,8 @@ def show_tutorial_toc(tutorial, current=None):
         .values("id", "title")
     )
 
-    context = {
+    return {
         "tutorial": tutorial,
         "materials": materials,
         "current": current,
     }
-    return context

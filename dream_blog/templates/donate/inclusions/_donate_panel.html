@@ -1,5 +1,4 @@
 {% load static %}
-
 <div class="space-y-6"
      data-donate-panel
      data-provider="wechatpay"
@@ -8,73 +7,55 @@
      data-alipay-base="{% static 'donate/images/alipay' %}"
      data-wechat-fallback="{% static 'donate/images/wechatpay0.png' %}"
      data-alipay-fallback="{% static 'donate/images/alipay0.jpg' %}">
-
-  {# Provider selector - no border, color-based active state #}
-  <div class="flex justify-center gap-6">
-    <button type="button"
-            class="px-4 py-2 font-medium transition-colors text-green-600 dark:text-green-400"
-            data-provider-button
-            data-provider-value="wechatpay"
-            aria-pressed="true">
-      微信
-    </button>
-    <button type="button"
-            class="px-4 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
-            data-provider-button
-            data-provider-value="alipay"
-            aria-pressed="false">
-      支付宝
-    </button>
-  </div>
-
-  {# QR code - no border #}
-  <div class="flex justify-center">
-    <img src="{% static 'donate/images/wechatpay299.png' %}"
-         alt="赞助二维码"
-         class="w-72 h-72 object-contain rounded-xl shadow-sm"
-         data-qr />
-  </div>
-
-  {# Amount buttons - ghost style #}
-  <div class="flex flex-wrap justify-center gap-2 text-sm">
-    <button type="button"
-            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
-            data-amount-button
-            data-amount-value="99"
-            aria-pressed="false">
-      9.9
-    </button>
-    <button type="button"
-            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
-            data-amount-button
-            data-amount-value="199"
-            aria-pressed="false">
-      19.9
-    </button>
-    <button type="button"
-            class="px-4 py-2 rounded-lg transition-colors text-cyan-600 dark:text-cyan-400 font-semibold"
-            data-amount-button
-            data-amount-value="299"
-            aria-pressed="true">
-      29.9
-    </button>
-    <button type="button"
-            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
-            data-amount-button
-            data-amount-value="599"
-            aria-pressed="false">
-      59.9
-    </button>
-    <button type="button"
-            class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
-            data-amount-button
-            data-amount-value="0"
-            aria-pressed="false">
-      任意
-    </button>
-  </div>
+    {# Provider selector - no border, color-based active state #}
+    <div class="flex justify-center gap-6">
+        <button type="button"
+                class="px-4 py-2 font-medium transition-colors text-green-600 dark:text-green-400"
+                data-provider-button
+                data-provider-value="wechatpay"
+                aria-pressed="true">微信</button>
+        <button type="button"
+                class="px-4 py-2 font-medium transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                data-provider-button
+                data-provider-value="alipay"
+                aria-pressed="false">支付宝</button>
+    </div>
+    {# QR code - no border #}
+    <div class="flex justify-center">
+        <img src="{% static 'donate/images/wechatpay299.png' %}"
+             alt="赞助二维码"
+             class="w-72 h-72 object-contain rounded-xl shadow-sm"
+             data-qr />
+    </div>
+    {# Amount buttons - ghost style #}
+    <div class="flex flex-wrap justify-center gap-2 text-sm">
+        <button type="button"
+                class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
+                data-amount-button
+                data-amount-value="99"
+                aria-pressed="false">9.9</button>
+        <button type="button"
+                class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
+                data-amount-button
+                data-amount-value="199"
+                aria-pressed="false">19.9</button>
+        <button type="button"
+                class="px-4 py-2 rounded-lg transition-colors text-cyan-600 dark:text-cyan-400 font-semibold"
+                data-amount-button
+                data-amount-value="299"
+                aria-pressed="true">29.9</button>
+        <button type="button"
+                class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
+                data-amount-button
+                data-amount-value="599"
+                aria-pressed="false">59.9</button>
+        <button type="button"
+                class="px-4 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
+                data-amount-button
+                data-amount-value="0"
+                aria-pressed="false">任意</button>
+    </div>
 </div>
-
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     for (const panel of document.querySelectorAll("[data-donate-panel]")) {

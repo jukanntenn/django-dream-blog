@@ -1,42 +1,75 @@
-<div id="share-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
-  <div class="absolute inset-0 bg-black/50" data-share-close></div>
-  <div class="relative w-full max-w-lg rounded-lg bg-white dark:bg-slate-800 shadow-xl">
-    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 px-4 py-3">
-      <h3 id="share-modal-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">分享到社交媒体</h3>
-      <button type="button" class="share-modal__close inline-flex items-center justify-center rounded p-1 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700 transition" aria-label="Close">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+<div id="share-modal"
+     class="fixed inset-0 z-50 hidden flex items-center justify-center p-4"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="share-modal-title">
+    <div class="absolute inset-0 bg-black/50" data-share-close></div>
+    <div class="relative w-full max-w-lg rounded-lg bg-white dark:bg-slate-800 shadow-xl">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 px-4 py-3">
+            <h3 id="share-modal-title"
+                class="text-base font-semibold text-slate-900 dark:text-slate-100">分享到社交媒体</h3>
+            <button type="button"
+                    class="share-modal__close inline-flex items-center justify-center rounded p-1 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700 transition"
+                    aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="20"
+                     height="20"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="px-4 py-4">
+            <label for="share-text"
+                   class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">分享内容：</label>
+            <textarea id="share-text"
+                      class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                      rows="4"></textarea>
+            <p id="share-platform-name"
+               class="mt-2 text-sm text-slate-500 dark:text-slate-400"></p>
+        </div>
+        <div class="flex justify-end gap-2 border-t border-slate-200 dark:border-slate-700 px-4 py-3">
+            <button type="button"
+                    class="share-modal__cancel rounded-md px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-700 transition">取消</button>
+            <button type="button"
+                    class="share-modal__confirm rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 transition">确认分享</button>
+        </div>
     </div>
-    <div class="px-4 py-4">
-      <label for="share-text" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">分享内容：</label>
-      <textarea id="share-text" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" rows="4"></textarea>
-      <p id="share-platform-name" class="mt-2 text-sm text-slate-500 dark:text-slate-400"></p>
-    </div>
-    <div class="flex justify-end gap-2 border-t border-slate-200 dark:border-slate-700 px-4 py-3">
-      <button type="button" class="share-modal__cancel rounded-md px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-700 transition">取消</button>
-      <button type="button" class="share-modal__confirm rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 transition">确认分享</button>
-    </div>
-  </div>
 </div>
-
-<div id="qrcode-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="qrcode-modal-title">
-  <div class="absolute inset-0 bg-black/50" data-qrcode-close></div>
-  <div class="relative w-full max-w-sm rounded-lg bg-white dark:bg-slate-800 shadow-xl">
-    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 px-4 py-3">
-      <h3 id="qrcode-modal-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">扫码分享到微信</h3>
-      <button type="button" class="qrcode-modal__close inline-flex items-center justify-center rounded p-1 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700 transition" aria-label="Close">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+<div id="qrcode-modal"
+     class="fixed inset-0 z-50 hidden flex items-center justify-center p-4"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="qrcode-modal-title">
+    <div class="absolute inset-0 bg-black/50" data-qrcode-close></div>
+    <div class="relative w-full max-w-sm rounded-lg bg-white dark:bg-slate-800 shadow-xl">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 px-4 py-3">
+            <h3 id="qrcode-modal-title"
+                class="text-base font-semibold text-slate-900 dark:text-slate-100">扫码分享到微信</h3>
+            <button type="button"
+                    class="qrcode-modal__close inline-flex items-center justify-center rounded p-1 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700 transition"
+                    aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="20"
+                     height="20"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="px-4 py-5">
+            <div id="qrcode-container" class="flex justify-center"></div>
+            <p class="mt-4 text-center text-sm text-slate-500 dark:text-slate-400">使用微信扫描二维码分享</p>
+        </div>
     </div>
-    <div class="px-4 py-5">
-      <div id="qrcode-container" class="flex justify-center"></div>
-      <p class="mt-4 text-center text-sm text-slate-500 dark:text-slate-400">使用微信扫描二维码分享</p>
-    </div>
-  </div>
 </div>

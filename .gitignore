@@ -169,3 +169,9 @@ huey.db
 index/
 .trae/documents/
 docs/plans/
+
+# e2e test run artifacts
+e2e/test-results/
+
+# Local agent workspace (notes, drafts, contexts)
+.local/

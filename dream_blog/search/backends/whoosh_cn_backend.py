@@ -8,9 +8,8 @@ from haystack.exceptions import SearchBackendError
 from haystack.models import SearchResult
 from haystack.utils.app_loading import haystack_get_model
 from jieba.analyse.analyzer import ChineseAnalyzer
-from whoosh.fields import BOOLEAN, DATETIME
+from whoosh.fields import BOOLEAN, DATETIME, IDLIST, KEYWORD, NGRAM, NGRAMWORDS, NUMERIC, TEXT, Schema
 from whoosh.fields import ID as WHOOSH_ID
-from whoosh.fields import IDLIST, KEYWORD, NGRAM, NGRAMWORDS, NUMERIC, TEXT, Schema
 from whoosh.highlight import ContextFragmenter
 from whoosh.highlight import highlight as whoosh_highlight
 
@@ -32,12 +31,10 @@ class WhooshJiebaSearchBackend(WhooshSearchBackend):
         initial_key_count = len(schema_fields)
         content_field_name = ""
 
-        for field_name, field_class in fields.items():
+        for field_class in fields.values():
             if field_class.is_multivalued:
                 if field_class.indexed is False:
-                    schema_fields[field_class.index_fieldname] = IDLIST(
-                        stored=True, field_boost=field_class.boost
-                    )
+                    schema_fields[field_class.index_fieldname] = IDLIST(stored=True, field_boost=field_class.boost)
                 else:
                     schema_fields[field_class.index_fieldname] = KEYWORD(
                         stored=True,
@@ -46,9 +43,7 @@ class WhooshJiebaSearchBackend(WhooshSearchBackend):
                         field_boost=field_class.boost,
                     )
             elif field_class.field_type in ["date", "datetime"]:
-                schema_fields[field_class.index_fieldname] = DATETIME(
-                    stored=field_class.stored, sortable=True
-                )
+                schema_fields[field_class.index_fieldname] = DATETIME(stored=field_class.stored, sortable=True)
             elif field_class.field_type == "integer":
                 schema_fields[field_class.index_fieldname] = NUMERIC(
                     stored=field_class.stored,
@@ -62,9 +57,7 @@ class WhooshJiebaSearchBackend(WhooshSearchBackend):
                     field_boost=field_class.boost,
                 )
             elif field_class.field_type == "boolean":
-                schema_fields[field_class.index_fieldname] = BOOLEAN(
-                    stored=field_class.stored
-                )
+                schema_fields[field_class.index_fieldname] = BOOLEAN(stored=field_class.stored)
             elif field_class.field_type == "ngram":
                 schema_fields[field_class.index_fieldname] = NGRAM(
                     minsize=3,
@@ -94,8 +87,7 @@ class WhooshJiebaSearchBackend(WhooshSearchBackend):
 
         if len(schema_fields) <= initial_key_count:
             raise SearchBackendError(
-                "No fields were found in any search_indexes. "
-                "Please correct this before attempting to search."
+                "No fields were found in any search_indexes. Please correct this before attempting to search."
             )
 
         return (content_field_name, Schema(**schema_fields))
@@ -134,18 +126,14 @@ class WhooshJiebaSearchBackend(WhooshSearchBackend):
                     index = unified_index.get_index(model)
                     string_key = str(key)
 
-                    if string_key in index.fields and hasattr(
-                        index.fields[string_key], "convert"
-                    ):
+                    if string_key in index.fields and hasattr(index.fields[string_key], "convert"):
                         if index.fields[string_key].is_multivalued:
                             if value is None or len(value) == 0:
                                 additional_fields[string_key] = []
                             else:
                                 additional_fields[string_key] = value.split(",")
                         else:
-                            additional_fields[string_key] = index.fields[
-                                string_key
-                            ].convert(value)
+                            additional_fields[string_key] = index.fields[string_key].convert(value)
                     else:
                         additional_fields[string_key] = self._to_python(value)
 

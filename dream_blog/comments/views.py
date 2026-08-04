@@ -33,23 +33,17 @@ def inject_comment_target(func):
             target = model.objects.get(pk=object_pk)
             view.kwargs["target"] = target
         except (LookupError, TypeError):
-            return CommentPostBadRequest(
-                "Invalid content_type value: %r" % escape(ctype)
-            )
+            return CommentPostBadRequest(f"Invalid content_type value: {escape(ctype)!r}")
         except AttributeError:
-            return CommentPostBadRequest(
-                "The given content-type %r does not resolve to a valid model."
-                % escape(ctype)
-            )
+            return CommentPostBadRequest(f"The given content-type {escape(ctype)!r} does not resolve to a valid model.")
         except ObjectDoesNotExist:
             return CommentPostBadRequest(
-                "No object matching content-type %r and object PK %r exists."
-                % (escape(ctype), escape(object_pk))
+                f"No object matching content-type {escape(ctype)!r} and object PK {escape(object_pk)!r} exists."
             )
         except (ValueError, ValidationError) as e:
             return CommentPostBadRequest(
-                "Attempting to get content-type %r and object PK %r raised %s"
-                % (escape(ctype), escape(object_pk), e.__class__.__name__)
+                f"Attempting to get content-type {escape(ctype)!r} "
+                f"and object PK {escape(object_pk)!r} raised {e.__class__.__name__}"
             )
         return func(view, *args, **kwargs)
 
@@ -88,9 +82,7 @@ class CommentPostView(FormView):
         return get_form()
 
     def form_invalid(self, form):
-        return CommentPostBadRequest(
-            "The comment form failed verification: %s" % escape(str(form.errors))
-        )
+        return CommentPostBadRequest(f"The comment form failed verification: {escape(str(form.errors))}")
 
     def form_valid(self, form):
         request = self.request
@@ -99,21 +91,16 @@ class CommentPostView(FormView):
         comment.ip_address = request.META.get("REMOTE_ADDR", None) or None
         comment.user = request.user
 
-        responses = signals.comment_will_be_posted.send(
-            sender=comment.__class__, comment=comment, request=request
-        )
+        responses = signals.comment_will_be_posted.send(sender=comment.__class__, comment=comment, request=request)
 
         for receiver, response in responses:
             if response is False:
                 return CommentPostBadRequest(
-                    "comment_will_be_posted receiver %r killed the comment"
-                    % receiver.__name__
+                    f"comment_will_be_posted receiver {receiver.__name__!r} killed the comment"
                 )
 
         comment.save()
-        signals.comment_was_posted.send(
-            sender=comment.__class__, comment=comment, request=request
-        )
+        signals.comment_was_posted.send(sender=comment.__class__, comment=comment, request=request)
 
         context = self.get_context_data(comment=comment, form=form)
         context["is_new"] = True
@@ -130,11 +117,9 @@ class CommentPostView(FormView):
 
         if form.security_errors():
             return CommentPostBadRequest(
-                "The comment form failed security verification: %s"
-                % escape(str(form.security_errors()))
+                f"The comment form failed security verification: {escape(str(form.security_errors()))}"
             )
 
         if form.is_valid():
             return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)

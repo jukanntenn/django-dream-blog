@@ -7,9 +7,7 @@ from users.models import User
 
 @pytest.fixture
 def user() -> User:
-    return User.objects.create_user(
-        username="user", password="password", email="user@example.com"
-    )
+    return User.objects.create_user(username="user", password="password", email="user@example.com")
 
 
 @pytest.fixture

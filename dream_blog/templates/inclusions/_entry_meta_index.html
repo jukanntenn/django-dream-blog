@@ -2,6 +2,6 @@
 {# Entry meta info for index pages: date, views, comments with dot separators #}
 {# Design intent: Compact layout with clear visual separation using dot separators #}
 <div class="text-slate-500 dark:text-slate-400 text-sm mt-3">
-  <span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.pub_date|date:"Y-m-d" }}</span><span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.views|default:0 }} 阅读</span><a href="{{ entry|entry_url }}#comment-area"
-     class="text-slate-700 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-150">{{ entry.comment_count }} 评论</a>
+    <span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.pub_date|date:"Y-m-d" }}</span><span class="after:content-['•'] after:mx-1 text-slate-700 dark:text-slate-400">{{ entry.views|default:0 }} 阅读</span><a href="{{ entry|entry_url }}#comment-area"
+   class="text-slate-700 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-150">{{ entry.comment_count }} 评论</a>
 </div>

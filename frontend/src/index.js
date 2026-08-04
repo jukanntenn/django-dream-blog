@@ -1,5 +1,4 @@
-import Offcanvas from "./offcanvas";
-import Scrollspy from "./scrollspy";
+import { Offcanvas, Scrollspy } from "@jukanntenn/kutsu";
 import Backtop from "./backtop";
 import ThemeSwitcher from "./theme-switcher";
 import Comment from "./comment";

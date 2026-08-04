@@ -38,10 +38,9 @@ def show_profile():
         ],
     }
 
-    context = {
+    return {
         "profile": profile,
     }
-    return context
 
 
 @register.simple_tag(takes_context=True)

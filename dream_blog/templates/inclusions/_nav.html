@@ -5,141 +5,164 @@
 <div id="site-nav"
      class="sticky top-0 z-[60] w-full flex-none transition-all duration-300"
      data-blur-nav>
-  <div class="max-w-[90rem] mx-auto px-4 lg:px-8">
-    <div class="py-4">
-      <div class="relative flex items-center justify-between">
-        <div class="flex items-center">
-          <span class="inline-block lg:hidden" id="offcanvas-trigger">
-            <img class="dark:invert" height="20" width="20" src="{% static 'menu-fill.svg' %}" />
-          </span>
-          <a href="{% url 'home' %}"
-             class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0">
-            <span class="text-3xl whitespace-nowrap">🦋</span>
-          </a>
-        </div>
-        <div class="flex items-center gap-2">
-          <a href="{% url 'archives' %}"
-             class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
-            归档
-          </a>
-          <a href="{% url 'favorites:issue_list' %}"
-             class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
-            精选
-          </a>
-          <a href="{% url 'donate:donate' %}"
-             class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
-            赞助
-          </a>
-          <form action="{% url 'search:search' %}" class="hidden md:flex items-center">
-            <div class="relative flex items-center">
-              <input name="q"
-                     type="search"
-                     placeholder="搜索..."
-                     required
-                     class="pr-10 pl-3 py-2 text-sm bg-slate-100 dark:bg-slate-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500/50 placeholder:text-slate-400 dark:placeholder:text-slate-500 w-48 focus:w-64 transition-all duration-200" />
-              <button type="submit"
-                      class="absolute right-2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-                      aria-label="搜索">
-                <img class="dark:invert" height="16" width="16" src="{% static 'search-line.svg' %}" alt="搜索" />
-              </button>
+    <div class="max-w-[90rem] mx-auto px-4 lg:px-8">
+        <div class="py-4">
+            <div class="relative flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="inline-block lg:hidden" id="offcanvas-trigger">
+                        <img class="dark:invert"
+                             height="20"
+                             width="20"
+                             src="{% static 'menu-fill.svg' %}" />
+                    </span>
+                    <a href="{% url 'home' %}"
+                       class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0">
+                        <span class="text-3xl whitespace-nowrap">🦋</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="{% url 'archives' %}"
+                       class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
+                        归档
+                    </a>
+                    <a href="{% url 'favorites:issue_list' %}"
+                       class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
+                        精选
+                    </a>
+                    <a href="{% url 'donate:donate' %}"
+                       class="hidden lg:flex px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors">
+                        赞助
+                    </a>
+                    <form action="{% url 'search:search' %}"
+                          class="hidden md:flex items-center">
+                        <div class="relative flex items-center">
+                            <input name="q"
+                                   type="search"
+                                   placeholder="搜索..."
+                                   required
+                                   class="pr-10 pl-3 py-2 text-sm bg-slate-100 dark:bg-slate-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500/50 placeholder:text-slate-400 dark:placeholder:text-slate-500 w-48 focus:w-64 transition-all duration-200" />
+                            <button type="submit"
+                                    class="absolute right-2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                                    aria-label="搜索">
+                                <img class="dark:invert"
+                                     height="16"
+                                     width="16"
+                                     src="{% static 'search-line.svg' %}"
+                                     alt="搜索" />
+                            </button>
+                        </div>
+                    </form>
+                    <button id="search-toggle"
+                            class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors md:hidden"
+                            aria-label="搜索">
+                        <img class="dark:invert"
+                             height="20"
+                             width="20"
+                             src="{% static 'search-line.svg' %}"
+                             alt="搜索" />
+                    </button>
+                    <!-- Theme switcher button with slate hover state -->
+                    <button id="theme-switcher"
+                            class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
+                            aria-label="切换主题">
+                        <img data-theme-icon="light"
+                             height="20"
+                             width="20"
+                             src="{% static 'sun-fill.svg' %}"
+                             alt="亮色模式"
+                             class="dark:invert hidden" />
+                        <img data-theme-icon="dark"
+                             height="20"
+                             width="20"
+                             src="{% static 'moon-line.svg' %}"
+                             alt="暗色模式"
+                             class="dark:invert hidden" />
+                        <img data-theme-icon="system"
+                             height="20"
+                             width="20"
+                             src="{% static 'contrast-fill.svg' %}"
+                             alt="跟随系统"
+                             class="dark:invert hidden" />
+                    </button>
+                    {% if user.is_authenticated %}
+                        {% notifications_unread as num_unread %}
+                        <a href="{% url 'notify:notification_all' %}"
+                           class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors relative"
+                           aria-label="通知">
+                            <img class="dark:invert{% if num_unread != 0 %} text-cyan-600 dark:text-cyan-400{% endif %}"
+                                 height="20"
+                                 width="20"
+                                 src="{% static 'notification-4-line.svg' %}"
+                                 alt="通知" />
+                            {% if num_unread != 0 %}
+                                <span class="absolute -top-1.5 -right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-400 px-1 text-[10px] font-bold text-white dark:text-slate-900">
+                                    {% if num_unread > 99 %}99+{% else %}{{ num_unread }}{% endif %}
+                                </span>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                    {# Mobile menu dropdown trigger - hidden on desktop #}
+                    <button id="mobile-menu-trigger"
+                            class="lg:hidden p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
+                            aria-label="菜单"
+                            aria-expanded="false"
+                            aria-controls="mobile-menu">
+                        <img class="dark:invert"
+                             height="20"
+                             width="20"
+                             src="{% static 'more-2-fill.svg' %}"
+                             alt="菜单" />
+                    </button>
+                </div>
             </div>
-          </form>
-          <button id="search-toggle"
-                  class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors md:hidden"
-                  aria-label="搜索">
-            <img class="dark:invert" height="20" width="20" src="{% static 'search-line.svg' %}" alt="搜索" />
-          </button>
-          <!-- Theme switcher button with slate hover state -->
-          <button id="theme-switcher"
-                  class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
-                  aria-label="切换主题">
-            <img data-theme-icon="light"
-                 height="20"
-                 width="20"
-                 src="{% static 'sun-fill.svg' %}"
-                 alt="亮色模式"
-                 class="dark:invert hidden" />
-            <img data-theme-icon="dark"
-                 height="20"
-                 width="20"
-                 src="{% static 'moon-line.svg' %}"
-                 alt="暗色模式"
-                 class="dark:invert hidden" />
-            <img data-theme-icon="system"
-                 height="20"
-                 width="20"
-                 src="{% static 'contrast-fill.svg' %}"
-                 alt="跟随系统"
-                 class="dark:invert hidden" />
-          </button>
-          {% if user.is_authenticated %}
-            {% notifications_unread as num_unread %}
-            <a href="{% url 'notify:notification_all' %}"
-               class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors relative"
-               aria-label="通知">
-              <img class="dark:invert{% if num_unread != 0 %} text-cyan-600 dark:text-cyan-400{% endif %}" height="20" width="20" src="{% static 'notification-4-line.svg' %}" alt="通知" />
-              {% if num_unread != 0 %}
-                <span class="absolute -top-1.5 -right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-400 px-1 text-[10px] font-bold text-white dark:text-slate-900">
-                  {% if num_unread > 99 %}99+{% else %}{{ num_unread }}{% endif %}
-                </span>
-              {% endif %}
-            </a>
-          {% endif %}
-          {# Mobile menu dropdown trigger - hidden on desktop #}
-          <button id="mobile-menu-trigger"
-                  class="lg:hidden p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
-                  aria-label="菜单"
-                  aria-expanded="false"
-                  aria-controls="mobile-menu">
-            <img class="dark:invert" height="20" width="20" src="{% static 'more-2-fill.svg' %}" alt="菜单" />
-          </button>
+            {# Mobile dropdown menu #}
+            <div id="mobile-menu"
+                 class="hidden lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 shadow-lg"
+                 aria-hidden="true">
+                <div class="max-w-[90rem] mx-auto px-4 lg:px-8 py-3">
+                    <div class="flex flex-col gap-1">
+                        <a href="{% url 'archives' %}"
+                           class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+                            归档
+                        </a>
+                        <a href="{% url 'favorites:issue_list' %}"
+                           class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+                            精选
+                        </a>
+                        <a href="{% url 'donate:donate' %}"
+                           class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+                            赞助
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="search-overlay"
+                 class="hidden fixed inset-0 top-16 z-50 bg-white/95 dark:bg-slate-900/95 md:hidden">
+                <div class="container mx-auto px-4 py-4">
+                    <form action="{% url 'search:search' %}" class="flex items-center gap-2">
+                        <button id="search-close"
+                                type="button"
+                                class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                aria-label="关闭">
+                            <img class="dark:invert"
+                                 height="20"
+                                 width="20"
+                                 src="{% static 'close-line.svg' %}"
+                                 alt="关闭" />
+                        </button>
+                        <input name="q"
+                               type="search"
+                               placeholder="搜索..."
+                               required
+                               autofocus
+                               class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+                        <button type="submit"
+                                class="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors">
+                            搜索
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-
-      {# Mobile dropdown menu #}
-      <div id="mobile-menu"
-           class="hidden lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 shadow-lg"
-           aria-hidden="true">
-        <div class="max-w-[90rem] mx-auto px-4 lg:px-8 py-3">
-          <div class="flex flex-col gap-1">
-            <a href="{% url 'archives' %}"
-               class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
-              归档
-            </a>
-            <a href="{% url 'favorites:issue_list' %}"
-               class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
-              精选
-            </a>
-            <a href="{% url 'donate:donate' %}"
-               class="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
-              赞助
-            </a>
-          </div>
-        </div>
-      </div>
-      <div id="search-overlay"
-           class="hidden fixed inset-0 top-16 z-50 bg-white/95 dark:bg-slate-900/95 md:hidden">
-        <div class="container mx-auto px-4 py-4">
-          <form action="{% url 'search:search' %}" class="flex items-center gap-2">
-            <button id="search-close"
-                    type="button"
-                    class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    aria-label="关闭">
-              <img class="dark:invert" height="20" width="20" src="{% static 'close-line.svg' %}" alt="关闭" />
-            </button>
-            <input name="q"
-                   type="search"
-                   placeholder="搜索..."
-                   required
-                   autofocus
-                   class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
-            <button type="submit"
-                    class="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors">
-              搜索
-            </button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
 </div>

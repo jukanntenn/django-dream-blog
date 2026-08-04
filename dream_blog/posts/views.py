@@ -1,9 +1,8 @@
+from core.entries import get_index_queryset
 from core.views import SetHeadlineMixin
 from django.views.generic import ListView
 from hitcount.views import HitCountDetailView
 from posts.models import Post
-
-from core.entries import get_index_queryset
 
 
 class PostDetailView(SetHeadlineMixin, HitCountDetailView):
@@ -12,12 +11,10 @@ class PostDetailView(SetHeadlineMixin, HitCountDetailView):
     template_name = "posts/detail.html"
 
     def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        return response
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
         return Post.objects.visible().with_comment_count()

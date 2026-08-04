@@ -1,12 +1,10 @@
 from dataclasses import dataclass
-from typing import Optional
 
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import F, Value, CharField, IntegerField, Subquery, OuterRef
+from django.db.models import CharField, F, IntegerField, OuterRef, Subquery, Value
 from django.db.models.functions import Cast
 from django.urls import reverse
-
 from hitcount.models import HitCount
 
 
@@ -18,8 +16,8 @@ class IndexEntry:
     title: str
     brief: str
     views: int
-    parent_slug: Optional[str]
-    parent_title: Optional[str]
+    parent_slug: str | None
+    parent_title: str | None
     comment_count: int
     pub_date: str  # ISO format date string
     type: str  # 'p', 'a', or 'm'
@@ -28,16 +26,17 @@ class IndexEntry:
         """Get URL based on entry type."""
         if self.type == "p":
             return reverse("posts:detail", kwargs={"pk": self.id})
-        elif self.type == "a":
+        if self.type == "a":
             return reverse(
                 "columns:article_detail",
                 kwargs={"slug": self.parent_slug, "pk": self.id},
             )
-        elif self.type == "m":
+        if self.type == "m":
             return reverse(
                 "tutorials:material_detail",
                 kwargs={"slug": self.parent_slug, "pk": self.id},
             )
+        return None
 
 
 def _get_hit_count_subquery(model_class):

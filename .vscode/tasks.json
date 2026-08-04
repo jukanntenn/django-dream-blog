@@ -49,6 +49,41 @@
       "dependsOrder": "parallel",
       "problemMatcher": [],
       "icon": { "id": "rocket", "color": "terminal.ansiBlue" }
+    },
+    {
+      "label": "migrate",
+      "type": "shell",
+      "command": "uv",
+      "args": ["run", "python", "manage.py", "migrate"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "pytest (unit)",
+      "type": "shell",
+      "command": "uv",
+      "args": ["run", "pytest", "-m", "not e2e"],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "e2e: setup + test",
+      "type": "shell",
+      "command": "bash e2e/setup-db.sh && cd e2e && npm test",
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "lint (prek)",
+      "type": "shell",
+      "command": "prek",
+      "args": ["run", "--all-files"],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "typecheck (mypy)",
+      "type": "shell",
+      "command": "uv",
+      "args": ["run", "mypy", "dream_blog"],
+      "presentation": { "reveal": "always", "panel": "shared" }
     }
   ]
 }

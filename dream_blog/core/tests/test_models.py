@@ -58,24 +58,14 @@ def test_get_next_or_previous_without_default_ordering():
     assert entry3.get_next_or_previous(is_next=True) is None
 
     # ordering by publish_date
-    assert (
-        entry1.get_next_or_previous(is_next=False, ordering=["-publish_date"]) is None
-    )
-    assert (
-        entry1.get_next_or_previous(is_next=True, ordering=["-publish_date"]) == entry3
-    )
+    assert entry1.get_next_or_previous(is_next=False, ordering=["-publish_date"]) is None
+    assert entry1.get_next_or_previous(is_next=True, ordering=["-publish_date"]) == entry3
 
-    assert (
-        entry2.get_next_or_previous(is_next=False, ordering=["-publish_date"]) == entry3
-    )
+    assert entry2.get_next_or_previous(is_next=False, ordering=["-publish_date"]) == entry3
     assert entry2.get_next_or_previous(is_next=True, ordering=["-publish_date"]) is None
 
-    assert (
-        entry3.get_next_or_previous(is_next=False, ordering=["-publish_date"]) == entry1
-    )
-    assert (
-        entry3.get_next_or_previous(is_next=True, ordering=["-publish_date"]) == entry2
-    )
+    assert entry3.get_next_or_previous(is_next=False, ordering=["-publish_date"]) == entry1
+    assert entry3.get_next_or_previous(is_next=True, ordering=["-publish_date"]) == entry2
 
 
 def test_get_next_or_previous_with_default_ordering():
@@ -94,13 +84,8 @@ def test_get_next_or_previous_with_default_ordering():
     assert entry3.get_next_or_previous(is_next=True) == entry2
 
     # extra kwargs
-    assert (
-        entry2.get_next_or_previous(is_next=False, value_fields=["rank"], rank__gt=2)
-        is None
-    )
-    assert entry2.get_next_or_previous(
-        is_next=True, value_fields=["rank"], rank__gt=2
-    ) == {"rank": 3}
+    assert entry2.get_next_or_previous(is_next=False, value_fields=["rank"], rank__gt=2) is None
+    assert entry2.get_next_or_previous(is_next=True, value_fields=["rank"], rank__gt=2) == {"rank": 3}
 
 
 def test_get_next_or_previous_no_hidden():

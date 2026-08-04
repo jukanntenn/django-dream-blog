@@ -1,7 +1,6 @@
+from core.entries import get_index_queryset
 from core.views import SetHeadlineMixin
 from django.views.generic import ListView
-
-from core.entries import get_index_queryset
 
 
 class HomeView(SetHeadlineMixin, ListView):

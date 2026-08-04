@@ -1,6 +1,3 @@
-import random
-
-from posts.models import Post
 from posts.tests.factories import PostFactory
 from users.models import User
 

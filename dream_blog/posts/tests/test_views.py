@@ -22,7 +22,7 @@ def test_post_detail_view_headline(tp: TestCase, post: Post):
 def test_post_detail_view_has_donate_panel(tp: TestCase, post: Post):
     response = tp.get_check_200("posts:detail", pk=post.pk)
     tp.assertContains(response, "赞赏支持")
-    tp.assertContains(response, 'data-donate-panel')
+    tp.assertContains(response, "data-donate-panel")
 
 
 def test_post_detail_view_hits(tp: TestCase, post: Post):
