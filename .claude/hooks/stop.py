@@ -14,9 +14,9 @@ Diagnostics:
 </ruff_output>
 
 Required:
-1. Fix every diagnostic above with a real code change. Do not silence them with
-   `# noqa`, inline rule disables, or `type: ignore` - only treat a diagnostic
-   as a false positive if you can justify why.
+1. Fix every diagnostic above with a real code change. Do not silence them
+   with `# noqa`, inline rule disables, or `type: ignore` - only treat a
+   diagnostic as a false positive if you can justify why.
 2. After editing, run `uv run ruff check` yourself to verify the tree is clean.
 3. Only attempt to finish again once that command exits 0 with no output.
 
@@ -35,9 +35,8 @@ def main() -> None:
         return
 
     try:
-        # `uv` is resolved from PATH; argv is a fixed literal, not tool input.
         result = subprocess.run(
-            ["uv", "run", "ruff", "check", "--fix"],  # noqa: S607 - trusted fixed argv
+            ["uv", "run", "ruff", "check", "--fix"],
             capture_output=True,
             text=True,
             check=False,

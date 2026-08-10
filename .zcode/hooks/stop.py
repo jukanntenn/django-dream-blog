@@ -14,15 +14,11 @@ Diagnostics:
 </ruff_output>
 
 Required:
-1. Fix every diagnostic above with a real code change. Do not silence them with
-   `# noqa`, inline rule disables, or `type: ignore` — only treat a diagnostic
-   as a false positive if you can justify why.
+1. Fix every diagnostic above with a real code change. Do not silence them with `# noqa`, inline rule disables, or `type: ignore` — only treat a diagnostic as a false positive if you can justify why.
 2. After editing, run `uv run ruff check` yourself to verify the tree is clean.
 3. Only attempt to finish again once that command exits 0 with no output.
 
-This enforcement fires once per turn — the stop hook will not block a second
-time. If you stop again with lint errors remaining, they will slip through to
-CI. Verify before you finish."""
+This enforcement fires once per turn — the stop hook will not block a second time. If you stop again with lint errors remaining, they will slip through to CI. Verify before you finish."""
 
 
 def main() -> None:
@@ -35,13 +31,7 @@ def main() -> None:
         return
 
     try:
-        # `uv` is resolved from PATH; argv is a fixed literal, not tool input.
-        result = subprocess.run(
-            ["uv", "run", "ruff", "check", "--fix"],  # noqa: S607 - trusted fixed argv
-            capture_output=True,
-            text=True,
-            check=False,
-        )
+        result = subprocess.run(["uv", "run", "ruff", "check", "--fix"], capture_output=True, text=True)
     except FileNotFoundError:
         print("[zcode-stop-hook] uv not found on PATH; skipping lint gate", file=sys.stderr)
         return

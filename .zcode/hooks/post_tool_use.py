@@ -31,8 +31,7 @@ def main() -> None:
 
     for cmd in commands_for(PurePath(raw_path)):
         try:
-            # `cmd` is built from a fixed literal in commands_for(), not tool input.
-            result = subprocess.run(cmd, capture_output=True, text=True, check=False)  # noqa: S603
+            result = subprocess.run(cmd, capture_output=True, text=True)
         except FileNotFoundError:
             print(f"[zcode-post-tool-use] uv not found on PATH; skipped {cmd[3]}", file=sys.stderr)
             continue
