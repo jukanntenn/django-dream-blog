@@ -9,3 +9,9 @@ stopasgroup=true
 killasgroup=true
 user={{ user }}
 environment=DJANGO_READ_DOT_ENV_FILE="yes"
+stdout_logfile={{ project_logs_path }}/django-dream-blog-huey.out.log
+stderr_logfile={{ project_logs_path }}/django-dream-blog-huey.err.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+stderr_logfile_maxbytes=50MB
+stderr_logfile_backups=10

@@ -12,7 +12,9 @@
     cmd: "{{ project_venv_path }}/bin/python manage.py {{ item }} --settings=config.settings.production"
     chdir: "{{ project_path }}"
   loop:
-    - collectstatic --noinput
+    # --clear drops the previous deploy's hashed Vite assets; without it
+    # staticfiles/assets/ grows without bound across deploys.
+    - collectstatic --noinput --clear
     - migrate
   environment:
     DJANGO_READ_DOT_ENV_FILE: yes

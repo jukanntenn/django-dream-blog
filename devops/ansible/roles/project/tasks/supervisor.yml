@@ -1,4 +1,12 @@
 ---
+- name: Ensure program log directory exists
+  ansible.builtin.file:
+    path: "{{ project_logs_path }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0755"
+    state: directory
+
 - name: Copy config file
   ansible.builtin.template:
     src: "{{ item }}.j2"

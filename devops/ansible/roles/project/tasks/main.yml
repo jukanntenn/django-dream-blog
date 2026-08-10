@@ -2,6 +2,7 @@
 - import_tasks: repo.yml
 - import_tasks: envfile.yml
 - import_tasks: deps.yml
+- import_tasks: frontend.yml
 - import_tasks: management.yml
 - import_tasks: supervisor.yml
   become: yes

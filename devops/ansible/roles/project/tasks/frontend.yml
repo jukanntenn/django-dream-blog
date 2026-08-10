@@ -1,0 +1,22 @@
+---
+# Node.js and corepack are provisioned by hand on the deploy host, so pnpm is
+# referenced by absolute path: Ansible's command module uses a non-login,
+# non-interactive shell that never sources /etc/profile.d or ~/.profile.
+- name: Install frontend dependencies
+  ansible.builtin.command:
+    cmd: "{{ pnpm }} install --frozen-lockfile"
+    chdir: "{{ project_path }}/frontend"
+  environment: &frontend_env
+    # node must be on PATH even though pnpm is absolute: the tsc and vite bins
+    # that `pnpm build` spawns start with a `#!/usr/bin/env node` shebang.
+    PATH: "{{ node_bin }}:{{ ansible_env.PATH }}"
+    # Ansible gives corepack no TTY; without this it aborts rather than
+    # provisioning the pnpm version pinned in package.json's packageManager.
+    COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
+
+- name: Build frontend assets
+  ansible.builtin.command:
+    cmd: "{{ pnpm }} build"
+    chdir: "{{ project_path }}/frontend"
+  environment: *frontend_env
+  notify: restart program

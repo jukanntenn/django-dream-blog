@@ -4,6 +4,10 @@ home: /home/{{ user }}
 local_bin: "{{ home }}/.local/bin"
 uv: "{{ local_bin }}/uv"
 python3: "{{ local_bin }}/python3"
+# Node.js is installed by hand on the deploy host; point node_bin at the
+# directory holding the node binary and corepack's pnpm shim.
+node_bin: /home/alice/.nvm/versions/node/v24.19.0/bin
+pnpm: "{{ node_bin }}/pnpm"
 
 apps_path: "{{ home }}/apps"
 project_name: django-dream-blog
@@ -11,6 +15,7 @@ project_repo: "git@github.com:jukanntenn/django-dream-blog.git"
 project_version: main
 project_path: "{{ apps_path }}/{{ project_name }}"
 project_venv_path: "{{ project_path }}/.venv"
+project_logs_path: "{{ home }}/var/log/{{ project_name }}"
 project_www_path: "{{ www_path }}/{{ project_name }}"
 domain: zmrenwu.com
 port: 8000
