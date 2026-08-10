@@ -1,7 +1,12 @@
-function loadMermaid() {
+/**
+ * Renders Mermaid diagrams in the document.
+ * Loads the Mermaid runtime lazily from CDN on first use.
+ */
+
+function loadMermaid(): Promise<void> {
   if (window.mermaid) return Promise.resolve();
   if (window.__mermaidLoadingPromise) return window.__mermaidLoadingPromise;
-  window.__mermaidLoadingPromise = new Promise((resolve, reject) => {
+  window.__mermaidLoadingPromise = new Promise<void>((resolve, reject) => {
     const script = document.createElement("script");
     script.src = "https://unpkg.com/mermaid@9.4.0/dist/mermaid.min.js";
     script.onload = () => resolve();
@@ -11,22 +16,17 @@ function loadMermaid() {
   return window.__mermaidLoadingPromise;
 }
 
-function init() {
+function init(): void {
   if (!document.querySelector(".mermaid")) return;
 
   loadMermaid()
     .then(() => {
       if (!window.mermaid) return;
       try {
-        window.mermaid.init({
-          startOnLoad: false,
-          securityLevel: "loose",
-        });
+        window.mermaid.init({ startOnLoad: false, securityLevel: "loose" });
       } catch {}
 
-      const nodes = Array.from(
-        document.querySelectorAll(".mermaid:not([data-processed])"),
-      );
+      const nodes = Array.from(document.querySelectorAll(".mermaid:not([data-processed])"));
       if (!nodes.length) return;
       try {
         window.mermaid.init(undefined, nodes);

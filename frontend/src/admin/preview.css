@@ -3,9 +3,9 @@
  * Uses shared Tailwind configuration with dark mode support
  * Aligned with Prism Design System
  */
-@import "./tailwind-base.css";
-@import "../friendly.css";
-@import "./prose.css";
+@import "../styles/tailwind-base.css";
+@import "../styles/friendly.css";
+@import "../styles/prose.css";
 
 /* Markdown field widget styles */
 

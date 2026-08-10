@@ -18,11 +18,9 @@
                    target="_blank"
                    rel="noopener noreferrer"
                    aria-label="{{ slink.name|default:'Social link' }}">
-                    <img class="dark:invert w-5 h-5"
-                         alt="{{ slink.name|default:'Social icon' }}"
-                         height="20"
-                         width="20"
-                         src="{% static slink.icon %}" />
+                    <span class="icon w-5 h-5"
+                          style="--icon-url: url('{% static slink.icon %}')"
+                          aria-hidden="true"></span>
                 </a>
             {% endif %}
         {% endfor %}

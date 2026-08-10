@@ -1,9 +1,17 @@
-@import './styles/tailwind-base.css';
-@import './styles/design-tokens.css';
-@import './styles/components.css';
-@import './styles/prose.css';
+@import './tailwind-base.css';
+@import './design-tokens.css';
+@import './components.css';
+@import './prose.css';
 
-@source '../../dream_blog/templates/**/*.{html,js}';
+@source '../../../dream_blog/templates/**/*.{html,js}';
+@source '../lib/**/*.{ts,js}';
+
+/*
+  Safelist class names built dynamically via template literals in lib/*.ts;
+  Tailwind's scanner cannot see through `${...}` interpolation, so these
+  variants must be declared explicitly to be emitted.
+*/
+@source inline("{toast--success,toast--error,toast--info}");
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,

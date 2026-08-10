@@ -1074,3 +1074,25 @@ input[name="suffix"] {
 input[type="email"][name="email"] {
   @apply input;
 }
+
+
+/* ============================================
+   Icon Utility (CSS mask + currentColor)
+   Single-color SVG icons rendered as masks so
+   they inherit text color (theme-aware, no
+   `dark:invert` hacks). Usage:
+   <span class="icon h-5 w-5" style="--icon-url: url('...svg')" aria-hidden="true"></span>
+   ============================================ */
+
+@utility icon {
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}

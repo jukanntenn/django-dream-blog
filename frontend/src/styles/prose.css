@@ -263,18 +263,23 @@
 
 .prose .admonition .admonition-title {
   @apply mb-2 flex items-center text-sm font-semibold before:inline-block before:w-4 before:h-4 before:align-top;
+  /* Icon rendered as a mask so it inherits the title color (theme-aware) */
 }
 
-.prose .admonition.danger .admonition-title,
-.prose .admonition.error .admonition-title,
-.prose .admonition.warning .admonition-title,
-.prose .admonition.caution .admonition-title,
-.prose .admonition.attention .admonition-title,
-.prose .admonition.important .admonition-title,
-.prose .admonition.note .admonition-title,
-.prose .admonition.hint .admonition-title,
-.prose .admonition.tip .admonition-title {
-  @apply before:bg-no-repeat before:bg-contain before:mr-1;
+.prose .admonition .admonition-title::before {
+  background-color: currentColor;
+  -webkit-mask-image: var(--admonition-icon);
+  mask-image: var(--admonition-icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.prose .admonition .admonition-title {
+  @apply before:mr-1;
 }
 
 .prose .admonition.danger,
@@ -284,7 +289,7 @@
 
 .prose .admonition.danger .admonition-title,
 .prose .admonition.error .admonition-title {
-  @apply before:bg-[url('/static/error-warning-fill.svg')];
+  --admonition-icon: url('/static/error-warning-fill.svg');
 }
 
 .prose .admonition.warning,
@@ -296,7 +301,7 @@
 .prose .admonition.warning .admonition-title,
 .prose .admonition.caution .admonition-title,
 .prose .admonition.attention .admonition-title {
-  @apply before:bg-[url('/static/alert-fill.svg')];
+  --admonition-icon: url('/static/alert-fill.svg');
 }
 
 .prose .admonition.important,
@@ -306,7 +311,7 @@
 
 .prose .admonition.important .admonition-title,
 .prose .admonition.note .admonition-title {
-  @apply before:bg-[url('/static/information-fill.svg')];
+  --admonition-icon: url('/static/information-fill.svg');
 }
 
 .prose .admonition.hint,
@@ -316,7 +321,7 @@
 
 .prose .admonition.hint .admonition-title,
 .prose .admonition.tip .admonition-title {
-  @apply before:bg-[url('/static/lightbulb-line.svg')];
+  --admonition-icon: url('/static/lightbulb-line.svg');
 }
 
 /* Tabbed content */
@@ -342,4 +347,48 @@
 
 .prose .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
   @apply block;
+}
+
+/* ============================================================
+   Admin preview isolation
+   Django admin's unlayered CSS (base.css / forms.css) targets
+   bare elements (e.g. `form .aligned ul { margin-left: 160px }`,
+   `li, dt, dd { font-size: 0.8125rem }`, `ul > li { square }`).
+   These rules only ever match inside the admin markdown widget
+   (`.md-field__preview`), and their compound specificity (0,2,1)
+   outranks the admin rules they neutralize. They never match on
+   the public site, which has no `.md-field__preview` elements.
+   ============================================================ */
+
+.md-field__preview.prose p,
+.md-field__preview.prose ul,
+.md-field__preview.prose ol,
+.md-field__preview.prose dl {
+  @apply my-5 mx-0;
+}
+
+.md-field__preview.prose ul,
+.md-field__preview.prose ol {
+  @apply pl-6 pr-0;
+}
+
+.md-field__preview.prose li {
+  @apply my-2;
+  font-size: inherit;
+  line-height: inherit;
+  list-style-type: inherit;
+  padding: 0;
+}
+
+.md-field__preview.prose dt {
+  font-weight: inherit;
+  margin-top: 0;
+}
+
+.md-field__preview.prose blockquote {
+  font-size: inherit;
+}
+
+.md-field__preview.prose pre code {
+  font-size: inherit;
 }

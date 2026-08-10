@@ -35,8 +35,9 @@
               href="{% url 'rss' %}" />
         {% if debug %}
             <link rel="stylesheet"
-                  href="{% vite_asset_url 'src/friendly.css' %}?direct" />
-            <link rel="stylesheet" href="{% vite_asset_url 'src/index.css' %}?direct" />
+                  href="{% vite_asset_url 'src/styles/friendly.css' %}?direct" />
+            <link rel="stylesheet"
+                  href="{% vite_asset_url 'src/styles/main.css' %}?direct" />
         {% endif %}
         {% vite_hmr_client %}
         {% vite_asset 'src/main.ts' %}
@@ -45,24 +46,25 @@
         {% include "inclusions/_nav.html" %}
         {# Desktop: wider layout (max-w-[90rem]=1440px) for better content display on large screens #}
         <div class="max-w-[90rem] mx-auto px-4 lg:px-8">
-            <div class="flex flex-col lg:flex-row">
+            {% comment %}Three-column grid: both sidebars stay in flow, so their edges always
+            align with the container padding and the nav logo at any width{% endcomment %}
+            <div class="lg:grid lg:grid-cols-[16rem_minmax(0,1fr)_16rem]">
                 <!-- left -->
-                <!-- Left sidebar: fixed on desktop, slide-in on mobile -->
-                {# Mobile: background matches sidebar-card style; Desktop: transparent #}
-                <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 opacity-100 right-auto overflow-y-auto scrollbar-hide bottom-0 left-0 duration-300 z-50 bg-slate-50/95 dark:bg-slate-800/95 lg:bg-transparent lg:dark:bg-transparent shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:left-[max(4rem,calc(50%-43rem))] top-16 lg:w-64"
+                <!-- Left sidebar: slide-in drawer on mobile, sticky column on desktop -->
+                <div class="fixed -translate-x-full pl-4 pr-6 pt-6 lg:pl-0 opacity-100 right-auto overflow-y-auto scrollbar-hide bottom-0 left-0 duration-300 z-50 bg-slate-50/95 dark:bg-slate-800/95 lg:bg-transparent lg:dark:bg-transparent shadow-[4px_0_6px_-4px_rgb(0,0,0,0.1)] lg:shadow-none w-2/3 lg:translate-x-0 lg:w-full lg:static lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100vh-4.5rem)]"
                      id="left">
                     {% block left %}
                         {% show_profile %}
                     {% endblock left %}
                 </div>
                 <!-- main -->
-                <div class="w-full pt-6 lg:px-64">
+                <div class="w-full pt-6 min-w-0">
                     {% block main %}
                     {% endblock main %}
                 </div>
                 <!-- right -->
-                {# 右侧边栏：固定定位，可滚动但隐藏滚动条，保持视觉简洁 #}
-                <div class="lg:pl-6 lg:pr-4 w-full lg:fixed lg:w-64 lg:right-[max(2rem,calc(50%-43rem))] lg:top-16 lg:pt-6 lg:overflow-y-auto lg:bottom-0 scrollbar-thin">
+                {# 右侧边栏：sticky 随滚动，独立滚动但隐藏滚动条 #}
+                <div class="w-full pt-6 lg:pt-6 lg:pl-6 lg:pr-4 lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100vh-4.5rem)] lg:overflow-y-auto scrollbar-thin">
                     {% block right %}
                         {% show_tutorials 999 %}
                         {% show_columns 999 %}
@@ -72,8 +74,10 @@
             </div>
         </div>
         <span id="backtop"
-              class="opacity-0 fixed bottom-4 right-4 lg:right-[max(0px,calc(50%-29rem))] cursor-pointer transition-opacity duration-500 ease-in dark:invert">
-            <img alt="" height="24" width="24" src="{% static 'arrow-up-line.svg' %}" />
+              class="opacity-0 fixed bottom-4 right-4 lg:right-[max(0px,calc(50%-29rem))] cursor-pointer transition-opacity duration-500 ease-in text-slate-500 dark:text-slate-400">
+            <span class="icon h-6 w-6"
+                  style="--icon-url: url('{% static 'arrow-up-line.svg' %}')"
+                  aria-hidden="true"></span>
         </span>
         {% include "inclusions/_footer.html" %}
         {% include "share/_share_modal.html" %}

@@ -9,9 +9,8 @@
             data-url="{{ request.build_absolute_uri }}"
             aria-label="Share to WeChat">
         <span aria-hidden="true"
-              class="inline-block h-5 w-5 bg-current [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain] [-webkit-mask-repeat:no-repeat] [-webkit-mask-position:center] [-webkit-mask-size:contain]"
-              style="mask-image: url('{% static 'wechat-fill.svg' %}');
-                     -webkit-mask-image: url('{% static 'wechat-fill.svg' %}')"></span>
+              class="icon h-5 w-5"
+              style="--icon-url: url('{% static 'wechat-fill.svg' %}')"></span>
     </button>
     <button type="button"
             class="share-icon inline-flex items-center justify-center rounded p-1.5 text-red-600 hover:bg-slate-100 hover:text-red-700 dark:text-red-400 dark:hover:bg-slate-700 dark:hover:text-red-300 transition"
@@ -21,9 +20,8 @@
             data-url="{{ request.build_absolute_uri }}"
             aria-label="Share to Xiaohongshu">
         <span aria-hidden="true"
-              class="inline-block h-5 w-5 bg-current [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain] [-webkit-mask-repeat:no-repeat] [-webkit-mask-position:center] [-webkit-mask-size:contain]"
-              style="mask-image: url('{% static 'xiaohongshu.svg' %}');
-                     -webkit-mask-image: url('{% static 'xiaohongshu.svg' %}')"></span>
+              class="icon h-5 w-5"
+              style="--icon-url: url('{% static 'xiaohongshu.svg' %}')"></span>
     </button>
     <button type="button"
             class="share-icon inline-flex items-center justify-center rounded p-1.5 text-yellow-600 hover:bg-slate-100 hover:text-yellow-700 dark:text-yellow-400 dark:hover:bg-slate-700 dark:hover:text-yellow-300 transition"
@@ -33,8 +31,7 @@
             data-url="{{ request.build_absolute_uri }}"
             aria-label="Share to Weibo">
         <span aria-hidden="true"
-              class="inline-block h-5 w-5 bg-current [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain] [-webkit-mask-repeat:no-repeat] [-webkit-mask-position:center] [-webkit-mask-size:contain]"
-              style="mask-image: url('{% static 'weibo-fill.svg' %}');
-                     -webkit-mask-image: url('{% static 'weibo-fill.svg' %}')"></span>
+              class="icon h-5 w-5"
+              style="--icon-url: url('{% static 'weibo-fill.svg' %}')"></span>
     </button>
 </div>

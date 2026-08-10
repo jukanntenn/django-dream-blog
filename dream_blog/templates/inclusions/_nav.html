@@ -10,10 +10,9 @@
             <div class="relative flex items-center justify-between">
                 <div class="flex items-center">
                     <span class="inline-block lg:hidden" id="offcanvas-trigger">
-                        <img class="dark:invert"
-                             height="20"
-                             width="20"
-                             src="{% static 'menu-fill.svg' %}" />
+                        <span class="icon h-5 w-5"
+                              style="--icon-url: url('{% static 'menu-fill.svg' %}')"
+                              aria-hidden="true"></span>
                     </span>
                     <a href="{% url 'home' %}"
                        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0">
@@ -44,56 +43,44 @@
                             <button type="submit"
                                     class="absolute right-2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                                     aria-label="搜索">
-                                <img class="dark:invert"
-                                     height="16"
-                                     width="16"
-                                     src="{% static 'search-line.svg' %}"
-                                     alt="搜索" />
+                                <span class="icon h-4 w-4"
+                                      style="--icon-url: url('{% static 'search-line.svg' %}')"
+                                      aria-hidden="true"></span>
                             </button>
                         </div>
                     </form>
                     <button id="search-toggle"
                             class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors md:hidden"
                             aria-label="搜索">
-                        <img class="dark:invert"
-                             height="20"
-                             width="20"
-                             src="{% static 'search-line.svg' %}"
-                             alt="搜索" />
+                        <span class="icon h-5 w-5"
+                              style="--icon-url: url('{% static 'search-line.svg' %}')"
+                              aria-hidden="true"></span>
                     </button>
                     <!-- Theme switcher button with slate hover state -->
                     <button id="theme-switcher"
                             class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors"
                             aria-label="切换主题">
-                        <img data-theme-icon="light"
-                             height="20"
-                             width="20"
-                             src="{% static 'sun-fill.svg' %}"
-                             alt="亮色模式"
-                             class="dark:invert hidden" />
-                        <img data-theme-icon="dark"
-                             height="20"
-                             width="20"
-                             src="{% static 'moon-line.svg' %}"
-                             alt="暗色模式"
-                             class="dark:invert hidden" />
-                        <img data-theme-icon="system"
-                             height="20"
-                             width="20"
-                             src="{% static 'contrast-fill.svg' %}"
-                             alt="跟随系统"
-                             class="dark:invert hidden" />
+                        <span data-theme-icon="light"
+                              class="icon h-5 w-5 hidden"
+                              style="--icon-url: url('{% static 'sun-fill.svg' %}')"
+                              aria-hidden="true"></span>
+                        <span data-theme-icon="dark"
+                              class="icon h-5 w-5 hidden"
+                              style="--icon-url: url('{% static 'moon-line.svg' %}')"
+                              aria-hidden="true"></span>
+                        <span data-theme-icon="system"
+                              class="icon h-5 w-5 hidden"
+                              style="--icon-url: url('{% static 'contrast-fill.svg' %}')"
+                              aria-hidden="true"></span>
                     </button>
                     {% if user.is_authenticated %}
                         {% notifications_unread as num_unread %}
                         <a href="{% url 'notify:notification_all' %}"
                            class="p-2 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-colors relative"
                            aria-label="通知">
-                            <img class="dark:invert{% if num_unread != 0 %} text-cyan-600 dark:text-cyan-400{% endif %}"
-                                 height="20"
-                                 width="20"
-                                 src="{% static 'notification-4-line.svg' %}"
-                                 alt="通知" />
+                            <span class="icon h-5 w-5{% if num_unread != 0 %} text-cyan-600 dark:text-cyan-400{% endif %}"
+                                  style="--icon-url: url('{% static 'notification-4-line.svg' %}')"
+                                  aria-hidden="true"></span>
                             {% if num_unread != 0 %}
                                 <span class="absolute -top-1.5 -right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-400 px-1 text-[10px] font-bold text-white dark:text-slate-900">
                                     {% if num_unread > 99 %}99+{% else %}{{ num_unread }}{% endif %}
@@ -107,11 +94,9 @@
                             aria-label="菜单"
                             aria-expanded="false"
                             aria-controls="mobile-menu">
-                        <img class="dark:invert"
-                             height="20"
-                             width="20"
-                             src="{% static 'more-2-fill.svg' %}"
-                             alt="菜单" />
+                        <span class="icon h-5 w-5"
+                              style="--icon-url: url('{% static 'more-2-fill.svg' %}')"
+                              aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
@@ -144,11 +129,9 @@
                                 type="button"
                                 class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                 aria-label="关闭">
-                            <img class="dark:invert"
-                                 height="20"
-                                 width="20"
-                                 src="{% static 'close-line.svg' %}"
-                                 alt="关闭" />
+                            <span class="icon h-5 w-5"
+                                  style="--icon-url: url('{% static 'close-line.svg' %}')"
+                                  aria-hidden="true"></span>
                         </button>
                         <input name="q"
                                type="search"

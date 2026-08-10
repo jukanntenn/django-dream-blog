@@ -22,7 +22,9 @@
             <div class="mt-3 flex items-center justify-between">
                 {# Markdown hint with official Markdown logo #}
                 <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
-                    <img class="w-4 h-4" src="{% static 'markdown-fill.svg' %}" alt="Markdown">
+                    <span class="icon w-4 h-4"
+                          style="--icon-url: url('{% static 'markdown-fill.svg' %}')"
+                          aria-hidden="true"></span>
                     <span class="text-xs">支持 Markdown 语法</span>
                 </div>
                 {# Submit button with primary styling #}

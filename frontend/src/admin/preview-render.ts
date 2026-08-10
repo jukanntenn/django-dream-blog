@@ -7,25 +7,6 @@
 
 export {};
 
-declare global {
-  interface Window {
-    katex?: {
-      render: (
-        math: string,
-        element: HTMLElement,
-        options?: { throwOnError?: boolean; displayMode?: boolean }
-      ) => void;
-    };
-    mermaid?: {
-      init: (
-        options?: { startOnLoad?: boolean; securityLevel?: string },
-        nodes?: Element | Element[]
-      ) => void;
-      run?: never; // Not available in Mermaid 9.x
-    };
-  }
-}
-
 interface RenderState {
   katexLoaded: boolean;
   katexCssLoaded: boolean;
