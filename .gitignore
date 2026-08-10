@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
 lib64/
 parts/
 sdist/
@@ -160,7 +160,7 @@ cython_debug/
 #.idea/
 
 node_modules/
-!/frontend/dist/
+frontend/dist/
 
 staticfiles/
 media/
@@ -175,3 +175,10 @@ e2e/test-results/
 
 # Local agent workspace (notes, drafts, contexts)
 .local/
+
+# playwright-cli machine-specific config
+.playwright/
+
+# e2e local artifacts
+e2e/e2e.sqlite3
+.playwright-cli/

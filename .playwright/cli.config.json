@@ -1,8 +1,0 @@
-{
-  "browser": {
-    "browserName": "chromium",
-    "launchOptions": {
-      "executablePath": "/home/alice/.cache/ms-playwright/chromium-1212/chrome-linux64/chrome"
-    }
-  }
-}

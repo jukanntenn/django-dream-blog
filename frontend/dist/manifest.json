@@ -1,28 +1,20 @@
 {
-  "src/admin-theme-sync.ts": {
-    "file": "assets/admin-theme-sync-Ce7dHTL8.js",
-    "name": "admin-theme-sync",
-    "src": "src/admin-theme-sync.ts",
-    "isEntry": true
+  "src/admin/main.ts": {
+    "file": "assets/admin-Wc6nE-wH.js",
+    "name": "admin",
+    "src": "src/admin/main.ts",
+    "isEntry": true,
+    "css": [
+      "assets/admin-CyWZ0Qx_.css"
+    ]
   },
   "src/main.ts": {
-    "file": "assets/main-BL1FfIoZ.js",
+    "file": "assets/main-BgqrnSdm.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
     "css": [
-      "assets/main-BLf9y4qX.css"
+      "assets/main-Djzx_1cm.css"
     ]
-  },
-  "src/scripts/admin-preview-render.ts": {
-    "file": "assets/admin-preview-render-CCxdSuG3.js",
-    "name": "admin-preview-render",
-    "src": "src/scripts/admin-preview-render.ts",
-    "isEntry": true
-  },
-  "src/styles/preview.css": {
-    "file": "assets/preview-vmfKnox_.css",
-    "src": "src/styles/preview.css",
-    "isEntry": true
   }
 }
