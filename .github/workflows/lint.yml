@@ -40,4 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # The mypy/basedpyright/makemigrations hooks are language = "system" and
+      # shell out to `uv`, so it must be on PATH before prek runs.
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --no-install-project
       - uses: j178/prek-action@v3.0.0
