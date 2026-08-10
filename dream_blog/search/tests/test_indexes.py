@@ -1,15 +1,16 @@
 from datetime import timedelta
 
 import pytest
-from columns.models import Article, Column
 from django.utils import timezone
-from posts.tests.factories import PostFactory
-from search.search_indexes.article_index import ArticleIndex
-from search.search_indexes.material_index import MaterialIndex
-from search.search_indexes.post_index import PostIndex
-from search.search_indexes.tutorial_index import TutorialIndex
-from tutorials.models import Material, Tutorial
-from tutorials.tests.factories import MaterialFactory, TutorialFactory
+
+from dream_blog.columns.models import Article, Column
+from dream_blog.posts.tests.factories import PostFactory
+from dream_blog.search.search_indexes.article_index import ArticleIndex
+from dream_blog.search.search_indexes.material_index import MaterialIndex
+from dream_blog.search.search_indexes.post_index import PostIndex
+from dream_blog.search.search_indexes.tutorial_index import TutorialIndex
+from dream_blog.tutorials.models import Material, Tutorial
+from dream_blog.tutorials.tests.factories import MaterialFactory, TutorialFactory
 
 pytestmark = pytest.mark.django_db
 

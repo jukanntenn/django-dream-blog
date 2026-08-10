@@ -1,6 +1,7 @@
 import pytest
-from friendlinks.models import FriendLink
-from friendlinks.templatetags.friendlinks_extra import show_friendlinks
+
+from dream_blog.friendlinks.models import FriendLink
+from dream_blog.friendlinks.templatetags.friendlinks_extra import show_friendlinks
 
 pytestmark = pytest.mark.django_db
 

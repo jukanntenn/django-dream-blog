@@ -1,9 +1,10 @@
 import pytest
-from comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from notifications.models import Notification
-from users.tests.factories import UserFactory
+
+from dream_blog.comments.models import Comment
+from dream_blog.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -44,4 +45,6 @@ class TestFixStaleNotifications:
 
         # Verify the notification was updated
         notif = Notification.objects.first()
+        assert notif is not None
+        assert notif.target_content_type is not None
         assert notif.target_content_type == new_ct

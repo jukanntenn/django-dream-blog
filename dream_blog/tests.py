@@ -2,9 +2,9 @@ from datetime import timedelta
 
 import pytest
 from django.utils import timezone
-from posts.tests.factories import PostFactory
-from users.tests.factories import UserFactory
 
+from dream_blog.posts.tests.factories import PostFactory
+from dream_blog.users.tests.factories import UserFactory
 from dream_blog.views import HomeView
 
 pytestmark = pytest.mark.django_db

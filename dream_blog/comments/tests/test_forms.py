@@ -1,7 +1,8 @@
 import pytest
-from comments.forms import TreeCommentForm
-from comments.models import Comment
-from posts.tests.factories import PostFactory
+
+from dream_blog.comments.forms import TreeCommentForm
+from dream_blog.comments.models import Comment
+from dream_blog.posts.tests.factories import PostFactory
 
 pytestmark = pytest.mark.django_db
 

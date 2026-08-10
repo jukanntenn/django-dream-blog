@@ -1,5 +1,6 @@
 import pytest
-from posts.models import Post
+
+from dream_blog.posts.models import Post
 
 pytestmark = pytest.mark.django_db
 

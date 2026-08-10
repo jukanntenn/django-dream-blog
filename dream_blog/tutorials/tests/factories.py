@@ -2,8 +2,9 @@ import factory
 from django.utils import timezone
 from django.utils.text import slugify
 from factory.django import DjangoModelFactory
-from tutorials.models import Category, Material, Tutorial
-from users.tests.factories import UserFactory
+
+from dream_blog.tutorials.models import Category, Material, Tutorial
+from dream_blog.users.tests.factories import UserFactory
 
 
 class CategoryFactory(DjangoModelFactory):

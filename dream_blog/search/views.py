@@ -1,11 +1,12 @@
-from columns.models import Article
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.views.generic import TemplateView
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet
-from posts.models import Post
-from tutorials.models import Material, Tutorial
+
+from dream_blog.columns.models import Article
+from dream_blog.posts.models import Post
+from dream_blog.tutorials.models import Material, Tutorial
 
 
 class SearchView(TemplateView):

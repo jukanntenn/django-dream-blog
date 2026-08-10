@@ -1,7 +1,8 @@
 import factory
-from columns.models import Article, Column
 from factory.django import DjangoModelFactory
-from users.tests.factories import UserFactory
+
+from dream_blog.columns.models import Article, Column
+from dream_blog.users.tests.factories import UserFactory
 
 
 class ColumnFactory(DjangoModelFactory):

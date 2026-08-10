@@ -4,8 +4,9 @@ import pytest
 from django.test import Client
 from django.utils import timezone
 from django.utils.html import strip_tags
-from posts.models import Post
-from posts.tests.factories import PostFactory
+
+from dream_blog.posts.models import Post
+from dream_blog.posts.tests.factories import PostFactory
 
 pytestmark = pytest.mark.django_db(transaction=True)
 
@@ -23,7 +24,7 @@ class TestSearchView:
     def test_search_view_returns_results(self, client, settings, tmp_path, user):
         settings.HAYSTACK_CONNECTIONS = {
             "default": {
-                "ENGINE": "search.backends.whoosh_cn_backend.WhooshJiebaEngine",
+                "ENGINE": "dream_blog.search.backends.whoosh_cn_backend.WhooshJiebaEngine",
                 "PATH": str(tmp_path / "whoosh"),
             }
         }
@@ -52,7 +53,7 @@ class TestSearchView:
     def test_search_view_pagination_preserves_querystring(self, client, settings, tmp_path, user):
         settings.HAYSTACK_CONNECTIONS = {
             "default": {
-                "ENGINE": "search.backends.whoosh_cn_backend.WhooshJiebaEngine",
+                "ENGINE": "dream_blog.search.backends.whoosh_cn_backend.WhooshJiebaEngine",
                 "PATH": str(tmp_path / "whoosh"),
             }
         }

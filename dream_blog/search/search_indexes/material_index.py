@@ -1,5 +1,6 @@
 from haystack import indexes
-from tutorials.models import Material
+
+from dream_blog.tutorials.models import Material
 
 
 class MaterialIndex(indexes.SearchIndex, indexes.Indexable):

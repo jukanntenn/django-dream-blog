@@ -1,3 +1,4 @@
+# pyright: reportArgumentType=false, reportAssignmentType=false, reportAttributeAccessIssue=false
 from haystack.backends.whoosh_backend import (
     WhooshEngine,
     WhooshHtmlFormatter,

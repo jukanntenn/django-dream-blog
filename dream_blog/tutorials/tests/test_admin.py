@@ -1,5 +1,6 @@
 from django.urls import reverse
-from tutorials.models import Tutorial
+
+from dream_blog.tutorials.models import Tutorial
 
 
 def test_auto_set_admin_as_tutorial_author(admin_client, admin_user):

@@ -1,5 +1,6 @@
 from django.utils.html import strip_tags
-from search.utils import Highlighter
+
+from dream_blog.search.utils import Highlighter
 
 
 class TestHighlighter:

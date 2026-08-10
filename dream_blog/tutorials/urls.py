@@ -1,5 +1,6 @@
 from django.urls import path
-from tutorials import views
+
+from dream_blog.tutorials import views
 
 app_name = "tutorials"
 urlpatterns = [

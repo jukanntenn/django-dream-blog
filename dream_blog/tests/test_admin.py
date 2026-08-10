@@ -1,3 +1,5 @@
+from unittest.mock import MagicMock
+
 import pytest
 from django.contrib.admin.sites import AdminSite
 
@@ -11,7 +13,7 @@ class TestSubscriptionAdmin:
 
         site = AdminSite()
         admin = SubscriptionAdmin(Subscription, site)
-        fields = admin.get_readonly_fields(request=None, obj=None)
+        fields = admin.get_readonly_fields(request=MagicMock(), obj=None)
         assert "email" not in fields
 
     def test_get_readonly_fields_existing(self):
@@ -21,5 +23,5 @@ class TestSubscriptionAdmin:
         site = AdminSite()
         admin = SubscriptionAdmin(Subscription, site)
         sub = Subscription(email="test@example.com")
-        fields = admin.get_readonly_fields(request=None, obj=sub)
+        fields = admin.get_readonly_fields(request=MagicMock(), obj=sub)
         assert "email" in fields

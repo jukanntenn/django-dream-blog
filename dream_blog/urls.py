@@ -1,6 +1,6 @@
 from django.urls import include, path
-from posts.views import ArchivesView
 
+from dream_blog.posts.views import ArchivesView
 from dream_blog.views import HomeView
 
 urlpatterns = [

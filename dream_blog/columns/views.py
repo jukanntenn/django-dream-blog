@@ -1,6 +1,7 @@
-from columns.models import Article, Column
-from core.views import SetHeadlineMixin
 from hitcount.views import HitCountDetailView
+
+from dream_blog.columns.models import Article, Column
+from dream_blog.core.views import SetHeadlineMixin
 
 
 class ColumnDetailView(SetHeadlineMixin, HitCountDetailView):

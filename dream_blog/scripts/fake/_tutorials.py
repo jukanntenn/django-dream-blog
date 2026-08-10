@@ -1,6 +1,6 @@
-from tutorials.models import Category, Tutorial
-from tutorials.tests.factories import CategoryFactory, MaterialFactory, TutorialFactory
-from users.models import User
+from dream_blog.tutorials.models import Category, Tutorial
+from dream_blog.tutorials.tests.factories import CategoryFactory, MaterialFactory, TutorialFactory
+from dream_blog.users.models import User
 
 
 def run():

@@ -3,15 +3,22 @@
 # Usage: bash e2e/setup-db.sh
 set -euo pipefail
 
-echo "[e2e] Running migrations..."
 cd "$(dirname "$0")/.."
-uv run python manage.py migrate --run-syncdb
+
+echo "[e2e] Resetting e2e database..."
+rm -f e2e/e2e.sqlite3
+
+echo "[e2e] Running migrations..."
+uv run python manage.py migrate --run-syncdb --settings=config.settings.e2e
+
+echo "[e2e] Collecting static (built frontend assets)..."
+uv run python manage.py collectstatic --noinput --settings=config.settings.e2e
 
 echo "[e2e] Creating test data..."
 uv run python -c "
 import django
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.local')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.e2e')
 django.setup()
 
 from django.contrib.auth import get_user_model
@@ -47,7 +54,7 @@ admin = User.objects.get(username='admin')
 now = timezone.now()
 
 # --- Posts ---
-from posts.models import Post
+from dream_blog.posts.models import Post
 if Post.objects.count() == 0:
     Post.objects.create(
         title='First Blog Post',
@@ -74,7 +81,7 @@ else:
     print('[e2e] Posts already exist')
 
 # --- Tutorials ---
-from tutorials.models import Category, Tutorial, Material
+from dream_blog.tutorials.models import Category, Tutorial, Material
 if Tutorial.objects.count() == 0:
     cat = Category.objects.create(name='Python Basics')
     t1 = Tutorial.objects.create(
@@ -118,7 +125,7 @@ else:
     print('[e2e] Tutorials already exist')
 
 # --- Columns ---
-from columns.models import Column, Article
+from dream_blog.columns.models import Column, Article
 if Column.objects.count() == 0:
     col = Column.objects.create(
         title='Weekly Picks',

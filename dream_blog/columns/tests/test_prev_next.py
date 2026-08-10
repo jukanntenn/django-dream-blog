@@ -1,8 +1,9 @@
 from datetime import timedelta
 
 import pytest
-from columns.models import Article, Column
 from django.utils import timezone
+
+from dream_blog.columns.models import Article, Column
 
 pytestmark = pytest.mark.django_db
 

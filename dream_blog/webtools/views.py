@@ -1,5 +1,6 @@
-from core.views import SetHeadlineMixin
 from django.views.generic import FormView
+
+from dream_blog.core.views import SetHeadlineMixin
 
 from .forms import DjangoSecretKeyCreateForm
 

@@ -1,7 +1,8 @@
-from core.models import TimeStampedModel
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from taggit.models import GenericTaggedItemBase, TagBase
+
+from dream_blog.core.models import TimeStampedModel
 
 
 class Tag(TimeStampedModel, TagBase):

@@ -1,8 +1,9 @@
-from core.models import TimeStampedModel
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from dream_blog.core.models import TimeStampedModel
 
 
 class Alert(TimeStampedModel):

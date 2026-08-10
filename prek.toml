@@ -11,11 +11,11 @@
 repo = "https://github.com/pre-commit/pre-commit-hooks"
 rev = "v6.0.0"
 hooks = [
-    { id = "trailing-whitespace" },
-    { id = "end-of-file-fixer" },
+    { id = "trailing-whitespace", exclude = { glob = "frontend/dist/**" } },
+    { id = "end-of-file-fixer", exclude = { glob = "frontend/dist/**" } },
     { id = "check-yaml", args = ["--allow-multiple-documents"] },
     { id = "check-toml" },
-    { id = "check-json", exclude = { glob = "frontend/tsconfig.json" } },
+    { id = "check-json", exclude = { glob = ["frontend/tsconfig.json", "frontend/dist/**"] } },
     { id = "check-merge-conflict" },
     { id = "check-added-large-files", args = ["--maxkb=500"] },
     { id = "mixed-line-ending", args = ["--fix=lf"] },
@@ -26,8 +26,8 @@ hooks = [
 repo = "https://github.com/astral-sh/ruff-pre-commit"
 rev = "v0.16.0"
 hooks = [
-    { id = "ruff", args = ["--fix"], exclude = { glob = "**/migrations/**" } },
-    { id = "ruff-format", exclude = { glob = "**/migrations/**" } },
+    { id = "ruff", args = ["--fix"], exclude = { glob = ["**/migrations/**", ".claude/**", ".codex/**", ".zcode/**"] } },
+    { id = "ruff-format", exclude = { glob = ["**/migrations/**", ".claude/**", ".codex/**", ".zcode/**"] } },
 ]
 
 [[repos]]
@@ -52,15 +52,40 @@ hooks = [
     { id = "django-upgrade", args = ["--target-version", "5.2"], exclude = { glob = "**/migrations/**" } },
 ]
 
+
+
 [[repos]]
-repo = "https://github.com/pre-commit/mirrors-mypy"
-rev = "v2.3.0"
+repo = "local"
 hooks = [
     {
         id = "mypy",
-        additional_dependencies = ["django-stubs[compatible-mypy]>=6.0.7"],
-        args = ["--strict", "--ignore-missing-imports", "--config-file=pyproject.toml"],
-        exclude = { glob = ["**/tests/**", "**/migrations/**", ".claude/**", ".codex/**", ".zcode/**"] },
+        name = "mypy (Django type truth, pinned 2.1.0)",
+        language = "system",
+        entry = "uv run mypy dream_blog config --strict --config-file=pyproject.toml",
+        pass_filenames = false,
+        exclude = { glob = ["**/tests/**", "**/migrations/**"] },
+    },
+    {
+        id = "basedpyright",
+        name = "basedpyright (primary type checker)",
+        language = "system",
+        entry = "uv run basedpyright --project pyproject.toml",
+        pass_filenames = false,
+    },
+    {
+        id = "makemigrations-check",
+        name = "Detect model/migration drift",
+        language = "system",
+        entry = "uv run python manage.py makemigrations posts tutorials columns comments alerts core donate favorites friendlinks newsletters notify search share tags users webtools --check --dry-run --settings=config.settings.test",
+        pass_filenames = false,
+    },
+    {
+        id = "pytest",
+        name = "pytest with coverage (pre-push gate)",
+        language = "system",
+        entry = "uv run pytest -m \"not e2e\" --no-header",
+        pass_filenames = false,
+        stages = ["pre-push"],
     },
 ]
 

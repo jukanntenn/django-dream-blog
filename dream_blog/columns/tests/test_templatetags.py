@@ -1,7 +1,8 @@
 import pytest
-from columns.templatetags.columns_extra import show_column_toc, show_columns
-from columns.tests.factories import ArticleFactory, ColumnFactory
 from django.utils import timezone
+
+from dream_blog.columns.templatetags.columns_extra import show_column_toc, show_columns
+from dream_blog.columns.tests.factories import ArticleFactory, ColumnFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -33,7 +34,7 @@ class TestShowColumnToc:
         result = show_column_toc(column)
         assert result["column"] == column
         assert result["current"] is None
-        articles = list(result["articles"])
+        articles = list(result["articles"] or [])
         assert len(articles) == 1
         assert articles[0]["id"] == article.pk
         assert articles[0]["title"] == article.title
@@ -49,4 +50,4 @@ class TestShowColumnToc:
         ArticleFactory(column=column, publish_date=timezone.now())
         ArticleFactory(column=column, hidden=True, publish_date=timezone.now())
         result = show_column_toc(column)
-        assert len(list(result["articles"])) == 1
+        assert len(list(result["articles"] or [])) == 1

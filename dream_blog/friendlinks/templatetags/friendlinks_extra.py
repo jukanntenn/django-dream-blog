@@ -1,5 +1,6 @@
 from django import template
-from friendlinks.models import FriendLink
+
+from dream_blog.friendlinks.models import FriendLink
 
 register = template.Library()
 

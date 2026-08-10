@@ -1,5 +1,6 @@
-from comments.views import CommentFormTemplateView, CommentPostView
 from django.urls import path
+
+from dream_blog.comments.views import CommentFormTemplateView, CommentPostView
 
 app_name = "comments"
 urlpatterns = [

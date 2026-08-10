@@ -1,12 +1,5 @@
-from core.models import (
-    AlertsModel,
-    CommentsModel,
-    EntryQuerySet,
-    HitCountModel,
-    PreviousNextMixin,
-    RichContentModel,
-    TimeStampedModel,
-)
+from typing import cast
+
 from django.conf import settings
 from django.db import models
 from django.db.models import Count, Manager, QuerySet
@@ -14,19 +7,35 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
-from tags.models import TaggedItem
+
+from dream_blog.core.models import (
+    AlertsModel,
+    CommentsModel,
+    EntryModelT,
+    EntryQuerySet,
+    HitCountModel,
+    PreviousNextMixin,
+    RichContentModel,
+    TimeStampedModel,
+)
+from dream_blog.tags.models import TaggedItem
 
 
-class ColumnQuerySet(QuerySet):
-    def visible(self):
+class ColumnQuerySet(EntryQuerySet[EntryModelT]):
+    def visible(self) -> EntryQuerySet[EntryModelT]:
         return self.filter(hidden=False)
 
-    def with_article_count(self):
+    def with_article_count(self) -> EntryQuerySet[EntryModelT]:
         return self.annotate(article_count=Count("article"))
 
 
 class ColumnManager(Manager.from_queryset(ColumnQuerySet)):
-    pass
+    def visible(self) -> EntryQuerySet["Column"]:
+        return cast("EntryQuerySet[Column]", self.get_queryset()).visible()
+
+    def with_article_count(self) -> EntryQuerySet["Column"]:
+        qs = cast("ColumnQuerySet[Column]", self.get_queryset())
+        return qs.with_article_count()
 
 
 class Column(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
@@ -42,7 +51,9 @@ class Column(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
         on_delete=models.CASCADE,
     )
 
-    objects = ColumnManager()
+    objects: ColumnManager = ColumnManager()
+    article_set: QuerySet["Article"]
+    article_count: int
 
     class Meta:
         verbose_name = _("Column")
@@ -62,12 +73,14 @@ class Column(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
         return reverse("columns:detail", kwargs={"slug": self.slug})
 
 
-class ArticleQuerySet(EntryQuerySet):
-    def visible(self):
+class ArticleQuerySet(EntryQuerySet[EntryModelT]):
+    def visible(self) -> EntryQuerySet[EntryModelT]:
         return super().visible().filter(column__hidden=False)
 
 
-class ArticleManager(Manager.from_queryset(ArticleQuerySet)): ...
+class ArticleManager(Manager.from_queryset(ArticleQuerySet)):
+    def visible(self) -> EntryQuerySet["Article"]:
+        return cast("EntryQuerySet[Article]", self.get_queryset()).visible()
 
 
 class Article(
@@ -97,7 +110,8 @@ class Article(
         blank=True,
     )
 
-    objects = ArticleManager()
+    objects: ArticleManager = ArticleManager()
+    column_id: int
 
     class Meta:
         verbose_name = _("Article")

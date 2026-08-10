@@ -1,5 +1,6 @@
 from django.urls import path
-from search.views import SearchView
+
+from dream_blog.search.views import SearchView
 
 app_name = "search"
 

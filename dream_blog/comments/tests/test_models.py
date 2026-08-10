@@ -1,5 +1,6 @@
 import pytest
-from comments.models import Comment
+
+from dream_blog.comments.models import Comment
 
 pytestmark = pytest.mark.django_db
 

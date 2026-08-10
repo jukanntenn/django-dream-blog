@@ -1,6 +1,7 @@
-from core.views import SetHeadlineMixin
 from hitcount.views import HitCountDetailView
-from tutorials.models import Material, Tutorial
+
+from dream_blog.core.views import SetHeadlineMixin
+from dream_blog.tutorials.models import Material, Tutorial
 
 
 class TutorialDetailView(SetHeadlineMixin, HitCountDetailView):

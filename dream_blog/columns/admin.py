@@ -1,15 +1,12 @@
-from alerts.admin import AlertInline
-from columns.models import Article, Column
-from core.admin import hide, show
 from django.contrib import admin
-from markdown_field.fields import MarkdownField
-from markdown_field.widgets import PreviewMarkdownWidget
+from django.utils.translation import gettext_lazy as _
+
+from dream_blog.columns.models import Article, Column
+from dream_blog.core.admin import EntryAdminMixin
 
 
 @admin.register(Column)
-class ColumnAdmin(admin.ModelAdmin):
-    actions = [hide, show]
-    inlines = [AlertInline]
+class ColumnAdmin(EntryAdminMixin, admin.ModelAdmin):
     list_display = [
         "id",
         "title",
@@ -22,20 +19,25 @@ class ColumnAdmin(admin.ModelAdmin):
 
     search_fields = ["title", "content"]
 
-    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
+    prepopulated_fields = {"slug": ("title",)}
 
     fieldsets = (
         (
             None,
             {
-                "fields": (
-                    "title",
-                    "slug",
-                    "excerpt",
-                    "content",
-                    "hidden",
-                    "comments_enabled",
-                )
+                "fields": ("title", "slug", "excerpt"),
+            },
+        ),
+        (
+            _("Content"),
+            {
+                "fields": ("content",),
+            },
+        ),
+        (
+            _("Publishing"),
+            {
+                "fields": ("hidden", "comments_enabled"),
             },
         ),
     )
@@ -46,9 +48,7 @@ class ColumnAdmin(admin.ModelAdmin):
 
 
 @admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
-    actions = [hide, show]
-    inlines = [AlertInline]
+class ArticleAdmin(EntryAdminMixin, admin.ModelAdmin):
     list_display = [
         "id",
         "title",
@@ -64,21 +64,23 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ["title"]
     list_filter = ["column"]
 
-    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
-
     fieldsets = (
         (
             None,
             {
-                "fields": (
-                    "title",
-                    "column",
-                    "tags",
-                    "content",
-                    "comments_enabled",
-                    "hidden",
-                    "publish_date",
-                )
+                "fields": ("title", "column", "tags"),
+            },
+        ),
+        (
+            _("Content"),
+            {
+                "fields": ("content",),
+            },
+        ),
+        (
+            _("Publishing"),
+            {
+                "fields": ("publish_date", "hidden", "comments_enabled"),
             },
         ),
     )

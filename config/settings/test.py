@@ -1,6 +1,8 @@
 """
 With these settings, tests run faster.
+
 """
+# pyright: reportArgumentType=false, reportAssignmentType=false
 
 from .base import *  # noqa: F403
 
@@ -10,7 +12,7 @@ from .base import *  # noqa: F403
 SECRET_KEY = "QK1k4qn626RB2QeQimTTkgWVhyWzAZleVvpcVxjFJhYvNuFv0TazhpZ6gSnKZ2j6"
 
 INSTALLED_APPS += [  # noqa: F405
-    "core.tests",
+    "dream_blog.core.tests",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#test-runner

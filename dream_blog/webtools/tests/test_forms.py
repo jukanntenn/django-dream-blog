@@ -1,4 +1,4 @@
-from webtools.forms import DjangoSecretKeyCreateForm
+from dream_blog.webtools.forms import DjangoSecretKeyCreateForm
 
 
 class TestDjangoSecretKeyCreateForm:
@@ -13,21 +13,21 @@ class TestDjangoSecretKeyCreateForm:
         assert len(key) == 50
 
     def test_create_secret_key_with_prefix(self):
-        form = DjangoSecretKeyCreateForm(data={"prefix": "test"})
+        form = DjangoSecretKeyCreateForm(data={"key_prefix": "test"})
         assert form.is_valid()
         key = form.create_secret_key()
         assert key.startswith("test")
         assert len(key) == 50
 
     def test_create_secret_key_with_suffix(self):
-        form = DjangoSecretKeyCreateForm(data={"suffix": "end"})
+        form = DjangoSecretKeyCreateForm(data={"key_suffix": "end"})
         assert form.is_valid()
         key = form.create_secret_key()
         assert key.endswith("end")
         assert len(key) == 50
 
     def test_create_secret_key_with_prefix_and_suffix(self):
-        form = DjangoSecretKeyCreateForm(data={"prefix": "pre", "suffix": "suf"})
+        form = DjangoSecretKeyCreateForm(data={"key_prefix": "pre", "key_suffix": "suf"})
         assert form.is_valid()
         key = form.create_secret_key()
         assert key.startswith("pre")

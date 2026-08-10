@@ -1,6 +1,7 @@
-from comments.forms import TreeCommentForm
-from comments.models import Comment
 from django import template
+
+from dream_blog.comments.forms import TreeCommentForm
+from dream_blog.comments.models import Comment
 
 register = template.Library()
 

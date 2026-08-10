@@ -1,4 +1,6 @@
-from comments.models import Comment
+# pyright: reportAttributeAccessIssue=false
+from typing import TypeVar
+
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models import Count, Q, QuerySet
@@ -9,6 +11,10 @@ from hitcount.models import HitCount, HitCountMixin
 from markdown_field import MarkdownField
 from model_utils.fields import AutoCreatedField, AutoLastModifiedField
 
+from dream_blog.comments.models import Comment
+
+EntryModelT = TypeVar("EntryModelT", bound=models.Model)
+
 
 def _compensate(value):
     if value.startswith("--"):
@@ -16,17 +22,17 @@ def _compensate(value):
     return value
 
 
-class EntryQuerySet(QuerySet):
-    def published(self):
+class EntryQuerySet(QuerySet[EntryModelT]):
+    def published(self) -> "EntryQuerySet[EntryModelT]":
         return self.filter(
             publish_date__isnull=False,
             publish_date__lte=timezone.now(),
         )
 
-    def visible(self):
+    def visible(self) -> "EntryQuerySet[EntryModelT]":
         return self.published().filter(hidden=False)
 
-    def with_comment_count(self):
+    def with_comment_count(self) -> "EntryQuerySet[EntryModelT]":
         return self.annotate(comment_count=Count("comments"))
 
 
@@ -55,6 +61,8 @@ class RichContentModel(models.Model):
 
 class CommentsModel(models.Model):
     comments_enabled = models.BooleanField(_("Comments Enabled"), default=True)
+    # Set by EntryQuerySet.with_comment_count() annotate; safe to treat as present.
+    comment_count: int
     comments = GenericRelation(
         Comment,
         content_type_field="content_type",

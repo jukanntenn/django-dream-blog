@@ -1,14 +1,15 @@
 from datetime import timedelta
 
 import pytest
-from columns.models import Article, Column
-from core.templatetags.entry_urls import entry_url
 from django.utils import timezone
 from django.utils.text import slugify
-from posts.tests.factories import PostFactory
 from test_plus.plugin import TestCase
-from tutorials.tests.factories import MaterialFactory, TutorialFactory
-from users.tests.factories import UserFactory
+
+from dream_blog.columns.models import Article, Column
+from dream_blog.core.templatetags.entry_urls import entry_url
+from dream_blog.posts.tests.factories import PostFactory
+from dream_blog.tutorials.tests.factories import MaterialFactory, TutorialFactory
+from dream_blog.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 

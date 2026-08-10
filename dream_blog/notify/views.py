@@ -1,5 +1,7 @@
-from core.views import SetHeadlineMixin
+# pyright: reportAttributeAccessIssue=false
 from notifications.views import AllNotificationsList, UnreadNotificationsList
+
+from dream_blog.core.views import SetHeadlineMixin
 
 
 class AllNotificationsListView(SetHeadlineMixin, AllNotificationsList):

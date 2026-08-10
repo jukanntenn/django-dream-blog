@@ -1,5 +1,6 @@
 from django.urls import reverse
-from posts.models import Post
+
+from dream_blog.posts.models import Post
 
 
 def test_auto_set_admin_as_post_author(admin_client, admin_user):

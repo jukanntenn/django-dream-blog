@@ -1,4 +1,4 @@
-from core.entries import IndexEntry
+from dream_blog.core.entries import IndexEntry
 
 
 class TestIndexEntry:

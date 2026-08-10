@@ -1,6 +1,7 @@
 import factory
 from factory.django import DjangoModelFactory
-from tags.models import Tag
+
+from dream_blog.tags.models import Tag
 
 
 class TagFactory(DjangoModelFactory):

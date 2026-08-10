@@ -1,5 +1,6 @@
 from django.contrib import admin
-from tags.models import Tag, TaggedItem
+
+from dream_blog.tags.models import Tag, TaggedItem
 
 
 @admin.register(Tag)

@@ -1,5 +1,6 @@
-from core.views import SetHeadlineMixin
 from django.views.generic import TemplateView
+
+from dream_blog.core.views import SetHeadlineMixin
 
 
 class DonateView(SetHeadlineMixin, TemplateView):

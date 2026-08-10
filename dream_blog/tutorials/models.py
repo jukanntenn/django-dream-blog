@@ -1,20 +1,24 @@
-from core.models import (
+from typing import cast
+
+from django.conf import settings
+from django.db import models
+from django.db.models import Manager
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+from model_utils.choices import Choices
+from taggit.managers import TaggableManager
+
+from dream_blog.core.models import (
     AlertsModel,
     CommentsModel,
+    EntryModelT,
     EntryQuerySet,
     HitCountModel,
     PreviousNextMixin,
     RichContentModel,
     TimeStampedModel,
 )
-from django.conf import settings
-from django.db import models
-from django.db.models import Manager, QuerySet
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-from model_utils.choices import Choices
-from taggit.managers import TaggableManager
-from tags.models import TaggedItem
+from dream_blog.tags.models import TaggedItem
 
 
 class Category(TimeStampedModel):
@@ -28,13 +32,14 @@ class Category(TimeStampedModel):
         return self.name
 
 
-class TutorialQuerySet(QuerySet):
-    def visible(self):
+class TutorialQuerySet(EntryQuerySet[EntryModelT]):
+    def visible(self) -> EntryQuerySet[EntryModelT]:
         return self.filter(hidden=False)
 
 
 class TutorialManager(Manager.from_queryset(TutorialQuerySet)):
-    pass
+    def visible(self) -> EntryQuerySet["Tutorial"]:
+        return cast("EntryQuerySet[Tutorial]", self.get_queryset()).visible()
 
 
 class Tutorial(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
@@ -69,7 +74,7 @@ class Tutorial(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
         blank=True,
     )
 
-    objects = TutorialManager()
+    objects: TutorialManager = TutorialManager()
 
     class Meta:
         verbose_name = _("Tutorial")
@@ -82,12 +87,14 @@ class Tutorial(HitCountModel, RichContentModel, TimeStampedModel, AlertsModel):
         return reverse("tutorials:detail", kwargs={"slug": self.slug})
 
 
-class MaterialQuerySet(EntryQuerySet):
-    def visible(self):
+class MaterialQuerySet(EntryQuerySet[EntryModelT]):
+    def visible(self) -> EntryQuerySet[EntryModelT]:
         return super().visible().filter(tutorial__hidden=False)
 
 
-class MaterialManager(Manager.from_queryset(MaterialQuerySet)): ...
+class MaterialManager(Manager.from_queryset(MaterialQuerySet)):
+    def visible(self) -> EntryQuerySet["Material"]:
+        return cast("EntryQuerySet[Material]", self.get_queryset()).visible()
 
 
 class Material(
@@ -112,7 +119,8 @@ class Material(
         on_delete=models.CASCADE,
     )
 
-    objects = MaterialManager()
+    objects: MaterialManager = MaterialManager()
+    tutorial_id: int
 
     class Meta:
         verbose_name = _("Material")

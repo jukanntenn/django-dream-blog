@@ -1,7 +1,8 @@
-from alerts.models import Alert
 from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.translation import gettext_lazy as _
+
+from dream_blog.alerts.models import Alert
 
 
 class AlertInline(GenericTabularInline):

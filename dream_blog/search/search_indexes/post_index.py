@@ -1,5 +1,6 @@
 from haystack import indexes
-from posts.models import Post
+
+from dream_blog.posts.models import Post
 
 
 class PostIndex(indexes.SearchIndex, indexes.Indexable):

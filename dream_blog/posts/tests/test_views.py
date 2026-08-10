@@ -2,9 +2,10 @@ from datetime import datetime, timedelta
 
 import pytest
 from freezegun import freeze_time
-from posts.models import Post
-from posts.tests.factories import PostFactory
 from test_plus.plugin import TestCase
+
+from dream_blog.posts.models import Post
+from dream_blog.posts.tests.factories import PostFactory
 
 pytestmark = pytest.mark.django_db
 

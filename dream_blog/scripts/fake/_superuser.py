@@ -1,4 +1,4 @@
-from users.models import User
+from dream_blog.users.models import User
 
 
 def run():

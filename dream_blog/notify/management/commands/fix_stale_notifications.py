@@ -10,7 +10,7 @@ class Command(BaseCommand):
         # Get old and new ContentTypes
         old_ct = ContentType.objects.filter(app_label="tree_comments", model="treecomment").first()
 
-        from comments.models import Comment
+        from dream_blog.comments.models import Comment
 
         new_ct = ContentType.objects.get_for_model(Comment)
 

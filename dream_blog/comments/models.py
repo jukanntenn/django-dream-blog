@@ -11,7 +11,8 @@ COMMENT_MAX_LENGTH = getattr(settings, "COMMENT_MAX_LENGTH", 3000)
 
 class CommentManager(TreeCommentManager):
     def threaded_for_instance(self, instance):
-        qs = self.cte_for_instance(instance)
+        # cte_for_instance comes from tree_comments (untyped); silence static analysis.
+        qs = self.cte_for_instance(instance)  # pyright: ignore[reportAttributeAccessIssue]
         qs = qs.select_related("user", "parent", "parent__user").prefetch_related(
             Prefetch(
                 "user__socialaccount_set",
@@ -30,7 +31,7 @@ class CommentManager(TreeCommentManager):
 class Comment(AbstractComment):
     comment = MarkdownField(_("comment"), max_length=COMMENT_MAX_LENGTH)
 
-    objects = CommentManager()
+    objects: CommentManager = CommentManager()
 
     class Meta(AbstractComment.Meta):
         verbose_name = _("Comment")

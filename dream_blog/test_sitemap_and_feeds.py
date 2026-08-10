@@ -1,6 +1,7 @@
 import pytest
-from posts.tests.factories import PostFactory
 from test_plus.plugin import TestCase
+
+from dream_blog.posts.tests.factories import PostFactory
 
 pytestmark = pytest.mark.django_db
 

@@ -1,5 +1,6 @@
-from columns import views
 from django.urls import path
+
+from dream_blog.columns import views
 
 app_name = "columns"
 urlpatterns = [

@@ -20,8 +20,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    // Auto-start Django dev server as the test target
-    command: 'cd .. && uv run python manage.py runserver 127.0.0.1:8000 --noreload',
+    // Production-grade server: django-vite manifest mode (run `pnpm build` first)
+    command:
+      'cd .. && uv run python manage.py runserver 127.0.0.1:8000 --noreload --settings=config.settings.e2e',
     url: 'http://127.0.0.1:8000',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

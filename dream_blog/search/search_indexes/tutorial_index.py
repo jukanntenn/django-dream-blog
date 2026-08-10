@@ -1,5 +1,6 @@
 from haystack import indexes
-from tutorials.models import Tutorial
+
+from dream_blog.tutorials.models import Tutorial
 
 
 class TutorialIndex(indexes.SearchIndex, indexes.Indexable):

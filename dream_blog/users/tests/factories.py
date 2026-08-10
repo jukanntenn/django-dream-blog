@@ -1,11 +1,12 @@
 from collections.abc import Sequence
-from typing import Any
+from typing import Any, cast
 
 import factory
 from django.utils.crypto import get_random_string
 from factory import Faker, post_generation
 from factory.django import DjangoModelFactory
-from users.models import User
+
+from dream_blog.users.models import User
 
 
 class UserFactory(DjangoModelFactory):
@@ -16,7 +17,7 @@ class UserFactory(DjangoModelFactory):
     @post_generation
     def password(self, create: bool, extracted: Sequence[Any], **kwargs):
         password = get_random_string(length=10)
-        self.set_password(password)
+        cast("User", self).set_password(password)
 
     class Meta:
         model = User

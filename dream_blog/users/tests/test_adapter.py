@@ -1,8 +1,9 @@
 from unittest.mock import MagicMock
 
 import pytest
-from users.adapter import SocialAccountAdapter
-from users.tests.factories import UserFactory
+
+from dream_blog.users.adapter import SocialAccountAdapter
+from dream_blog.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 

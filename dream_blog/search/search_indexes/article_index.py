@@ -1,5 +1,6 @@
-from columns.models import Article
 from haystack import indexes
+
+from dream_blog.columns.models import Article
 
 
 class ArticleIndex(indexes.SearchIndex, indexes.Indexable):

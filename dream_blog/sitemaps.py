@@ -1,8 +1,9 @@
-from columns.models import Article, Column
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-from posts.models import Post
-from tutorials.models import Material, Tutorial
+
+from dream_blog.columns.models import Article, Column
+from dream_blog.posts.models import Post
+from dream_blog.tutorials.models import Material, Tutorial
 
 
 class StaticViewSitemap(Sitemap):

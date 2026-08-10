@@ -1,8 +1,9 @@
-from core.entries import get_index_queryset
-from core.views import SetHeadlineMixin
 from django.views.generic import ListView
 from hitcount.views import HitCountDetailView
-from posts.models import Post
+
+from dream_blog.core.entries import get_index_queryset
+from dream_blog.core.views import SetHeadlineMixin
+from dream_blog.posts.models import Post
 
 
 class PostDetailView(SetHeadlineMixin, HitCountDetailView):

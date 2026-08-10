@@ -1,10 +1,11 @@
-from core.models import (
+from django.db import models
+
+from dream_blog.core.models import (
     EntryQuerySet,
     PreviousNextMixin,
     RichContentModel,
     TimeStampedModel,
 )
-from django.db import models
 
 
 class AbstractEntry(PreviousNextMixin, TimeStampedModel, RichContentModel):
@@ -14,7 +15,7 @@ class AbstractEntry(PreviousNextMixin, TimeStampedModel, RichContentModel):
     )
     hidden = models.BooleanField(default=False)
 
-    objects = models.Manager.from_queryset(EntryQuerySet)()
+    objects: models.Manager["Entry"] = models.Manager.from_queryset(EntryQuerySet)()
 
     class Meta:
         abstract = True

@@ -95,7 +95,10 @@ prek run --all-files                             # full gate (shared by local + 
 uv run ruff check --fix                          # ruff only
 uv run ruff format .                             # format only
 uv run djlint dream_blog/templates --reformat    # templates only
-uv run mypy dream_blog                           # typecheck (strict)
+uv run mypy dream_blog config                    # Django type truth (django-stubs plugin)
+uv run basedpyright dream_blog config            # primary type checker (0 errors baseline)
+uv run ty check dream_blog config                # auxiliary type checker (beta, non-gating)
+uv run pytest -m "not e2e" --no-header           # unit tests + coverage (pre-push gate)
 ```
 
 Migrations:
@@ -156,8 +159,14 @@ This is a Django application; migrations follow Django's standard rules:
 ## Git Workflow
 
 - Main branch is `main`; development happens on `main` (frequent direct commits).
-- pre-commit gate (`prek.toml`): runs ruff/djlint/pyproject-fmt/django-upgrade/
-  mypy/hygiene hooks automatically before each commit.
+- pre-commit gate (`prek.toml`): code-quality hooks (ruff/djlint/pyproject-fmt/
+  django-upgrade/mypy/basedpyright/makemigrations/hygiene) run automatically
+  before each commit.
+- pre-push gate: the full pytest suite with coverage (`fail_under = 90`) runs on
+  `git push` via the `pytest` local hook (`stages = ["pre-push"]`). CI runs the
+  same command, so local and CI are consistent.
+- `frontend/dist` is git-ignored; production builds it via the Ansible
+  `frontend.yml` role step.`
 - Skip a single hook: `SKIP=ruff git commit ...`. Skip all: `git commit --no-verify`
   (use sparingly; CI still enforces).
 - CI triggers per path filter (docs-only changes run no lint/test/e2e).
@@ -185,15 +194,16 @@ This is a Django application; migrations follow Django's standard rules:
 ## Agent Hooks
 
 This project ships AI agent hooks (`.claude/hooks/`), configured independently
-for Claude Code (`.claude/settings.json`), Codex (`.codex/config.toml`), and
-ZCode (`.zcode/config.json`):
+for Claude Code (`.claude/settings.json`), Codex (`.codex/hooks.json`), and
+ZCode (user-level `~/.zcode/cli/config.json` — the runtime strips
+workspace-scope hooks; see `.zcode/README.md`):
 
-- **PostToolUse** (`format_on_edit.py`): after the agent edits a file, silently
-  runs the matching formatter by extension — ruff (`.py`), djlint (`.html`),
-  prettier (`.css/.js/.ts/.json/.yaml/.toml`).
-- **Stop** (`lint_gate.py`): before the agent stops, runs `ruff check` +
-  `djlint --lint` + `mypy --strict` (+ `tsc` if e2e changed); on failure blocks
-  the stop with `{"decision":"block","reason":...}` (exit 0 + JSON).
+- **PostToolUse** (`post_tool_use.py`): after the agent edits a Python file,
+  silently runs `ruff check --fix` + `ruff format` on it.
+- **Stop** (`stop.py`): before the agent stops, runs `ruff check --fix`; on
+  failure blocks the stop with `{"decision":"block","reason":...}` (exit 0 +
+  JSON). The full gate (djlint/mypy/basedpyright/pytest) is enforced by prek on
+  commit and push, and by CI.
 
 Exit-code semantics (identical for Claude Code, Codex, ZCode): exit 0 = proceed
 (stdout parsed as JSON; `decision:"block"` with required `reason` blocks the

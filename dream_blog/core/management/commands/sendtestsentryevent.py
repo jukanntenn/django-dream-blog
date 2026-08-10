@@ -7,5 +7,5 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         pass
 
-    def handle(self, *args, **kwargs):
-        return 1 / 0
+    def handle(self, *args, **options):
+        raise ZeroDivisionError("test sentry event")

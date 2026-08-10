@@ -1,3 +1,4 @@
+# pyright: reportArgumentType=false, reportAssignmentType=false
 import logging
 
 import sentry_sdk

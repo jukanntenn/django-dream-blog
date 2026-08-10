@@ -1,6 +1,8 @@
 """
 Base settings to build other settings files upon.
+
 """
+# pyright: reportArgumentType=false, reportAssignmentType=false
 
 import os
 import sys
@@ -207,7 +209,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "notify.context_processors.notification_count",
+                "dream_blog.notify.context_processors.notification_count",
             ],
         },
     }
@@ -358,7 +360,7 @@ HUEY = {
 
 HC_EMAIL_SERVICE_PING_EMAIL = env.str("HC_EMAIL_SERVICE_PING_EMAIL", "")
 
-SOCIALACCOUNT_ADAPTER = "users.adapter.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "dream_blog.users.adapter.SocialAccountAdapter"
 
 MARKDOWN_FIELD = {
     "extensions": [
@@ -397,7 +399,7 @@ MARKDOWN_FIELD = {
 
 # Required by tree_comments to associate comments to a Site
 SITE_ID = 1
-COMMENTS_APP = "comments"
+COMMENTS_APP = "dream_blog.comments"
 TREE_COMMENTS_COMMENT_MODEL = "comments.Comment"
 TREE_COMMENTS_COMMENT_FLAG_MODEL = "comments.CommentFlag"
 
@@ -413,10 +415,10 @@ DJANGO_NOTIFICATIONS_CONFIG = {
 
 HAYSTACK_CONNECTIONS = {
     "default": {
-        "ENGINE": "search.backends.whoosh_cn_backend.WhooshJiebaEngine",
+        "ENGINE": "dream_blog.search.backends.whoosh_cn_backend.WhooshJiebaEngine",
         "PATH": BASE_DIR / "index" / "whoosh",
     }
 }
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
 HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
-HAYSTACK_CUSTOM_HIGHLIGHTER = "search.utils.Highlighter"
+HAYSTACK_CUSTOM_HIGHLIGHTER = "dream_blog.search.utils.Highlighter"

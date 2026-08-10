@@ -1,5 +1,6 @@
-from columns.models import Column
 from django import template
+
+from dream_blog.columns.models import Column
 
 register = template.Library()
 

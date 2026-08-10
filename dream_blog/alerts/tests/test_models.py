@@ -1,6 +1,7 @@
 import pytest
-from alerts.models import Alert
-from posts.tests.factories import PostFactory
+
+from dream_blog.alerts.models import Alert
+from dream_blog.posts.tests.factories import PostFactory
 
 pytestmark = pytest.mark.django_db
 

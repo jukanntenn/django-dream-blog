@@ -1,6 +1,7 @@
 from django import template
 from django.utils import timezone
-from tutorials.models import Tutorial
+
+from dream_blog.tutorials.models import Tutorial
 
 register = template.Library()
 

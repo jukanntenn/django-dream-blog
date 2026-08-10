@@ -1,10 +1,11 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
-from comments.moderation import CommentModerator, Moderator
-from posts.models import Post
-from posts.tests.factories import PostFactory
-from users.tests.factories import UserFactory
+
+from dream_blog.comments.moderation import CommentModerator, Moderator
+from dream_blog.posts.models import Post
+from dream_blog.posts.tests.factories import PostFactory
+from dream_blog.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -16,9 +17,9 @@ class TestModerator:
         comment.content_type.model_class.return_value = str  # not registered
         request = MagicMock()
         # Should not raise
-        moderator.post_save_moderation(sender=None, comment=comment, request=request)
+        moderator.post_save_moderation(sender=Post, comment=comment, request=request)
 
-    @patch("comments.moderation.notify.send")
+    @patch("dream_blog.comments.moderation.notify.send")
     def test_post_save_moderation_registered_model(self, mock_notify):
         moderator = Moderator()
         moderator.register(Post, CommentModerator)
@@ -36,15 +37,15 @@ class TestModerator:
         request.build_absolute_uri.return_value = "http://example.com"
 
         with (
-            patch("comments.moderation.loader") as mock_loader,
-            patch("comments.moderation.get_current_site") as mock_site,
+            patch("dream_blog.comments.moderation.loader") as mock_loader,
+            patch("dream_blog.comments.moderation.get_current_site") as mock_site,
         ):
             mock_site.return_value = MagicMock()
             mock_template = MagicMock()
             mock_loader.get_template.return_value = mock_template
             mock_template.render.return_value = "rendered"
 
-            moderator.post_save_moderation(sender=None, comment=comment, request=request)
+            moderator.post_save_moderation(sender=Post, comment=comment, request=request)
 
         # Author commenting on own post - no notification
         mock_notify.assert_not_called()
@@ -59,7 +60,7 @@ class TestCommentModerator:
     def post(self, user):
         return PostFactory(author=user)
 
-    @patch("comments.moderation.notify.send")
+    @patch("dream_blog.comments.moderation.notify.send")
     def test_notify_author_comment_on_own_post(self, mock_notify, moderator, user, post):
         """When author comments on own post, no notification is sent."""
         comment = MagicMock()
@@ -69,9 +70,9 @@ class TestCommentModerator:
         moderator.notify(comment, post, MagicMock())
         mock_notify.assert_not_called()
 
-    @patch("comments.moderation.notify.send")
-    @patch("comments.moderation.loader")
-    @patch("comments.moderation.get_current_site")
+    @patch("dream_blog.comments.moderation.notify.send")
+    @patch("dream_blog.comments.moderation.loader")
+    @patch("dream_blog.comments.moderation.get_current_site")
     def test_notify_other_user_comments_on_post(self, mock_site, mock_loader, mock_notify, moderator, user, post):
         """When another user comments, author gets notification."""
         other_user = UserFactory()
@@ -97,9 +98,9 @@ class TestCommentModerator:
         assert call_kwargs[1]["recipient"] == user
         assert call_kwargs[1]["verb"] == "comment"
 
-    @patch("comments.moderation.notify.send")
-    @patch("comments.moderation.loader")
-    @patch("comments.moderation.get_current_site")
+    @patch("dream_blog.comments.moderation.notify.send")
+    @patch("dream_blog.comments.moderation.loader")
+    @patch("dream_blog.comments.moderation.get_current_site")
     def test_notify_reply_to_another_user(self, mock_site, mock_loader, mock_notify, moderator, user, post):
         """When user replies to another user, both get notifications."""
         replier = UserFactory()
@@ -125,9 +126,9 @@ class TestCommentModerator:
 
         assert mock_notify.call_count == 2
 
-    @patch("comments.moderation.notify.send")
-    @patch("comments.moderation.loader")
-    @patch("comments.moderation.get_current_site")
+    @patch("dream_blog.comments.moderation.notify.send")
+    @patch("dream_blog.comments.moderation.loader")
+    @patch("dream_blog.comments.moderation.get_current_site")
     def test_notify_reply_to_self(self, mock_site, mock_loader, mock_notify, moderator, user, post):
         """When user replies to themselves, no notification is sent."""
         comment = MagicMock()
@@ -147,9 +148,9 @@ class TestCommentModerator:
         moderator.notify(comment, post, request)
         mock_notify.assert_not_called()
 
-    @patch("comments.moderation.send_mail")
-    @patch("comments.moderation.loader")
-    @patch("comments.moderation.get_current_site")
+    @patch("dream_blog.comments.moderation.send_mail")
+    @patch("dream_blog.comments.moderation.loader")
+    @patch("dream_blog.comments.moderation.get_current_site")
     def test_email_sends_to_managers(self, mock_site, mock_loader, mock_send_mail, moderator, user, post):
         """email() sends notification to MANAGERS."""
         comment = MagicMock()

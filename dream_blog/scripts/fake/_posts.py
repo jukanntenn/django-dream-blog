@@ -1,5 +1,5 @@
-from posts.tests.factories import PostFactory
-from users.models import User
+from dream_blog.posts.tests.factories import PostFactory
+from dream_blog.users.models import User
 
 _NUM_POSTS = 100
 

@@ -1,6 +1,6 @@
+# pyright: reportAttributeAccessIssue=false
 import functools
 
-from comments import get_form
 from django.apps import apps
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
@@ -12,6 +12,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic import FormView, TemplateView
 from tree_comments import signals
 from tree_comments.views import CommentPostBadRequest
+
+from dream_blog.comments import get_form
 
 
 def inject_comment_target(func):
@@ -88,13 +90,13 @@ class CommentPostView(FormView):
         request = self.request
 
         comment = form.get_comment_object(site_id=get_current_site(request).id)
-        comment.ip_address = request.META.get("REMOTE_ADDR", None) or None
+        comment.ip_address = request.META.get("REMOTE_ADDR")
         comment.user = request.user
 
         responses = signals.comment_will_be_posted.send(sender=comment.__class__, comment=comment, request=request)
 
         for receiver, response in responses:
-            if response is False:
+            if response is False:  # pyright: ignore[reportUnnecessaryComparison]
                 return CommentPostBadRequest(
                     f"comment_will_be_posted receiver {receiver.__name__!r} killed the comment"
                 )

@@ -1,9 +1,9 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
-from notify.templatetags.notify_tags import display, frag
 
 from dream_blog.notify.factories import NotificationFactory
+from dream_blog.notify.templatetags.notify_tags import display, frag
 
 pytestmark = pytest.mark.django_db
 
@@ -24,8 +24,8 @@ class TestDisplay:
         result = display(notification)
         assert result == ""
 
-    @patch("notify.templatetags.notify_tags.render_to_string")
-    @patch("notify.templatetags.notify_tags.settings")
+    @patch("dream_blog.notify.templatetags.notify_tags.render_to_string")
+    @patch("dream_blog.notify.templatetags.notify_tags.settings")
     def test_returns_rendered_template_for_known_verb(self, mock_settings, mock_render):
         mock_settings.NOTIFICATION_TEMPLATES = {"comment": "notifications/comment.html"}
         mock_render.return_value = "<p>rendered</p>"
@@ -35,8 +35,8 @@ class TestDisplay:
         assert result == "<p>rendered</p>"
         mock_render.assert_called_once()
 
-    @patch("notify.templatetags.notify_tags.render_to_string")
-    @patch("notify.templatetags.notify_tags.settings")
+    @patch("dream_blog.notify.templatetags.notify_tags.render_to_string")
+    @patch("dream_blog.notify.templatetags.notify_tags.settings")
     def test_passes_request_to_context(self, mock_settings, mock_render):
         mock_settings.NOTIFICATION_TEMPLATES = {"comment": "notifications/comment.html"}
         mock_render.return_value = "<p>rendered</p>"

@@ -1,7 +1,8 @@
 import pytest
-from core.views import SetHeadlineMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic import TemplateView
+
+from dream_blog.core.views import SetHeadlineMixin
 
 
 class TestSetHeadlineMixin:

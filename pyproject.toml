@@ -8,11 +8,9 @@ version = "0.1.0"
 description = ""
 readme = "README.md"
 authors = [ { name = "jukanntenn", email = "jukanntenn@outlook.com" } ]
-requires-python = ">=3.10,<4"
+requires-python = ">=3.12,<4"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
@@ -50,15 +48,20 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  "basedpyright>=1.39",
   "daphne>=4,<5",
   "django-browser-reload>=1.12.1,<2",
   "django-debug-toolbar>=4.2,<5",
   "django-stubs[compatible-mypy]>=6.0.7",
   "djlint>=1.42.3",
   "factory-boy>=3.3,<4",
-  "mypy>=2.3",
+  # mypy 2.2+/2.3 crashes with django-stubs 6.0.7 on custom user models
+  # (typeddjango/django-stubs#2461); 2.1.0 is the verified-stable combo.
+  "mypy==2.1",
   "rich>=13.7.1,<14",
   "ruff>=0.16",
+  "ty>=0.0.66",
+  "types-markdown",
 ]
 test = [
   "coverage[toml]>=7.4.1,<8",
@@ -93,7 +96,7 @@ ignore = "H030,H031,H021,H005,H013,H026,H042"
 target-version = "py310"
 line-length = 120
 indent-width = 4
-exclude = [ "**/migrations/", ".local", ".venv", "build", "dist", "node_modules" ]
+exclude = [ "**/migrations/", ".claude", ".codex", ".local", ".venv", ".zcode", "build", "dist", "node_modules" ]
 format.indent-style = "space"
 format.quote-style = "double"
 format.line-ending = "auto"
@@ -216,34 +219,62 @@ lint.pylint.max-returns = 8
 lint.pylint.max-statements = 60
 
 [tool.mypy]
-exclude = '''(?x)(
-    ^\.claude/ |
-    ^\.codex/  |
-    ^\.zcode/
-)'''
+explicit_package_bases = true
+ignore_missing_imports = true
 python_version = "3.10"
 warn_redundant_casts = true
 warn_unused_ignores = true
 strict = true
-plugins = []
+plugins = [ "mypy_django_plugin.main" ]
 overrides = [
+  # Progressive typing: flip modules to strict as they get annotated.
+  { module = "config.*", ignore_errors = false },
   { module = "dream_blog.*", ignore_errors = true },
-  { module = "config.*", ignore_errors = true },
 ]
 no_implicit_optional = true
+
+[tool.ty]
+environment.python-version = "3.12"
 
 [tool.django-stubs]
 django_settings_module = "config.settings.test"
 
 [tool.pytest]
 ini_options.minversion = "8.0"
-ini_options.norecursedirs = "frontend"
+ini_options.norecursedirs = "frontend .local"
 ini_options.python_files = "tests.py test_*.py"
-ini_options.addopts = "-v --tb=short --reuse-db --strict-markers --cov=dream_blog/ --cov-report html"
+ini_options.addopts = "-v --tb=short --reuse-db --strict-markers --cov=dream_blog/ --cov-report=term --cov-report=html"
 ini_options.markers = [
   "e2e: end-to-end browser tests (slow, needs docker + playwright)",
 ]
 ini_options.DJANGO_SETTINGS_MODULE = "config.settings.test"
 
 [tool.coverage]
+# Python 3.12+: coverage's C tracer (ctrace) is ~100x slower than sys.monitoring
+# on Django-heavy workloads; PEP 669 is the supported core on 3.12+.
+run.core = "sysmon"
 run.omit = [ "*/factories.py", "*/migrations/*", "*/tests/*", "dream_blog/scripts/*" ]
+fail_under = 90
+
+[tool.basedpyright]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+include = [ "config", "dream_blog" ]
+# Progressive typing: noisier "unknown type" diagnostics stay warnings so
+# unannotated legacy code does not block; real type errors are errors.
+reportAny = "warning"
+reportConstantRedefinition = "warning"
+reportIncompatibleVariableOverride = "warning"
+reportMissingParameterType = "warning"
+reportMissingTypeArgument = "warning"
+reportMissingTypeStubs = "warning"
+reportPrivateImportUsage = "warning"
+reportUnannotatedClassAttribute = "warning"
+reportUnknownArgumentType = "warning"
+reportUnknownLambdaType = "warning"
+reportUnknownMemberType = "warning"
+reportUnknownParameterType = "warning"
+reportUnknownVariableType = "warning"
+reportUntypedBaseClass = "warning"
+reportUntypedClassDecorator = "warning"
+reportUntypedFunctionDecorator = "warning"

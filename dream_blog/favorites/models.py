@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import QuerySet
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
@@ -8,6 +9,7 @@ from dream_blog.core.models import TimeStampedModel
 
 
 class Issue(TimeStampedModel):
+    favorites: QuerySet["Favorite"]
     number = models.PositiveSmallIntegerField(_("number"), unique=True)
     pub_date = models.DateTimeField(_("publication datetime"))
     description = models.TextField(_("description"))

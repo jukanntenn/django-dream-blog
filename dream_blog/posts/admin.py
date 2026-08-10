@@ -1,16 +1,13 @@
-from alerts.admin import AlertInline
-from core.admin import hide, show
 from django.contrib import admin
-from markdown_field.fields import MarkdownField
-from markdown_field.widgets import PreviewMarkdownWidget
-from posts.models import Post
+from django.utils.translation import gettext_lazy as _
+
+from dream_blog.core.admin import EntryAdminMixin
+from dream_blog.posts.models import Post
 
 
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    actions = [hide, show]
+class PostAdmin(EntryAdminMixin, admin.ModelAdmin):
     date_hierarchy = "publish_date"
-    inlines = [AlertInline]
     list_display = [
         "id",
         "title",
@@ -27,21 +24,23 @@ class PostAdmin(admin.ModelAdmin):
         "comments_enabled",
     ]
 
-    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
-
     fieldsets = (
         (
             None,
             {
-                "fields": (
-                    "title",
-                    "excerpt",
-                    "tags",
-                    "content",
-                    "comments_enabled",
-                    "hidden",
-                    "publish_date",
-                )
+                "fields": ("title", "excerpt", "tags"),
+            },
+        ),
+        (
+            _("Content"),
+            {
+                "fields": ("content",),
+            },
+        ),
+        (
+            _("Publishing"),
+            {
+                "fields": ("publish_date", "hidden", "comments_enabled"),
             },
         ),
     )

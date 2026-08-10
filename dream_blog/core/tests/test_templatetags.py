@@ -1,8 +1,9 @@
 from unittest.mock import MagicMock
 
 import pytest
-from core.templatetags.core_extra import querystring, show_profile
 from django.http import QueryDict
+
+from dream_blog.core.templatetags.core_extra import querystring, show_profile
 
 
 @pytest.mark.django_db

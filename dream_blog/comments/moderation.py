@@ -1,3 +1,4 @@
+# pyright: reportAttributeAccessIssue=false
 from constance import config
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
@@ -36,12 +37,6 @@ class CommentModerator(DjangoCommentModerator):
         if not notification_data:
             return
 
-        for data in notification_data:
-            notify.send(sender=comment.user, **data)
-            recipient = data["recipient"]
-            if recipient == author or not recipient.email:
-                continue
-
         tmpl_html = loader.get_template("comments/email/reply.html")
         tmpl_txt = loader.get_template("comments/email/reply.txt")
         c = {
@@ -59,7 +54,11 @@ class CommentModerator(DjangoCommentModerator):
             "fail_silently": True,
             "html_message": msg_html,
         }
-        recipient.email_user(**email_data)
+        for data in notification_data:
+            recipient = data["recipient"]
+            notify.send(sender=comment.user, **data)
+            if recipient != author and recipient.email:
+                recipient.email_user(**email_data)
 
         if comment.user != author:
             self.email(comment, content_object, request)

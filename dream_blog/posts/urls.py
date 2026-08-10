@@ -1,5 +1,6 @@
 from django.urls import path
-from posts import views
+
+from dream_blog.posts import views
 
 app_name = "posts"
 urlpatterns = [

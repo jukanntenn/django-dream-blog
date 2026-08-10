@@ -5,15 +5,27 @@ on:
     paths:
       - '**.py'
       - '**.html'
+      - 'frontend/**'
+      - 'e2e/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - '.github/**'
       - 'pyproject.toml'
       - 'prek.toml'
+      - '.gitignore'
       - '.editorconfig'
   pull_request:
     paths:
       - '**.py'
       - '**.html'
+      - 'frontend/**'
+      - 'e2e/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - '.github/**'
       - 'pyproject.toml'
       - 'prek.toml'
+      - '.gitignore'
       - '.editorconfig'
 
 concurrency:
@@ -28,4 +40,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: j178/prek-action@v5
+      - uses: j178/prek-action@v3.0.0

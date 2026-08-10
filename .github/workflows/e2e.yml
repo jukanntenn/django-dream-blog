@@ -5,12 +5,14 @@ on:
     paths:
       - 'dream_blog/**'
       - 'config/**'
+      - 'frontend/**'
       - 'e2e/**'
       - 'pyproject.toml'
   pull_request:
     paths:
       - 'dream_blog/**'
       - 'config/**'
+      - 'frontend/**'
       - 'e2e/**'
       - 'pyproject.toml'
 
@@ -33,6 +35,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install and build frontend (production assets)
+        working-directory: frontend
+        run: |
+          npm install -g corepack
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm build
       - uses: actions/cache@v4
         with:
           path: |

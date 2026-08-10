@@ -1,4 +1,13 @@
-from core.models import (
+from typing import cast
+
+from django.conf import settings
+from django.db import models
+from django.db.models import Manager
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+from taggit.managers import TaggableManager
+
+from dream_blog.core.models import (
     AlertsModel,
     CommentsModel,
     EntryQuerySet,
@@ -6,17 +15,20 @@ from core.models import (
     RichContentModel,
     TimeStampedModel,
 )
-from django.conf import settings
-from django.db import models
-from django.db.models import Manager
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-from taggit.managers import TaggableManager
-from tags.models import TaggedItem
+from dream_blog.tags.models import TaggedItem
 
 
 class PostManager(Manager.from_queryset(EntryQuerySet)):
-    pass
+    # Manager.from_queryset's factory result is invisible to static checkers;
+    # redeclare the queryset API explicitly (django-types pattern).
+    def published(self) -> EntryQuerySet["Post"]:
+        return cast("EntryQuerySet[Post]", self.get_queryset()).published()
+
+    def visible(self) -> EntryQuerySet["Post"]:
+        return cast("EntryQuerySet[Post]", self.get_queryset()).visible()
+
+    def with_comment_count(self) -> EntryQuerySet["Post"]:
+        return cast("EntryQuerySet[Post]", self.get_queryset()).with_comment_count()
 
 
 class Post(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel, AlertsModel):
@@ -40,7 +52,7 @@ class Post(HitCountModel, RichContentModel, TimeStampedModel, CommentsModel, Ale
         blank=True,
     )
 
-    objects = PostManager()
+    objects: PostManager = PostManager()
 
     class Meta:
         verbose_name = _("Post")

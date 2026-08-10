@@ -49,7 +49,7 @@ class SubscriptionCreateView(CreateView):
             message=plain_message,
             html_message=html_message,
             from_email=None,
-            recipient_list=[self.object.email],
+            recipient_list=[self.object.email if self.object else ""],
             fail_silently=True,
         )
 

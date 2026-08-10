@@ -1,8 +1,10 @@
+# pyright: reportAttributeAccessIssue=false
 from datetime import timedelta
 
 import pytest
-from core.tests.models import Entry, RankableEntry
 from django.utils import timezone
+
+from dream_blog.core.tests.models import Entry, RankableEntry
 
 pytestmark = pytest.mark.django_db
 

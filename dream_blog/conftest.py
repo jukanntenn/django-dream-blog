@@ -1,8 +1,9 @@
 import pytest
-from posts.models import Post
-from posts.tests.factories import PostFactory
-from tutorials.tests.factories import CategoryFactory, MaterialFactory, TutorialFactory
-from users.models import User
+
+from dream_blog.posts.models import Post
+from dream_blog.posts.tests.factories import PostFactory
+from dream_blog.tutorials.tests.factories import CategoryFactory, MaterialFactory, TutorialFactory
+from dream_blog.users.models import User
 
 
 @pytest.fixture

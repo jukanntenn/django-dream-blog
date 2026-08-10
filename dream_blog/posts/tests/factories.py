@@ -1,8 +1,9 @@
 import factory
 from django.utils import timezone
 from factory.django import DjangoModelFactory
-from posts.models import Post
-from users.tests.factories import UserFactory
+
+from dream_blog.posts.models import Post
+from dream_blog.users.tests.factories import UserFactory
 
 
 class PostFactory(DjangoModelFactory):

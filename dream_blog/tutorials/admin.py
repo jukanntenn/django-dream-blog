@@ -1,9 +1,8 @@
-from alerts.admin import AlertInline
-from core.admin import hide, show
 from django.contrib import admin
-from markdown_field.fields import MarkdownField
-from markdown_field.widgets import PreviewMarkdownWidget
-from tutorials.models import Category, Material, Tutorial
+from django.utils.translation import gettext_lazy as _
+
+from dream_blog.core.admin import EntryAdminMixin
+from dream_blog.tutorials.models import Category, Material, Tutorial
 
 
 @admin.register(Category)
@@ -13,9 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Tutorial)
-class TutorialAdmin(admin.ModelAdmin):
-    actions = [hide, show]
-    inlines = [AlertInline]
+class TutorialAdmin(EntryAdminMixin, admin.ModelAdmin):
     list_display = [
         "id",
         "title",
@@ -32,23 +29,25 @@ class TutorialAdmin(admin.ModelAdmin):
     search_fields = ["title", "content"]
     list_filter = ["category"]
 
-    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
+    prepopulated_fields = {"slug": ("title",)}
 
     fieldsets = (
         (
             None,
             {
-                "fields": (
-                    "title",
-                    "slug",
-                    "excerpt",
-                    "content",
-                    "status",
-                    "hidden",
-                    "comments_enabled",
-                    "category",
-                    "tags",
-                )
+                "fields": ("title", "slug", "excerpt", "category", "tags"),
+            },
+        ),
+        (
+            _("Content"),
+            {
+                "fields": ("content",),
+            },
+        ),
+        (
+            _("Publishing"),
+            {
+                "fields": ("status", "hidden", "comments_enabled"),
             },
         ),
     )
@@ -59,9 +58,7 @@ class TutorialAdmin(admin.ModelAdmin):
 
 
 @admin.register(Material)
-class MaterialAdmin(admin.ModelAdmin):
-    actions = [hide, show]
-    inlines = [AlertInline]
+class MaterialAdmin(EntryAdminMixin, admin.ModelAdmin):
     list_display = [
         "id",
         "title",
@@ -76,5 +73,31 @@ class MaterialAdmin(admin.ModelAdmin):
     list_select_related = ["tutorial"]
     search_fields = ["title"]
     list_filter = ["tutorial"]
+    readonly_fields = ["created_at", "modified_at"]
 
-    formfield_overrides = {MarkdownField: {"widget": PreviewMarkdownWidget}}
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": ("title", "tutorial"),
+            },
+        ),
+        (
+            _("Content"),
+            {
+                "fields": ("content",),
+            },
+        ),
+        (
+            _("Publishing"),
+            {
+                "fields": ("publish_date", "hidden", "comments_enabled"),
+            },
+        ),
+        (
+            _("System"),
+            {
+                "fields": ("created_at", "modified_at"),
+            },
+        ),
+    )

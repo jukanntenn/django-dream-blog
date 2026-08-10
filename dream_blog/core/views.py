@@ -1,9 +1,10 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.encoding import force_str
+from django.views.generic.base import ContextMixin
 
 
 # Take from https://github.com/brack3t/django-braces
-class SetHeadlineMixin:
+class SetHeadlineMixin(ContextMixin):
     """
     Define a `headline` context item as a view attribute
     """

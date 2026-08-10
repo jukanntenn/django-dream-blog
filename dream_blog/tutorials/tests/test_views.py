@@ -3,8 +3,9 @@ from datetime import datetime, timedelta
 import pytest
 from freezegun import freeze_time
 from test_plus.plugin import TestCase
-from tutorials.models import Material, Tutorial
-from tutorials.tests.factories import MaterialFactory, TutorialFactory
+
+from dream_blog.tutorials.models import Material, Tutorial
+from dream_blog.tutorials.tests.factories import MaterialFactory, TutorialFactory
 
 pytestmark = pytest.mark.django_db
 

@@ -1,7 +1,8 @@
 import pytest
-from columns.tests.factories import ArticleFactory, ColumnFactory
 from django.utils import timezone
 from test_plus.plugin import TestCase
+
+from dream_blog.columns.tests.factories import ArticleFactory, ColumnFactory
 
 pytestmark = pytest.mark.django_db
 

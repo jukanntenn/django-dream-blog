@@ -1,5 +1,6 @@
 import pytest
-from tags.tests.factories import TagFactory
+
+from dream_blog.tags.tests.factories import TagFactory
 
 pytestmark = pytest.mark.django_db
 

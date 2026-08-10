@@ -1,8 +1,9 @@
 import pytest
-from alerts.models import Alert
-from columns.models import Article, Column
-from core.models import AlertsModel
 from django.utils.text import slugify
+
+from dream_blog.alerts.models import Alert
+from dream_blog.columns.models import Article, Column
+from dream_blog.core.models import AlertsModel
 
 pytestmark = pytest.mark.django_db
 
